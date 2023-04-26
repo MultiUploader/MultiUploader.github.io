@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<note>
-  <to>Tove</to>
-  <from>Jani</from>
-  <heading>Reminder</heading>
-  <body>Don't forget me this weekend!</body>
-</note>
+<item>
+  <version>2.3.0.0</version>
+  <url>https://github.com/MultiUploader/MultiUploader.github.io/releases/download/1/MultiUploaderSetup-v2.2.2.msi</url>
+  <changelog>https://github.com/ravibpatel/AutoUpdater.NET/releases</changelog>
+  <mandatory>false</mandatory>
+</item>
