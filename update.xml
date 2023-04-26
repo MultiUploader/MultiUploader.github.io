@@ -2,6 +2,6 @@
 <item>
   <version>2.3.0.0</version>
   <url>https://github.com/MultiUploader/MultiUploader.github.io/releases/download/1/MultiUploaderSetup-v2.2.2.msi</url>
-  <changelog>https://github.com/ravibpatel/AutoUpdater.NET/releases</changelog>
+  <changelog>https://github.com/MultiUploader/MultiUploader.github.io/releases</changelog>
   <mandatory>false</mandatory>
 </item>
