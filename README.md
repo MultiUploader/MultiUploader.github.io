@@ -2,7 +2,7 @@
 
 
 # <p align="center">MultiUploader</p>
-<p style="text-align: center;">Játék, Konzol, Film, Sorozat, Program, Mobil, Zene, XXX és Könyv feltöltése <a href=https://predb.club/api/v1/?q=AUTODESK.MOLDFLOW.ADVISER.ULTIMATE.2023.WIN64-MAGNiTUDE>predb.club</a> és <a href=https://predb.de/api/?q=Rammstein-Adieu_(Remixes)-WEB-DE-2022-ENRiCH>predb.de</a> segítségével (emiatt lehetnek hibák, ha rossz kategóriába sorolják itt) egy Uploaderben egyesítve</p>
+<p align="center">Játék, Konzol, Film, Sorozat, Program, Mobil, Zene, XXX és Könyv feltöltése <a href=https://predb.club/api/v1/?q=AUTODESK.MOLDFLOW.ADVISER.ULTIMATE.2023.WIN64-MAGNiTUDE>predb.club</a> és <a href=https://predb.de/api/?q=Rammstein-Adieu_(Remixes)-WEB-DE-2022-ENRiCH>predb.de</a> segítségével (emiatt lehetnek hibák, ha rossz kategóriába sorolják itt) egy Uploaderben egyesítve</p>
 
 ### Általános
 0. Telepítsd fel tetszőleges mappába!
@@ -14,7 +14,7 @@
 
 <details>
   <summary><strong>Alapvető működési beállítások</strong></summary>
-  <i><p style="text-align: center;">Beállítások nagy része egyértelmű, de pl van olyan, mint a süti jelszó és az APi kulcsok...
+  <i><p align="center">Beállítások nagy része egyértelmű, de pl van olyan, mint a süti jelszó és az APi kulcsok...
 (nem kell sehova sem " [aposztróf], ha esetleg beírnád kitörli, hogy ebből ne legyen hiba)</p></i>
 
 * nCore Cookie Password megjelenítéshez Chrome-ra és a belépési oldalon lévő "Csökkentett biztonság" opcióra van szükséged, ha bekapcsoltad a csökkentett biztonságot és bejelentkeztél akkor az F12-es gomb lenyomása után [ITT](itt lesz majd a kép) találod.
