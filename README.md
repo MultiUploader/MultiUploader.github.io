@@ -2,7 +2,7 @@
 
 
 # <p align="center">MultiUploader</p>
-<p align="center">Játék, Konzol, Film, Sorozat, Program, Mobil, Zene, XXX és Könyv feltöltése <a href=https://predb.club/api/v1/?q=AUTODESK.MOLDFLOW.ADVISER.ULTIMATE.2023.WIN64-MAGNiTUDE>predb.club</a> és <a href=https://predb.de/api/?q=Rammstein-Adieu_(Remixes)-WEB-DE-2022-ENRiCH>predb.de</a> segítségével (emiatt lehetnek hibák, ha rossz kategóriába sorolják itt) egy Uploaderben egyesítve</p>
+<p align="center">Játék, Konzol, Film, Sorozat, Program, Mobil, Zene, XXX és Könyv feltöltése <a href=https://predb.club/api/v1/?q=AUTODESK.MOLDFLOW.ADVISER.ULTIMATE.2023.WIN64-MAGNiTUDE>predb.club</a> és <a href=https://predb.de/api/?q=Rammstein-Adieu_(Remixes)-WEB-DE-2022-ENRiCH>predb.de</a> segítségével (emiatt lehetnek hibák, ha rossz kategóriába sorolják itt, beolvasás után váltható tetszőlegesen a kategória) egy Uploaderben egyesítve</p>
 
 ### Általános
 0. Telepítsd fel tetszőleges mappába!
