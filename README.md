@@ -5,12 +5,13 @@
 <p align="center">Játék, Konzol, Film, Sorozat, Program, Mobil, Zene, XXX és Könyv feltöltése <a href=https://predb.club/api/v1/?q=AUTODESK.MOLDFLOW.ADVISER.ULTIMATE.2023.WIN64-MAGNiTUDE>predb.club</a> és <a href=https://predb.de/api/?q=Rammstein-Adieu_(Remixes)-WEB-DE-2022-ENRiCH>predb.de</a> segítségével (emiatt lehetnek hibák, ha rossz kategóriába sorolják itt, beolvasás után váltható tetszőlegesen a kategória) egy Uploaderben egyesítve</p>
 
 ### Általános
-0. Telepítsd fel tetszőleges mappába!
-1. 'Read' gombbal beolvassa az összes .torrent fájlt abból a mappából amit megadtál vagy a 'Read & Create Torrent' gombbal létre hozza a .torrentet aztán beolvassa azt amit elkészített.
-1.1 Megvizsgálja, hogy fent van-e az oldalon ez a konkrét release amit felszeretnél tenni szóval 1:1ben meg kell egyezzen, hogy azt mondja fent van már, ellenkező esetben nem szól! (Dupera figyeljetek!)
-2. Módosítsd kedvedre a leírást.
-3. Save/Save All gomb egyikével mentsd el őket.
-4. Upload gomb megnyomásával pedig elkezdi őket egyesével feltölteni! 
+* 0\. Telepítsd fel tetszőleges mappába!
+* 1\. 'Read' gombbal beolvassa az összes .torrent fájlt abból a mappából amit megadtál vagy a 'Read & Create Torrent' gombbal létre hozza a .torrentet aztán beolvassa azt amit elkészített.
+    * 1.1\. Megvizsgálja, hogy fent van-e az oldalon ez a konkrét release amit felszeretnél tenni szóval 1:1ben meg kell egyezzen, hogy azt mondja fent van már, ellenkező esetben nem szól! (Dupera figyeljetek!)
+
+* 2\. Módosítsd kedvedre a leírást.
+* 3\. Save/Save All gomb egyikével mentsd el őket.
+* 4\. Upload gomb megnyomásával pedig elkezdi őket egyesével feltölteni! 
 
 <details>
   <summary><strong>Alapvető működési beállítások</strong></summary>
