@@ -1,165 +1,124 @@
-<table><tr><td>2022.09.28.</td><td>v1.0</td><td>- Initial release</td></tr><tr><td>2022.09.30.</td><td>v1.1</td><td>- Many bug fixes</td></tr><tr><td>2022.10.02.</td><td>v1.2</td><td>- Some bug fixes
-- Code clean up
-- Changed Bencode.NET to MonoTorrent</td></tr><tr><td>2022.10.06.</td><td>v1.3</td><td>- Fixed Tools' directory
-- Stored log messages to separeted class
-- Added tests for TMDB API Key</td></tr><tr><td>2022.11.07.</td><td>v1.4</td><td>- Fixed GOG API data pulls
-- Implement Custom Image upload (right click)
-- Implement create torrent before read
-- Improved request search
-- Implement RequestMovieTitle method if movie title would be empty
-- Implement new Feature: AlwaysAddReleaseNameToDescription (settings)
-- Added TimeOut in qBittorrentClient
-- Lot of other fixes...</td></tr><tr><td>2022.11.12.</td><td>v1.5</td><td>- Fixed predb.ovh API 429 error
-- fix thumbnail arrow buttons after reset
-- fix Steam/GoG ID when its 0
-- fix GetVerificationlinkFromNFO - NullReferenceException
-- fix OtherMovieDatabaseURL
-- add Movie&Series category null checks
-- check if file locked by another process
-- implement better webClient tries
-- implement tinyurl reverse engineering
-- fix StripNameString method if object is null
-- fixed some typo</td></tr><tr><td>2022.11.17.</td><td>v1.6</td><td>- fixed dateRegexInSeries
-- add GetVerificationlinkFromNFO to XXX category
-- Using torrent's stored files instead of local files
-- handle if game categorized as movie
-- fixed same torrents with different names
-- fix error if Directory does not exist
-- store ExistCheck and AnonymousUpload states in settings
-- check movieYear property is valid</td></tr><tr><td>2022.11.22.</td><td>v1.6.1</td><td>- fixed foundGame's name
-- improve dateRegexInSeries
-- add GetVerificationlinkFromNFO to XXX category
-- implement Torrents.IsImageFromTorrent instead of Files
-- handle if game categorized as movie
-- implement CheckUploadProgress method
-- fix same torrents with different names
-- fix error if Directory isnt exist
-- check movieYear property is valid
-- improve nCore API Search query string
-- Music Cover primary is the FileSource
-- improve predb API Search query string
-- fix Lock() method null exception</td></tr><tr><td>2022.11.27.</td><td>v1.6.2</td><td>- fix when predb.ovh is down</td></tr><tr><td>2022.11.28.</td><td>v1.6.3</td><td>- added predb.de for backup site
-- update resolutionRegex
-- fix yearRegex and MovieTitle
-- using await instead of .Result
-- DownloadStringWithPolly - async
-- AutoSize RemoveExistTorrent form
-- implement RemoveTorrentAfterUploadFailed method
-- add MessageBox Icon to uninstaller
-</td></tr><tr><td>2022.11.29.</td><td>v1.6.4</td><td>- check resolutionMatch is valid int
-- check XXX thumbnails before save
-- fix predbCategory is null
-- fix predbCalls</td></tr><tr><td>2022.12.06.</td><td>v1.6.5</td><td>- fix saveAllButton state
-- implement CheckOtherMovieDatabaseURL (priorize port.hu or mafab from NFO)
-- update game category where localfile was used
-- optimize some ImageOperations & Log to XXX
-- fixed Movie category - tmdb search
-- remove XXX required thumbnails
-- able to change Thumbnail positions
-- add new regex what match with XXX-IMAGESET</td></tr><tr><td>2022.12.06.</td><td>v1.6.6
-v1.6.7 HotFix</td><td>- check redicteredURL is valid
-- fixed faulty negation</td></tr><tr><td>2022.12.13.</td><td>v1.7</td><td>- add search for port.hu url as other database
-- try to optimize large imageFiles again
-- fix XXX category log messages
-- add more predbcategories (ask me if more needed)
-- fix Thumbnail settings
-- improve Checks for port.hu url
-- change error color to red and regular to green
-- fix multiSeriesPack's nfo
-- implement GetEbookTagsByReleaseName
-- create errorHTML for every errors
-- add ebook verification url to the desc
-- implement verification url prop to every possibilities
-- fix ebook category InforbarImage</td></tr><tr><td>2023.01.09.</td><td>v2.0</td><td>- fix RequestSearchString
-- implement SrrdbAPI
-- fix SetButtons method, change selectedIndex to selectedItem
-- fix steamGame verificationText
-- new: able to choose another thumbnails in movie/serie category
-- fix game search if game object is null
-- add thumbnail chooser for XXX Videos
-- fix tmdbAPI error message
-- fix getSearchValueRegex
-- improve searchTypeAutodeterminate
-- implement able to add custom requestID
-- fix IsNFOContainsGameURL to determinate category
-- search year at port.hu and use it as criteria
-- add XXX coverimage with CustomInfoBarImage
-- fix NullReferenceException at SearchGameWithNameOnSteam
-- implement Movies & Series & Games changeID
-- movieCategory: handle WebException NotFound & BadRequest
-- improve AddOrChangeImdbID - checks for valid imdbID
-- implement XXX Imageset search for cover pic
-- add random XXX coverpicture if nothing found with keywords
-- implement ThumbnailStep in movie settings</td></tr><tr><td>2023.01.11.</td><td>v2.0.1</td><td>- fix RenameTorrentFiles
-- Updated TMDbLib to 2.0</td></tr><tr><td>2023.02.09.</td><td>v2.1</td><td>- fix button states
-- fix NullReferenceException in Attributes["data-ds-appid"] (Game category)
-- improve ImdbSuggestionAPI search
-- Feature: check ImdbID is exist
-- fix GetSearchValue trim last whitespace char
-- fix Bluray disk's category
-- add Warning message if foundTorrents listbox has value
-- search tmdb url in NFO
-- improve errorLogger with version number
-- refactor webclients
-- implement hungarian title from tvmaze's akas
-- add able to skip/ignore tmdb error without reconnecting
-- fix rightClick menu when check in progress
-- check WatchFolder permissions and add log messages
-- implement JustWatchAPI to search imdbID
-- fix tvmaze GetShowAkasAsync method
-- fix tmdbSearch with imdbID
-- rewrite MovieAndSeries category's logic
-- remove useless errorloggers
-- fix if tmdb is ignored</td></tr><tr><td>2023.02.10.</td><td>v2.1.1</td><td>- replace first dot char in MusicOrEbook genre string
-- fix tmdb api check in settingsvalider
-- search tvmaze url in nfo to get hun title
-- search movie database urls only once per movie</td></tr><tr><td>2023.02.15.</td><td>v2.1.2</td><td>- fix for Country is null at tvmaze Akas
-- fix Wrong categorised XXX
-- add XXX settings: URL from NFO
-- feature: generate new random picture in XXX imageset
-- fix Mobile category log message
-- removed predbDotOvh
-- catch 405 status code at UploadPOST
-- feature: display selected Imageset index
-- implement Message before closing if something already read
-- implement XXX Imageset steps</td></tr><tr><td>2023.02.16.</td><td>v2.1.3</td><td>- fixed imdbID when already found in NFO </td></tr><tr><td>2023.02.18.</td><td>v2.1.4</td><td>- fix tvmaze hun title
-- check WebContent if exists before upload
-- fix too long path
-- add ExitConfirmation to settings
-- trim movie/serie Descriptions</td></tr><tr><td>2023.03.14.</td><td>v2.2</td><td>- feature: GetAudioStreamAndSubtitles from videoStream
-- add wmv file extension
-- fix game pictures if screenshots is null
-- update GetInfoFromTvmaze method
-- fix MusicOrEbookGenre starts with dot
-- prevent pure black thumbnails
-- fix JustWatchAPI multiple imdbID-s
-- add new settings option - Audio/Subtitle
-- implement multi season request search
-- add FFMpegConverter convertSettings to fix some rare error
-- implement TorrentCreate form
-- validate settings with jsonSchema</td></tr><tr><td>2023.03.17.</td><td>v2.2.1</td><td>- fix qBittorrentState method
-- implement GenerateScreenshotsToDescription method
-- implement Undo function
-- function: able to set maxTries in bad pic detection</td></tr><tr><td>2023.04.15.</td><td>v2.2.2</td><td>- improve request search with category match (exclude completed requests)
-- correct otherDatabase url where hun title came from
-- fix createTorrents button state
-- add nCoreDomain to settings form
-- fix null or empty genre in music
-- fix error exclamation mark when reconnect
-- fix IsSteamGame or IsGogGame states
-- fixed Hungarian category when MediaInfo lang is null
-- Added music description
-- implement new settings form for Apps, Ebooks, Musics etc
-- update MediaInfo DLL to v23.03
-- fix NumericUpDown text changed by user not triggered
-- fix PictureBoxContextMenu items at popup</td></tr><tr><td>2023.04.27.</td><td>v2.3</td><td>- fix music description
-- get genre and music infos with MediaInfo is success
-- get ImdbLength from MediaInfo
-- implement an Update checker
-- Trim last '/' char from OtherMovieDatabaseURL</td></tr><tr><td>2023.05.05.</td><td>v2.3.1</td><td>- Added predb.club as a new pre site
-- Added check to qBittorrentWebUIAnswer's is valid
-- Fixed predb search query with a backup query
-- Added lossless file check in Music category
-- Fixed headerPictureBox ContextMenu
-- Added new feature: able to open every Thumbnails
-- Implement Exist check options (Right click)</td></tr></table>
+<p>&nbsp;Feature request and issue tracker: <a href="https://github.com/MultiUploader/MultiUploader.github.io">Click here</a>.</p>
+
+<table border="1" cellpadding="1" cellspacing="1" style="width:673px">
+	<thead>
+		<tr>
+			<th scope="col" style="width:308px">Version</th>
+			<th scope="col" style="width:348px">Changes</th>
+		</tr>
+		<tr>
+			<td style="text-align:center; width:308px">v2.3.1</td>
+			<td style="width:348px">- Added predb.club as a new pre site<br />
+			- Added check to qBittorrentWebUIAnswer&#39;s is valid<br />
+			- Fixed predb search query with a backup query<br />
+			- Added lossless file check in Music category<br />
+			- Fixed headerPictureBox ContextMenu<br />
+			- Added new feature: able to open every Thumbnails<br />
+			- Implement Exist check options (Right click)</td>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td style="width:308px">&nbsp;</td>
+			<td style="width:348px">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width:308px">&nbsp;</td>
+			<td style="width:348px">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width:308px">&nbsp;</td>
+			<td style="width:348px">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width:308px">&nbsp;</td>
+			<td style="width:348px">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width:308px">&nbsp;</td>
+			<td style="width:348px">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width:308px">&nbsp;</td>
+			<td style="width:348px">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width:308px">&nbsp;</td>
+			<td style="width:348px">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width:308px">&nbsp;</td>
+			<td style="width:348px">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width:308px">&nbsp;</td>
+			<td style="width:348px">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width:308px">&nbsp;</td>
+			<td style="width:348px">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width:308px">&nbsp;</td>
+			<td style="width:348px">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width:308px">&nbsp;</td>
+			<td style="width:348px">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width:308px">&nbsp;</td>
+			<td style="width:348px">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width:308px">&nbsp;</td>
+			<td style="width:348px">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width:308px">&nbsp;</td>
+			<td style="width:348px">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width:308px">&nbsp;</td>
+			<td style="width:348px">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width:308px">&nbsp;</td>
+			<td style="width:348px">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width:308px">&nbsp;</td>
+			<td style="width:348px">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width:308px">&nbsp;</td>
+			<td style="width:348px">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width:308px">&nbsp;</td>
+			<td style="width:348px">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width:308px">&nbsp;</td>
+			<td style="width:348px">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width:308px">&nbsp;</td>
+			<td style="width:348px">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width:308px">&nbsp;</td>
+			<td style="width:348px">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width:308px">&nbsp;</td>
+			<td style="width:348px">&nbsp;</td>
+		</tr>
+		<tr>
+			<td style="width:308px">&nbsp;</td>
+			<td style="width:348px">&nbsp;</td>
+		</tr>
+	</tbody>
+</table>
+
+<p>&nbsp;</p>
