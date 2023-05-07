@@ -1,4 +1,4 @@
-<p align="center"><img src="https://i.kek.sh/b46vAI07GVc.png"></p>
+<p align="center"><img src="https://multiuploader.github.io/icon.png"></p>
 
 
 # <p align="center">MultiUploader</p>
