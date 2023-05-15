@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <item>
   <version>2.3.1.0</version>
-  <url>https://github.com/MultiUploader/MultiUploader.github.io/releases/download/2.3.1/MultiUploaderSetup-v2.3.1.msi</url>
+  <url>https://github.com/MultiUploader/MultiUploader.github.io/releases/download/2.3.2/MultiUploaderSetup.msi</url>
   <changelog>https://multiuploader.github.io/changelog.html</changelog>
   <mandatory>false</mandatory>
 </item>
