@@ -6,7 +6,8 @@
 ### Általános
 * 0\. Telepítsd fel tetszőleges mappába!
 * 1\. 'Read' gombbal beolvassa az összes .torrent fájlt abból a mappából amit megadtál vagy a 'Read & Create Torrent' gombbal létre hozza a .torrentet aztán beolvassa azt amit elkészített.
-    * 1.1\. Megvizsgálja, hogy fent van-e az oldalon ez a konkrét release amit felszeretnél tenni szóval 1:1ben meg kell egyezzen, hogy azt mondja fent van már, ellenkező esetben nem szól! (Dupera figyeljetek!)
+    * 1.1\. Abban az esetben ha nem talált NFO fájlt a fájl listában, akkor megpróbálja releasename alapján megkeresni [srrDB](https://api.srrdb.com/v1/nfo/Joy.Ride.The.Trip.2023.GERMAN.DL.1080P.WEB.H264-WAYNE)-n, ha van találat akkor rákérdez, hogy letöltse-e, ilyenkor természetesen új .torrent fájlt is generál.
+    * 1.2\. Megvizsgálja, hogy fent van-e az oldalon ez a konkrét release amit felszeretnél tenni szóval 1:1ben meg kell egyezzen, hogy azt mondja fent van már, ellenkező esetben nem szól! (Dupera figyeljetek!)
 
 * 2\. Módosítsd kedvedre a leírást.
 * 3\. Save/Save All gomb egyikével mentsd el őket.
@@ -63,7 +64,7 @@
 
 * Egyedi kép feltöltésének lehetősége (mintakép vagy infobar kép), infobar képet megfelelően átméretezi alapértelmezetten [Jobb-Klikk a képeken]
 
-* Ha nincs NFOban Imdb link akkor név alapján megkeresi, van ehhez egy "Minimum similarity" ezt beállítod minél magasabb értékre annál pontosabb egyezéseket fogja csak visszaadni. (Ajánlott 90% vagy fölé tenni, mert akkor már elég pontos tud lenni!)
+* Ha nincs NFOban Imdb link akkor először releasename alapján megkeresi [srrDB](https://api.srrdb.com/v1/imdb/Joy.Ride.The.Trip.2023.GERMAN.DL.1080P.WEB.H264-WAYNE)-n, ha itt nincs találat akkor megpróbálja [xREL](https://api.xrel.to/v2/search/releases.json?q=Joy.Ride.The.Trip.2023.GERMAN.DL.1080P.WEB.H264-WAYNE&scene=1&p2p=1)-ről lekérni szintén releasename alapján, ha ez a két keresés sem hoz eredményt akkor név alapján megkeresi, amihez tartozik egy "Minimum similarity" beállítás, ha ezt beállítod minél magasabb értékre annál pontosabb egyezéseket fogja csak visszaadni. (Ajánlott 90% vagy fölé tenni, mert akkor már elég pontos tud lenni!)
 
 * Kategóriát megtudja állapítani magának, Film vagy Sorozat illetve SD vagy HD. (pl.: ha csak évszám van a címben akkor film lesz, ha évad vagy epizód szám illetve ha komplett dátum akkor sorozat kategória)
 
