@@ -1,7 +1,7 @@
 <p align="center"><img src="https://multiuploader.github.io/icon.png"></p>
 
 # <p align="center">MultiUploader for nCore</p>
-<p align="center">Játék, Konzol, Film, Sorozat, Program, Mobil, Zene, XXX és Könyv feltöltése <a href=https://predb.club/api/v1/?q=AUTODESK.MOLDFLOW.ADVISER.ULTIMATE.2023.WIN64-MAGNiTUDE>predb.club</a> és <a href=https://api.predb.net/?q=Rammstein-Adieu_(Remixes)-WEB-DE-2022-ENRiCH>predb.net</a> segítségével (emiatt lehetnek hibák, ha rossz kategóriába sorolják itt, beolvasás után váltható tetszőlegesen a kategória) egy Uploaderben egyesítve</p>
+<p align="center">Játék, Konzol, Film, Sorozat, Program, Mobil, Zene, XXX és Könyv feltöltése <a href=https://predb.club/api/v1/?q=AUTODESK.MOLDFLOW.ADVISER.ULTIMATE.2023.WIN64-MAGNiTUDE>predb.club</a>, <a href=https://api.predb.net/?q=Rammstein-Adieu_(Remixes)-WEB-DE-2022-ENRiCH>predb.net</a> és az <a href=https://api.xrel.to/v2/search/releases.json?q=1080p&scene=1&p2p=1>xrel.to</a> segítségével (emiatt lehetnek hibák, ha rossz kategóriába sorolják itt, beolvasás után váltható tetszőlegesen a kategória) egy Uploaderben egyesítve</p>
 
 ### Általános
 * 0\. Telepítsd fel tetszőleges mappába!
@@ -80,7 +80,7 @@
 
   <summary><strong>Mivel többször is megeshet, hogy rossz ImdbID-t talál így azt a következő képpen tudod orvosolni:</strong></summary>
   <br>
-  <p style="text-align: center;">Hasonló címmel rendelkező Imdb-t talál, de az hibás</p>
+  <p style="text-align: center;">Hasonló címmel rendelkező Imdb-t talál, de az hibás?</p>
 
 Érdemes rögzíteni a következőket a Settings -> Advanced Settings -> "Static ImdbID" mezőbe!
 
