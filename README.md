@@ -74,7 +74,9 @@
 
 * TVmaze vagy TMDB oldaláról behúzza a plotot, illetve ha nincs kép imdb-n akkor azt is.
 
-* 3 db mintaképet generál a film elejéről, vagy ha évad packról van szó akkor az első epizódból. (Ha nem talál videó fájlt akkor ezt a lépést kihagyja) 
+* 3 db mintaképet generál a film elejéről, vagy ha évad packról van szó akkor az első epizódból. (Ha nem talál videó fájlt akkor ezt a lépést kihagyja)
+  
+* Technikai információkat opcionálisan beszúrja a leírásba (Hangsáv(ok) és/vagy Felirat nyelv(ek)), szintén opcionálisan le is fordítja magyarra ezeket a nyelveket, vagy bekéri a magyar megfelelőjét
   
 <details>
 
