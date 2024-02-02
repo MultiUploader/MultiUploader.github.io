@@ -64,6 +64,8 @@
 
 * Csak ebben a kategóriában van lehetőség nem eredeti release feltöltésére vagyis a program legenerálja a TechInfo-t a torrenthez, de ebben az esetben bekéri a Film/Sorozat címét és a torrent nevét amivel feltöltésre fog kerülni.
 
+* Nem eredeti release esetén a beállításokban megadott szempontok alapján Film kategóriában sample fájlt is készít.
+
 * Egyedi kép feltöltésének lehetősége (mintakép vagy infobar kép), infobar képet megfelelően átméretezi alapértelmezetten [Jobb-Klikk a képeken]
 
 * Ha nincs NFOban Imdb link akkor először releasename alapján megkeresi [srrDB](https://api.srrdb.com/v1/imdb/Joy.Ride.The.Trip.2023.GERMAN.DL.1080P.WEB.H264-WAYNE)-n, ha itt nincs találat akkor megpróbálja [xREL](https://api.xrel.to/v2/search/releases.json?q=Joy.Ride.The.Trip.2023.GERMAN.DL.1080P.WEB.H264-WAYNE&scene=1&p2p=1)-ről lekérni szintén releasename alapján, ha ez a két keresés sem hoz eredményt akkor név alapján megkeresi, amihez tartozik egy "Minimum similarity" beállítás, ha ezt beállítod minél magasabb értékre annál pontosabb egyezéseket fogja csak visszaadni. (Ajánlott 90% vagy fölé tenni, mert akkor már elég pontos tud lenni!)
