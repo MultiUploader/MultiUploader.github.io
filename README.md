@@ -1,3 +1,5 @@
+<p align="center"><img src="https://raw.githubusercontent.com/MultiUploader/MultiUploader.github.io/main/icon.png"></p>
+
 # <p align="center">MultiUploader for nCore</p>
 <p align="center">Játék, Konzol, Film, Sorozat, Program, Mobil, Zene, XXX és Könyv feltöltése <a href=https://predb.club/api/v1/?q=AUTODESK.MOLDFLOW.ADVISER.ULTIMATE.2023.WIN64-MAGNiTUDE>predb.club</a>, <a href=https://api.predb.net/?q=Rammstein-Adieu_(Remixes)-WEB-DE-2022-ENRiCH>predb.net</a> és az <a href=https://api.xrel.to/v2/search/releases.json?q=1080p&scene=1&p2p=1>xrel.to</a> segítségével (emiatt lehetnek hibák, ha rossz kategóriába sorolják itt, beolvasás után váltható tetszőlegesen a kategória) egy Uploaderben egyesítve</p>
 
