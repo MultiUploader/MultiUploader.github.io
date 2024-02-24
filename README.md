@@ -62,7 +62,7 @@
 
 #### Főbb jellemzők:
 
-* Ebben a kategóriában van lehetőség nem eredeti release feltöltésére vagyis a program legenerálja a TechInfo-t a torrenthez, de ebben az esetben bekéri a Film/Sorozat címét és a torrent nevét amivel feltöltésre fog kerülni.
+* Ebben a kategóriában van lehetőség nem eredeti release feltöltésére vagyis a program legenerálja a TechInfo-t a torrenthez, de ebben az esetben bekéri a Film/Sorozat címét és a torrent nevét amivel feltöltésre fog kerülni. [Beállításokban bekapcsolható]
 
 * Nem eredeti release esetén a beállításokban megadott szempontok alapján Film kategóriában sample fájlt is készít.
 
@@ -133,7 +133,7 @@
   
 #### Főbb jellemzők:
 
-* Ebben a kategóriában van lehetőség nem eredeti release feltöltésére vagyis a program legenerálja a TechInfo-t a torrenthez, de ebben az esetben bekéri az igazoló linket, extrákat és a torrent nevét amivel feltöltésre fog kerülni.
+* Ebben a kategóriában van lehetőség nem eredeti release feltöltésére vagyis a program legenerálja a TechInfo-t a torrenthez, de ebben az esetben bekéri az igazoló linket, extrákat és a torrent nevét amivel feltöltésre fog kerülni. [Beállításokban bekapcsolható]
 
 * Egyedi kép feltöltésének lehetősége (mintakép vagy infobar kép), infobar képet megfelelően átméretezi alapértelmezetten [Jobb-Klikk a képeken]
 
