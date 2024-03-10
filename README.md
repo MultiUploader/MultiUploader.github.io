@@ -175,4 +175,6 @@
 </details>
 
 ## Működés közben
-![image1](sample.gif)
+<kbd>
+  <img src="sample.gif">
+</kbd>
