@@ -173,3 +173,6 @@
 
 * Imageset esetén random 3 db képet választ ki amit feltölt, illetve opcionálisan megkeresi a cover képet és azt teszi ki infobarba.
 </details>
+
+## Működés közben
+![image1](sample.gif)
