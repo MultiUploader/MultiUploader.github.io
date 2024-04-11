@@ -4,4 +4,5 @@
   <url>https://github.com/MultiUploader/MultiUploader.github.io/releases/download/2.8.2/MultiUploaderSetup.msi</url>
   <changelog>https://multiuploader.github.io/changelog.html</changelog>
   <mandatory>false</mandatory>
+  <checksum algorithm="MD5">023ef8678cb21923e1af9df1e521c276</checksum>
 </item>
