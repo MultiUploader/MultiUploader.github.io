@@ -1,226 +1,276 @@
 <table border="0" cellpadding="1" cellspacing="1" style="width:581px">
-  <tbody>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center">
-        <strong>Version</strong>
-      </td>
-      <td style="border-bottom:1px solid black; text-align:center; width:480px">
-        <strong>Changes</strong>
-      </td>
-    </tr>
-  </tbody>
-  <tbody>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">2.9.0</td>
-      <td style="border-bottom:1px solid black; width:480px"> - Improved GogGame data model handling <br />- Implemented a new method that checks for empty (zero-byte) files in torrents <br />- Implemented a new method that checks if a series is incomplete, then pops up a warning <br />- Rewrite the ExistChecker method <br />- Error logging for 502 Bad Gateway errors has been turned off <br />- Fixed a mistake in the request search <br />- Fixed the bookware category in predb <br />- Fixed the UpdateTorrentInfo() method <br />- Updated MediaInfo CLI to 24.06 </td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">2.8.3</td>
-      <td style="border-bottom:1px solid black; width:480px"> - Implement new feature what search local file in NFO <br />- Set application icon <br />- Show exist form instead of warning message when app is already running <br />- Get url from NFO in game category when upload as empty <br />- Requests: check Linux or Mac in request titles - match with game type <br />- Remove music description if cannot get any data from files <br />- Fix torrent create form <br />- Improve post to kek.sh <br />- Get the best quality picture from GOG api <br />- Fixed torrents with multiple NFOs <br />- Ignore country code in stream (Audio/Subtitle) title <br />- Updated dependencies - [ReverseMarkdown from 4.3.0 to 4.4.0], [Newtonsoft.Json.Schema from 3.0.15 to 3.0.16], [Polly from 8.3.0 to 8.4.0], [Autoupdater.NET.Official from 1.8.5 to 1.8.6], [HtmlAgilityPack from 1.11.59 to 1.11.61], [TMDbLib from 2.1.0 to 2.2.0] </td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">2.8.2</td>
-      <td style="border-bottom:1px solid black; width:480px">- Fixed the error when there are several soundtracks, but one of them is Hungarian</td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">2.8.1</td>
-      <td style="border-bottom:1px solid black; width:480px">- Fixed Flurl.Http.FlurlHttpException in TVmaze API <br />- Fixed url in GoG changelog <br />- Fixed non-release infobar <br />- Fixed music performer value in description <br />- Add open TechInfo file button (same as Open NFO) it uses windows default notepad.exe if notepad++ is missing <br />- Updated MediaInfo CLI to v24.01.1 <br />- Check for nukes and exits before reading <br />- Add RetryPolicy to GetImdbInfoAsync </td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">2.8</td>
-      <td style="border-bottom:1px solid black; width:480px">- Exclude translatedOtherStreamInfo if it same as AudioInfo or SubtitleInfo <br />- Fixed settings changed checker <br />- Fixed html headings </td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">2.7.5</td>
-      <td style="border-bottom:1px solid black; width:480px">- Find and replace three or more newlines with a maximum of two <br /> - Check movieTitle and torrent's name missmatch <br /> - Option to turn off upload with mediainfo <br /> - Removed useless translate requests <br /> - Added new feature what allow to upload music/clip with mediaInfo <br /> - Fixed sample create method <br /> - Fixed MainForm torrentInfo's after upload terminated </td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">2.7.4</td>
-      <td style="border-bottom:1px solid black; width:480px">- Fixed duplicated "forced" string in subtitle info <br /> - Fixed subtitle's title has bad character set <br /> - Fixed CreateTorrents form </td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">2.7.3</td>
-      <td style="border-bottom:1px solid black; width:480px">- Add files to torrentCreate form <br />- Implement DataModel's Identification (for better search) <br />- Improve IsEbookFromTorrentAsync method <br />- Improve IsTorrentContainsOnlyMediaFile method <br />- Check if UserProvidedUploadTitle is contains MovieTitle <br />- Check fileStream is exist before ask a question to download <br />- Check NFO's & Torrent's size at read <br />- RequestGameURL resize form by torrentDirectoryPath.Length <br />- Exclude Menu info from series <br />- Exclude HttpStatusCode.Forbidden from error log <br />- Fixed AddCommentToTheTorrentAsync method <br />- Fixed RequestExtraInfo when user wanna delete something </td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">2.7.2</td>
-      <td style="border-bottom:1px solid black; width:480px">- Fixed UserProvidedUploadTitle when hun title found <br /> - Fixed RemoveItemAfterItFound method <br /> - Fixed duplicate requestMovieInfos form when imdbIDChanged <br /> - Fixed some null exceptions <br /> - Dont get steaminfos again after isImdbIDChanged <br /> - Add a request form if language is missing </td>
-    </tr>
-    <tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">2.7.1</td>
-      <td style="border-bottom:1px solid black; width:480px">- Add new method what count mediafiles without sample <br /> - Accept imdbID in RequestMovieInfos form <br /> - Check if userProvidedURL is valid url at RequestMovieInfos form <br /> - The user can specify the category in RequestMovieInfos form <br /> - Removed MediaInfo.Wrapper, use Xabe.FFmpeg instead <br /> - Improve IsTorrentContainsOnlyMediaFile method (it will check the local files exist) </td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">2.7</td>
-      <td style="border-bottom:1px solid black; width:480px">- Fixed Auth test with comas <br /> - Fixed Unleashed's setup file <br /> - Update isFixOrUnlockerRegex with 'lang pack' <br /> - Add AppBundle to InstallInfo method (MacOS) <br /> - Read .torrent & NFO files directly to the memory instead of a local reference <br /> - Add "BOOKWARE" to program instead of ebook <br /> - Feature: !!!ready to upload movie/serie with mediainfo!!! <br /> - New settings options in Movie/Serie Uploader <br /> - Ask subtitle language if it included in the torrent </td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">2.6.4</td>
-      <td style="border-bottom:1px solid black; width:480px">- Whoops fixed regex in gameCategory</td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">2.6.3</td>
-      <td style="border-bottom:1px solid black; width:480px">- Fixed XrelAPI's "rating" variable (int to double) <br /> - Fixed IsRequestValid method <br /> - Improve TranslateString with auto lang detection <br /> - Translate genre only where needed <br /> - Adjust RequestMediaInfoLanguage form again (meh...) <br /> - Changed ExactRequestSearch to NotJustAnExactSearch (it update the settings.json so you should update your settings) </td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">2.6.2</td>
-      <td style="border-bottom:1px solid black; width:480px">- Fix RequestMediaInfoLanguage form layout <br /> - Improve RequestMediaInfoLanguage methods <br /> - Implement new Feature: TranslateLanguageWithGoogle, default: false <br /> - Little code refactoring </td>
-    </tr>
-    <tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">2.6.1</td>
-      <td style="border-bottom:1px solid black; width:480px">- Whoops fixed log textbox colors <br /> - Bump QBittorrent.Client from 1.9.23340.1 to 1.9.23349.1 </td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">2.6</td>
-      <td style="border-bottom:1px solid black; width:480px">- Add "TRAiNER" string to filters <br /> - Implement xREL API (category and imdbID searches) <br /> - Read stored files from Torrent file <br /> - Improve setupFileSearch method if only one executable file found <br /> - Fix if nothing selected for torrentCreate <br /> - Update FoundMoreSetupFileChooser form <br /> - Remove the exist desktopShortcut before install <br /> - Update MediaInfo.dll to 23.11 <br /> - Updated dependencies to the latest versions </td>
-    </tr>
-    <td style="border-bottom:1px solid black; text-align:center; width:85px">2.5</td>
-    <td style="border-bottom:1px solid black; width:480px">- Remove any space from Releasename at exist check <br /> - Get changelog from gogAPI if changelog.txt missing <br /> - Validate Image what user selected <br /> - Remove whitespace in game descriptions <br /> - Add UploadTimeout (60s) <br /> - Add new feature: able to select multiple value for undo/saves <br /> - Add BallonNotification when program is minimized <br /> - Add request search for ebook's title <br /> - Fixed gameapibroken log message <br /> - Fixed NotificationFlash when foundTorrentsListBox is empty <br /> - Fixed RemoveFirstAndLastComa method <br /> - Fixed inappropriate game ID </td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">2.4.1</td>
-      <td style="border-bottom:1px solid black; width:480px">- Added new MobileURLRegex <br /> - Fixed if any game api broken </td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">2.4</td>
-      <td style="border-bottom:1px solid black; width:480px">- Fix SetupFileSearch <br /> - Fix if ImdbID missing but NFO has hun url <br /> - Add BOOKWARE to predbEbookCategory <br /> - Add ClickAble link when rls already exist <br /> - Update MediaInfo.dll to 23.09 <br /> - Removed Timeout error logging </td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">2.3.7</td>
-      <td style="border-bottom:1px solid black; width:480px">- Fixed game description after GameID removed <br /> - Fix MusicClip release&#39;s category </td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">2.3.6</td>
-      <td style="border-bottom:1px solid black; width:480px">- Fix blank header picture in Clip category <br /> - Fix read buttons state <br /> - Improve category definition <br /> - Improve Imageset CoverPicture getting <br /> - Implement new Feature: get NFO from srrdb <br /> - Add NotificationFlash when form not active <br /> - Add ToolTip for selectedFolders </td>
-    </tr>
-    <tr></tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">2.3.5</td>
-      <td style="border-bottom:1px solid black; width:480px">- predb.de changed to predb.net <br /> - Fixed some tipos <br /> - Fixed some cases when game category changed to console </td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">2.3.4</td>
-      <td style="border-bottom:1px solid black; width:480px">- Fixed TooLongPath exceptions <br /> - Add flashing when got some error in upload <br /> - Add error message in TorrentCreate progress <br /> - Updater fixed - The previous version (2.3.3) throws an error when searching for a new version. </td>
-    </tr>
-    <tr></tr>
-    <tr></tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">2.3.3</td>
-      <td style="border-bottom:1px solid black; width:480px">- Fixed deadlock when files to be deleted are in use <br /> - Check if program already running <br /> - Improve waitInSecondsBetweenUpload methods <br /> - Add existCheckBeforeReadIsFinished to Form&#39;s exit check <br /> - Add flashing when app is minimized <br /> - Change retryPolicy -&gt; except InternalServerError (it fixes predb.de errors) </td>
-    </tr>
-    <tr></tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">2.3.2</td>
-      <td style="border-bottom:1px solid black; width:480px">- Fix upload button state when torrent already exist <br /> - Fix Thumbnail 3 image open <br /> - Fix updateChecking radio button state <br /> - Fix CheckRequestIsValid method <br /> - Add error string when found movie, but TMDB Api key is invalid <br /> - Add checks for video files if category is movie <br /> - Add checking to readProgress when form closing <br /> - Implement new searchType - Search by release groups <br /> - Get imdbID and hungarian plot from port.hu </td>
-    </tr>
-    <tr></tr>
-    <tr></tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">2.3.1</td>
-      <td style="border-bottom:1px solid black; width:480px">- Added predb.club as a new pre site <br /> - Added check to qBittorrentWebUIAnswer&#39;s is valid <br /> - Fixed predb search query with a backup query <br /> - Added lossless file check in Music category <br /> - Fixed headerPictureBox ContextMenu <br /> - Added new feature: able to open every Thumbnails <br /> - Implement Exist check options (Right click) </td>
-    </tr>
-    <tr></tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">2.3</td>
-      <td style="border-bottom:1px solid black; width:480px">- Fixed music description <br /> - Get genre and music infos with MediaInfo is success <br /> - Get ImdbLength from MediaInfo <br /> - Implement an Update checker <br /> - Trim last &#39;/&#39; char from OtherMovieDatabaseURL </td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">2.2.2</td>
-      <td style="border-bottom:1px solid black; width:480px">- Improve request search with category match (exclude completed requests) <br /> - Correct otherDatabase url where hun title came from <br /> - Fixed createTorrents button state <br /> - Add nCoreDomain to settings form <br /> - Fixed null or empty genre in music <br /> - Fixed error exclamation mark when reconnect <br /> - Fixed IsSteamGame or IsGogGame states <br /> - Fiixed Hungarian category when MediaInfo lang is null <br /> - Added music description <br /> - Implement new settings form for Apps, Ebooks, Musics etc <br /> - Update MediaInfo DLL to v23.03 <br /> - Fixed NumericUpDown text changed by user not triggered <br /> - Fixed PictureBoxContextMenu items at popup </td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">2.2.1</td>
-      <td style="border-bottom:1px solid black; width:480px">- Fixed qBittorrentState method <br /> - Implement GenerateScreenshotsToDescription method <br /> - Implement Undo function <br /> - Function: able to set maxTries in bad pic detection </td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">2.2</td>
-      <td style="border-bottom:1px solid black; width:480px">- Feature: GetAudioStreamAndSubtitles from videoStream <br /> - Add wmv file extension <br /> - Fix game pictures if screenshots is null <br /> - Update GetInfoFromTvmaze method <br /> - Fix MusicOrEbookGenre starts with dot <br /> - Prevent pure black thumbnails <br /> - Fix JustWatchAPI multiple imdbID-s <br /> - Add new settings option - Audio/Subtitle <br /> - Implement multi season request search <br /> - Add FFMpegConverter convertSettings to fix some rare error <br /> - Implement TorrentCreate form <br /> - Validate settings with jsonSchema </td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">2.1.4</td>
-      <td style="border-bottom:1px solid black; width:480px">- Fix too long path <br /> - Add ExitConfirmation to settings <br /> - Trim movie/serie Descriptions </td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">2.1.3</td>
-      <td style="border-bottom:1px solid black; width:480px">- Fix tvmaze hun title <br /> - Check WebContent if exists before upload </td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">2.1.2</td>
-      <td style="border-bottom:1px solid black; width:480px">- Fixed imdbID when already found in NFO</td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">2.1.1</td>
-      <td style="border-bottom:1px solid black; width:480px">- Replace first dot char in MusicOrEbook genre string <br /> - Fix tmdb api check in settingsvalider <br /> - Search tvmaze url in nfo to get hun title <br /> - Search movie database urls only once per movie </td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">2.1</td>
-      <td style="border-bottom:1px solid black; width:480px">- Fix button states <br /> - Fix NullReferenceException in Attributes[&quot;data-ds-appid&quot;] (Game category) <br /> - Improve ImdbSuggestionAPI search <br /> - Feature: check ImdbID is exist <br /> - Fix GetSearchValue trim last whitespace char <br /> - Fix Bluray disk&#39;s category <br /> - Add Warning message if foundTorrents listbox has value <br /> - Search tmdb url in NFO <br /> - Improve errorLogger with version number <br /> - Refactor webclients <br /> - Rmplement hungarian title from tvmaze&#39;s akas <br /> - Add able to skip/ignore tmdb error without reconnecting <br /> - Fix rightClick menu when check in progress <br /> - Check WatchFolder permissions and add log messages <br /> - Implement JustWatchAPI to search imdbID <br /> - Fix tvmaze GetShowAkasAsync method <br /> - Fix tmdbSearch with imdbID <br /> - Rewrite MovieAndSeries category&#39;s logic <br /> - Remove useless errorloggers <br /> - Fix if tmdb is ignored </td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">2.0.1</td>
-      <td style="border-bottom:1px solid black; width:480px">- Fix RenameTorrentFiles <br /> - Updated TMDbLib to 2.0 </td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">2.0</td>
-      <td style="border-bottom:1px solid black; width:480px">- Fix RequestSearchString <br /> - Implement SrrdbAPI <br /> - Fix SetButtons method, change selectedIndex to selectedItem <br /> - Fix steamGame verificationText <br /> - New: able to choose another thumbnails in movie/serie category <br /> - Fix game search if game object is null <br /> - Add thumbnail chooser for XXX Videos <br /> - Fix tmdbAPI error message <br /> - Fix getSearchValueRegex <br /> - Improve searchTypeAutodeterminate <br /> - Implement able to add custom requestID <br /> - Fix IsNFOContainsGameURL to determinate category <br /> - Search year at port.hu and use it as criteria <br /> - Add XXX coverimage with CustomInfoBarImage <br /> - Fix NullReferenceException at SearchGameWithNameOnSteam <br /> - Implement Movies &amp; Series &amp; Games changeID <br /> - Fix: movieCategory -&nbsp;handle WebException NotFound &amp; BadRequest <br /> - Improve AddOrChangeImdbID - checks for valid imdbID <br /> - Implement XXX Imageset search for cover pic <br /> - Add random XXX coverpicture if nothing found with keywords <br /> - Implement ThumbnailStep in movie settings </td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">1.7</td>
-      <td style="border-bottom:1px solid black; width:480px">- Add search for port.hu url as other database <br /> - Try to optimize large imageFiles again <br /> - Fix XXX category log messages <br /> - Add more predbcategories (ask me if more needed) <br /> - Fix Thumbnail settings <br /> - Improve Checks for port.hu url <br /> - Change error color to red and regular to green <br /> - Fix multiSeriesPack&#39;s nfo <br /> - Implement GetEbookTagsByReleaseName <br /> - Create errorHTML for every errors <br /> - Add ebook verification url to the desc <br /> - Implement verification url prop to every possibilities <br /> - Fix ebook category InforbarImage </td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">1.6.7 Hotfix <br /> 1.6.6 </td>
-      <td style="border-bottom:1px solid black; width:480px">- Check redicteredURL is valid <br /> - Fixed faulty negation </td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">1.6.5</td>
-      <td style="border-bottom:1px solid black; width:480px">- Fix saveAllButton state <br /> - Implement CheckOtherMovieDatabaseURL (priorize port.hu or mafab from NFO) <br /> - Update game category where localfile was used <br /> - Optimize some ImageOperations &amp; Log to XXX <br /> - Fixed Movie category - tmdb search <br /> - Remove XXX required thumbnails <br /> - Able to change Thumbnail positions <br /> - Add new regex what match with XXX-IMAGESET </td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">1.6.4</td>
-      <td style="border-bottom:1px solid black; width:480px">- Check resolutionMatch is valid int <br /> - Check XXX thumbnails before save <br /> - Fix predbCategory is null <br /> - Fix predbCalls </td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">1.6.3</td>
-      <td style="border-bottom:1px solid black; width:480px">- Added predb.de for backup site <br /> - Update resolutionRegex <br /> - Fix yearRegex and MovieTitle <br /> - Using await instead of .Result <br /> - DownloadStringWithPolly - async <br /> - AutoSize RemoveExistTorrent form <br /> - Implement RemoveTorrentAfterUploadFailed method <br /> - Add MessageBox Icon to uninstaller </td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">1.6.2</td>
-      <td style="border-bottom:1px solid black; width:480px">- Fix when predb.ovh is down</td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">1.6.1</td>
-      <td style="border-bottom:1px solid black; width:480px">- Fixed foundGame&#39;s name <br /> - Improve dateRegexInSeries <br /> - Add GetVerificationlinkFromNFO to XXX category <br /> - Implement Torrents.IsImageFromTorrent instead of Files <br /> - Handle if game categorized as movie <br /> - Implement CheckUploadProgress method <br /> - Fix same torrents with different names <br /> - Fix error if Directory isnt exist <br /> - Check movieYear property is valid <br /> - Improve nCore API Search query string <br /> - Music Cover primary is the FileSource <br /> - Improve predb API Search query string <br /> - Fix Lock() method null exception </td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">1.6</td>
-      <td style="border-bottom:1px solid black; width:480px">- Fixed dateRegexInSeries <br /> - Add GetVerificationlinkFromNFO to XXX category <br /> - Using torrent&#39;s stored files instead of local files <br /> - Handle if game categorized as movie <br /> - Fixed same torrents with different names <br /> - Fix error if Directory does not exist <br /> - Store ExistCheck and AnonymousUpload states in settings <br /> - Check movieYear property is valid </td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">1.5</td>
-      <td style="border-bottom:1px solid black; width:480px">- Fixed predb.ovh API 429 error <br /> - Fix thumbnail arrow buttons after reset <br /> - Fix Steam/GoG ID when its 0 <br /> - Fix GetVerificationlinkFromNFO - NullReferenceException <br /> - Fix OtherMovieDatabaseURL <br /> - Add Movie&amp;Series category null checks <br /> - Check if file locked by another process <br /> - Implement better webClient tries <br /> - Implement tinyurl reverse engineering <br /> - Fix StripNameString method if object is null <br /> - Fixed some typo </td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">1.4</td>
-      <td style="border-bottom:1px solid black; width:480px">- Fixed GOG API data pulls <br /> - Implement Custom Image upload (right click) <br /> - Implement create torrent before read <br /> - Improved request search <br /> - Implement RequestMovieTitle method if movie title would be empty <br /> - Implement new Feature: AlwaysAddReleaseNameToDescription (settings) <br /> - Added TimeOut in qBittorrentClient <br /> - Lot of other fixes... </td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">1.3</td>
-      <td style="border-bottom:1px solid black; width:480px">- Fixed Tools&#39; directory <br /> - Stored log messages to separeted class <br /> - Added tests for TMDB API Key </td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">1.2</td>
-      <td style="border-bottom:1px solid black; width:480px">- Some bug fixes <br /> - Code clean up <br /> - Changed Bencode.NET to MonoTorrent </td>
-    </tr>
-    <tr>
-      <td style="border-bottom:1px solid black; text-align:center; width:85px">1.1</td>
-      <td style="border-bottom:1px solid black; width:480px">- Many bug fixes</td>
-    </tr>
-    <tr>
-      <td style="text-align:center; width:85px">1.0</td>
-      <td style="width:480px">&nbsp;- Initial release</td>
-    </tr>
-  </tbody>
+    <tbody>
+        <tr>
+            <td style="border-bottom:1px solid black; text-align:center">
+                <strong>Version</strong>
+            </td>
+            <td style="border-bottom:1px solid black; text-align:center; width:480px">
+                <strong>Changes</strong>
+            </td>
+        </tr>
+    </tbody>
+    <tbody>
+        <tr>
+            <td style="border-bottom:1px solid black; text-align:center; width:85px">3.0</td>
+            <td style="border-bottom:1px solid black; width:480px">- Optimize CreateTorrent method<br />- Check if an NFO file exists in the torrent file. If it doesn't, recreate it<br />- Fixed music description if performers more than one<br />- Rewrite the ExistChecker method <br />- Exclude bad torrent
+                file, and remove it<br />- Fixed a mistake in the request search <br />- Fixed form start positions<br />- Fixed the UpdateTorrentInfo() method <br />- New feature: AutoUpload!<br />- Bump HtmlAgilityPack from 1.11.64 to 1.11.72<br />-
+                Bump Polly from 8.4.1 to 8.5.0<br />- Bump QBittorrent.Client from 1.9.23349.1 to 1.9.24285.1</td>
+        </tr>
+        <tr>
+            <td style="border-bottom:1px solid black; text-align:center; width:85px">2.9</td>
+            <td style="border-bottom:1px solid black; width:480px">- Improved GogGame data model handling<br />- Implemented a new method that checks for empty (zero-byte) files in torrents <br />- Implemented a new method that checks if a series is incomplete, then pops up a warning <br />- Rewrite the ExistChecker
+                method <br />- Error logging for 502 Bad Gateway errors has been turned off <br />- Fixed a mistake in the request search <br />- Fixed the bookware category in predb <br />- Fixed the UpdateTorrentInfo() method <br />- Updated MediaInfo
+                CLI to 24.06 </td>
+        </tr>
+        <tr>
+            <td style="border-bottom:1px solid black; text-align:center; width:85px">2.8.3</td>
+            <td style="border-bottom:1px solid black; width:480px"> - Implement new feature what search local file in NFO <br />- Set application icon <br />- Show exist form instead of warning message when app is already running <br />- Get url from NFO in game category when upload as empty <br />- Requests:
+                check Linux or Mac in request titles - match with game type <br />- Remove music description if cannot get any data from files <br />- Fix torrent create form <br />- Improve post to kek.sh <br />- Get the best quality picture from GOG
+                api <br />- Fixed torrents with multiple NFOs <br />- Ignore country code in stream (Audio/Subtitle) title <br />- Updated dependencies - [ReverseMarkdown from 4.3.0 to 4.4.0], [Newtonsoft.Json.Schema from 3.0.15 to 3.0.16], [Polly from
+                8.3.0 to 8.4.0], [Autoupdater.NET.Official from 1.8.5 to 1.8.6], [HtmlAgilityPack from 1.11.59 to 1.11.61], [TMDbLib from 2.1.0 to 2.2.0] </td>
+        </tr>
+        <tr>
+            <td style="border-bottom:1px solid black; text-align:center; width:85px">2.8.2</td>
+            <td style="border-bottom:1px solid black; width:480px">- Fixed the error when there are several soundtracks, but one of them is Hungarian</td>
+        </tr>
+        <tr>
+            <td style="border-bottom:1px solid black; text-align:center; width:85px">2.8.1</td>
+            <td style="border-bottom:1px solid black; width:480px">- Fixed Flurl.Http.FlurlHttpException in TVmaze API <br />- Fixed url in GoG changelog <br />- Fixed non-release infobar <br />- Fixed music performer value in description <br />- Add open TechInfo file button (same as Open NFO) it uses windows
+                default notepad.exe if notepad++ is missing <br />- Updated MediaInfo CLI to v24.01.1 <br />- Check for nukes and exits before reading <br />- Add RetryPolicy to GetImdbInfoAsync </td>
+        </tr>
+        <tr>
+            <td style="border-bottom:1px solid black; text-align:center; width:85px">2.8</td>
+            <td style="border-bottom:1px solid black; width:480px">- Exclude translatedOtherStreamInfo if it same as AudioInfo or SubtitleInfo <br />- Fixed settings changed checker <br />- Fixed html headings </td>
+        </tr>
+        <tr>
+            <td style="border-bottom:1px solid black; text-align:center; width:85px">2.7.5</td>
+            <td style="border-bottom:1px solid black; width:480px">- Find and replace three or more newlines with a maximum of two <br /> - Check movieTitle and torrent's name missmatch <br /> - Option to turn off upload with mediainfo <br /> - Removed useless translate requests <br /> - Added new feature
+                what allow to upload music/clip with mediaInfo <br /> - Fixed sample create method <br /> - Fixed MainForm torrentInfo's after upload terminated </td>
+        </tr>
+        <tr>
+            <td style="border-bottom:1px solid black; text-align:center; width:85px">2.7.4</td>
+            <td style="border-bottom:1px solid black; width:480px">- Fixed duplicated "forced" string in subtitle info <br /> - Fixed subtitle's title has bad character set <br /> - Fixed CreateTorrents form </td>
+        </tr>
+        <tr>
+            <td style="border-bottom:1px solid black; text-align:center; width:85px">2.7.3</td>
+            <td style="border-bottom:1px solid black; width:480px">- Add files to torrentCreate form <br />- Implement DataModel's Identification (for better search) <br />- Improve IsEbookFromTorrentAsync method <br />- Improve IsTorrentContainsOnlyMediaFile method <br />- Check if UserProvidedUploadTitle
+                is contains MovieTitle <br />- Check fileStream is exist before ask a question to download <br />- Check NFO's & Torrent's size at read <br />- RequestGameURL resize form by torrentDirectoryPath.Length <br />- Exclude Menu info from series
+                <br />- Exclude HttpStatusCode.Forbidden from error log <br />- Fixed AddCommentToTheTorrentAsync method <br />- Fixed RequestExtraInfo when user wanna delete something </td>
+        </tr>
+        <tr>
+            <td style="border-bottom:1px solid black; text-align:center; width:85px">2.7.2</td>
+            <td style="border-bottom:1px solid black; width:480px">- Fixed UserProvidedUploadTitle when hun title found <br /> - Fixed RemoveItemAfterItFound method <br /> - Fixed duplicate requestMovieInfos form when imdbIDChanged <br /> - Fixed some null exceptions <br /> - Dont get steaminfos again after
+                isImdbIDChanged <br /> - Add a request form if language is missing </td>
+        </tr>
+        <tr>
+            <tr>
+                <td style="border-bottom:1px solid black; text-align:center; width:85px">2.7.1</td>
+                <td style="border-bottom:1px solid black; width:480px">- Add new method what count mediafiles without sample <br /> - Accept imdbID in RequestMovieInfos form <br /> - Check if userProvidedURL is valid url at RequestMovieInfos form <br /> - The user can specify the category in RequestMovieInfos
+                    form <br /> - Removed MediaInfo.Wrapper, use Xabe.FFmpeg instead <br /> - Improve IsTorrentContainsOnlyMediaFile method (it will check the local files exist) </td>
+            </tr>
+            <tr>
+                <td style="border-bottom:1px solid black; text-align:center; width:85px">2.7</td>
+                <td style="border-bottom:1px solid black; width:480px">- Fixed Auth test with comas <br /> - Fixed Unleashed's setup file <br /> - Update isFixOrUnlockerRegex with 'lang pack' <br /> - Add AppBundle to InstallInfo method (MacOS) <br /> - Read .torrent & NFO files directly to the memory instead
+                    of a local reference <br /> - Add "BOOKWARE" to program instead of ebook <br /> - Feature: !!!ready to upload movie/serie with mediainfo!!! <br /> - New settings options in Movie/Serie Uploader <br /> - Ask subtitle language if it
+                    included in the torrent </td>
+            </tr>
+            <tr>
+                <td style="border-bottom:1px solid black; text-align:center; width:85px">2.6.4</td>
+                <td style="border-bottom:1px solid black; width:480px">- Whoops fixed regex in gameCategory</td>
+            </tr>
+            <tr>
+                <td style="border-bottom:1px solid black; text-align:center; width:85px">2.6.3</td>
+                <td style="border-bottom:1px solid black; width:480px">- Fixed XrelAPI's "rating" variable (int to double) <br /> - Fixed IsRequestValid method <br /> - Improve TranslateString with auto lang detection <br /> - Translate genre only where needed <br /> - Adjust RequestMediaInfoLanguage form
+                    again (meh...) <br /> - Changed ExactRequestSearch to NotJustAnExactSearch (it update the settings.json so you should update your settings) </td>
+            </tr>
+            <tr>
+                <td style="border-bottom:1px solid black; text-align:center; width:85px">2.6.2</td>
+                <td style="border-bottom:1px solid black; width:480px">- Fix RequestMediaInfoLanguage form layout <br /> - Improve RequestMediaInfoLanguage methods <br /> - Implement new Feature: TranslateLanguageWithGoogle, default: false <br /> - Little code refactoring </td>
+            </tr>
+            <tr>
+                <tr>
+                    <td style="border-bottom:1px solid black; text-align:center; width:85px">2.6.1</td>
+                    <td style="border-bottom:1px solid black; width:480px">- Whoops fixed log textbox colors <br /> - Bump QBittorrent.Client from 1.9.23340.1 to 1.9.23349.1 </td>
+                </tr>
+                <tr>
+                    <td style="border-bottom:1px solid black; text-align:center; width:85px">2.6</td>
+                    <td style="border-bottom:1px solid black; width:480px">- Add "TRAiNER" string to filters <br /> - Implement xREL API (category and imdbID searches) <br /> - Read stored files from Torrent file <br /> - Improve setupFileSearch method if only one executable file found <br /> - Fix if nothing
+                        selected for torrentCreate <br /> - Update FoundMoreSetupFileChooser form <br /> - Remove the exist desktopShortcut before install <br /> - Update MediaInfo.dll to 23.11 <br /> - Updated dependencies to the latest versions </td>
+                </tr>
+                <td style="border-bottom:1px solid black; text-align:center; width:85px">2.5</td>
+                <td style="border-bottom:1px solid black; width:480px">- Remove any space from Releasename at exist check <br /> - Get changelog from gogAPI if changelog.txt missing <br /> - Validate Image what user selected <br /> - Remove whitespace in game descriptions <br /> - Add UploadTimeout (60s)
+                    <br /> - Add new feature: able to select multiple value for undo/saves <br /> - Add BallonNotification when program is minimized <br /> - Add request search for ebook's title <br /> - Fixed gameapibroken log message <br /> - Fixed
+                    NotificationFlash when foundTorrentsListBox is empty <br /> - Fixed RemoveFirstAndLastComa method <br /> - Fixed inappropriate game ID </td>
+            </tr>
+            <tr>
+                <td style="border-bottom:1px solid black; text-align:center; width:85px">2.4.1</td>
+                <td style="border-bottom:1px solid black; width:480px">- Added new MobileURLRegex <br /> - Fixed if any game api broken </td>
+            </tr>
+            <tr>
+                <td style="border-bottom:1px solid black; text-align:center; width:85px">2.4</td>
+                <td style="border-bottom:1px solid black; width:480px">- Fix SetupFileSearch <br /> - Fix if ImdbID missing but NFO has hun url <br /> - Add BOOKWARE to predbEbookCategory <br /> - Add ClickAble link when rls already exist <br /> - Update MediaInfo.dll to 23.09 <br /> - Removed Timeout error
+                    logging </td>
+            </tr>
+            <tr>
+                <td style="border-bottom:1px solid black; text-align:center; width:85px">2.3.7</td>
+                <td style="border-bottom:1px solid black; width:480px">- Fixed game description after GameID removed <br /> - Fix MusicClip release&#39;s category </td>
+            </tr>
+            <tr>
+                <td style="border-bottom:1px solid black; text-align:center; width:85px">2.3.6</td>
+                <td style="border-bottom:1px solid black; width:480px">- Fix blank header picture in Clip category <br /> - Fix read buttons state <br /> - Improve category definition <br /> - Improve Imageset CoverPicture getting <br /> - Implement new Feature: get NFO from srrdb <br /> - Add NotificationFlash
+                    when form not active <br /> - Add ToolTip for selectedFolders </td>
+            </tr>
+            <tr></tr>
+            <tr>
+                <td style="border-bottom:1px solid black; text-align:center; width:85px">2.3.5</td>
+                <td style="border-bottom:1px solid black; width:480px">- predb.de changed to predb.net <br /> - Fixed some tipos <br /> - Fixed some cases when game category changed to console </td>
+            </tr>
+            <tr>
+                <td style="border-bottom:1px solid black; text-align:center; width:85px">2.3.4</td>
+                <td style="border-bottom:1px solid black; width:480px">- Fixed TooLongPath exceptions <br /> - Add flashing when got some error in upload <br /> - Add error message in TorrentCreate progress <br /> - Updater fixed - The previous version (2.3.3) throws an error when searching for a new version.
+                </td>
+            </tr>
+            <tr></tr>
+            <tr></tr>
+            <tr>
+                <td style="border-bottom:1px solid black; text-align:center; width:85px">2.3.3</td>
+                <td style="border-bottom:1px solid black; width:480px">- Fixed deadlock when files to be deleted are in use <br /> - Check if program already running <br /> - Improve waitInSecondsBetweenUpload methods <br /> - Add existCheckBeforeReadIsFinished to Form&#39;s exit check <br /> - Add flashing
+                    when app is minimized <br /> - Change retryPolicy -&gt; except InternalServerError (it fixes predb.de errors) </td>
+            </tr>
+            <tr></tr>
+            <tr>
+                <td style="border-bottom:1px solid black; text-align:center; width:85px">2.3.2</td>
+                <td style="border-bottom:1px solid black; width:480px">- Fix upload button state when torrent already exist <br /> - Fix Thumbnail 3 image open <br /> - Fix updateChecking radio button state <br /> - Fix CheckRequestIsValid method <br /> - Add error string when found movie, but TMDB Api key
+                    is invalid <br /> - Add checks for video files if category is movie <br /> - Add checking to readProgress when form closing <br /> - Implement new searchType - Search by release groups <br /> - Get imdbID and hungarian plot from port.hu
+                </td>
+            </tr>
+            <tr></tr>
+            <tr></tr>
+            <tr>
+                <td style="border-bottom:1px solid black; text-align:center; width:85px">2.3.1</td>
+                <td style="border-bottom:1px solid black; width:480px">- Added predb.club as a new pre site <br /> - Added check to qBittorrentWebUIAnswer&#39;s is valid <br /> - Fixed predb search query with a backup query <br /> - Added lossless file check in Music category <br /> - Fixed headerPictureBox
+                    ContextMenu <br /> - Added new feature: able to open every Thumbnails <br /> - Implement Exist check options (Right click) </td>
+            </tr>
+            <tr></tr>
+            <tr>
+                <td style="border-bottom:1px solid black; text-align:center; width:85px">2.3</td>
+                <td style="border-bottom:1px solid black; width:480px">- Fixed music description <br /> - Get genre and music infos with MediaInfo is success <br /> - Get ImdbLength from MediaInfo <br /> - Implement an Update checker <br /> - Trim last &#39;/&#39; char from OtherMovieDatabaseURL </td>
+            </tr>
+            <tr>
+                <td style="border-bottom:1px solid black; text-align:center; width:85px">2.2.2</td>
+                <td style="border-bottom:1px solid black; width:480px">- Improve request search with category match (exclude completed requests) <br /> - Correct otherDatabase url where hun title came from <br /> - Fixed createTorrents button state <br /> - Add nCoreDomain to settings form <br /> - Fixed
+                    null or empty genre in music <br /> - Fixed error exclamation mark when reconnect <br /> - Fixed IsSteamGame or IsGogGame states <br /> - Fiixed Hungarian category when MediaInfo lang is null <br /> - Added music description <br />                    - Implement new settings form for Apps, Ebooks, Musics etc <br /> - Update MediaInfo DLL to v23.03 <br /> - Fixed NumericUpDown text changed by user not triggered <br /> - Fixed PictureBoxContextMenu items at popup </td>
+            </tr>
+            <tr>
+                <td style="border-bottom:1px solid black; text-align:center; width:85px">2.2.1</td>
+                <td style="border-bottom:1px solid black; width:480px">- Fixed qBittorrentState method <br /> - Implement GenerateScreenshotsToDescription method <br /> - Implement Undo function <br /> - Function: able to set maxTries in bad pic detection </td>
+            </tr>
+            <tr>
+                <td style="border-bottom:1px solid black; text-align:center; width:85px">2.2</td>
+                <td style="border-bottom:1px solid black; width:480px">- Feature: GetAudioStreamAndSubtitles from videoStream <br /> - Add wmv file extension <br /> - Fix game pictures if screenshots is null <br /> - Update GetInfoFromTvmaze method <br /> - Fix MusicOrEbookGenre starts with dot <br /> - Prevent
+                    pure black thumbnails <br /> - Fix JustWatchAPI multiple imdbID-s <br /> - Add new settings option - Audio/Subtitle <br /> - Implement multi season request search <br /> - Add FFMpegConverter convertSettings to fix some rare error
+                    <br /> - Implement TorrentCreate form <br /> - Validate settings with jsonSchema </td>
+            </tr>
+            <tr>
+                <td style="border-bottom:1px solid black; text-align:center; width:85px">2.1.4</td>
+                <td style="border-bottom:1px solid black; width:480px">- Fix too long path <br /> - Add ExitConfirmation to settings <br /> - Trim movie/serie Descriptions </td>
+            </tr>
+            <tr>
+                <td style="border-bottom:1px solid black; text-align:center; width:85px">2.1.3</td>
+                <td style="border-bottom:1px solid black; width:480px">- Fix tvmaze hun title <br /> - Check WebContent if exists before upload </td>
+            </tr>
+            <tr>
+                <td style="border-bottom:1px solid black; text-align:center; width:85px">2.1.2</td>
+                <td style="border-bottom:1px solid black; width:480px">- Fixed imdbID when already found in NFO</td>
+            </tr>
+            <tr>
+                <td style="border-bottom:1px solid black; text-align:center; width:85px">2.1.1</td>
+                <td style="border-bottom:1px solid black; width:480px">- Replace first dot char in MusicOrEbook genre string <br /> - Fix tmdb api check in settingsvalider <br /> - Search tvmaze url in nfo to get hun title <br /> - Search movie database urls only once per movie </td>
+            </tr>
+            <tr>
+                <td style="border-bottom:1px solid black; text-align:center; width:85px">2.1</td>
+                <td style="border-bottom:1px solid black; width:480px">- Fix button states <br /> - Fix NullReferenceException in Attributes[&quot;data-ds-appid&quot;] (Game category) <br /> - Improve ImdbSuggestionAPI search <br /> - Feature: check ImdbID is exist <br /> - Fix GetSearchValue trim last whitespace
+                    char <br /> - Fix Bluray disk&#39;s category <br /> - Add Warning message if foundTorrents listbox has value <br /> - Search tmdb url in NFO <br /> - Improve errorLogger with version number <br /> - Refactor webclients <br /> - Rmplement
+                    hungarian title from tvmaze&#39;s akas <br /> - Add able to skip/ignore tmdb error without reconnecting <br /> - Fix rightClick menu when check in progress <br /> - Check WatchFolder permissions and add log messages <br /> - Implement
+                    JustWatchAPI to search imdbID <br /> - Fix tvmaze GetShowAkasAsync method <br /> - Fix tmdbSearch with imdbID <br /> - Rewrite MovieAndSeries category&#39;s logic <br /> - Remove useless errorloggers <br /> - Fix if tmdb is ignored
+                </td>
+            </tr>
+            <tr>
+                <td style="border-bottom:1px solid black; text-align:center; width:85px">2.0.1</td>
+                <td style="border-bottom:1px solid black; width:480px">- Fix RenameTorrentFiles <br /> - Updated TMDbLib to 2.0 </td>
+            </tr>
+            <tr>
+                <td style="border-bottom:1px solid black; text-align:center; width:85px">2.0</td>
+                <td style="border-bottom:1px solid black; width:480px">- Fix RequestSearchString <br /> - Implement SrrdbAPI <br /> - Fix SetButtons method, change selectedIndex to selectedItem <br /> - Fix steamGame verificationText <br /> - New: able to choose another thumbnails in movie/serie category
+                    <br /> - Fix game search if game object is null <br /> - Add thumbnail chooser for XXX Videos <br /> - Fix tmdbAPI error message <br /> - Fix getSearchValueRegex <br /> - Improve searchTypeAutodeterminate <br /> - Implement able to
+                    add custom requestID <br /> - Fix IsNFOContainsGameURL to determinate category <br /> - Search year at port.hu and use it as criteria <br /> - Add XXX coverimage with CustomInfoBarImage <br /> - Fix NullReferenceException at SearchGameWithNameOnSteam
+                    <br /> - Implement Movies &amp; Series &amp; Games changeID <br /> - Fix: movieCategory -&nbsp;handle WebException NotFound &amp; BadRequest <br /> - Improve AddOrChangeImdbID - checks for valid imdbID <br /> - Implement XXX Imageset
+                    search for cover pic <br /> - Add random XXX coverpicture if nothing found with keywords <br /> - Implement ThumbnailStep in movie settings </td>
+            </tr>
+            <tr>
+                <td style="border-bottom:1px solid black; text-align:center; width:85px">1.7</td>
+                <td style="border-bottom:1px solid black; width:480px">- Add search for port.hu url as other database <br /> - Try to optimize large imageFiles again <br /> - Fix XXX category log messages <br /> - Add more predbcategories (ask me if more needed) <br /> - Fix Thumbnail settings <br /> - Improve
+                    Checks for port.hu url <br /> - Change error color to red and regular to green <br /> - Fix multiSeriesPack&#39;s nfo <br /> - Implement GetEbookTagsByReleaseName <br /> - Create errorHTML for every errors <br /> - Add ebook verification
+                    url to the desc <br /> - Implement verification url prop to every possibilities <br /> - Fix ebook category InforbarImage </td>
+            </tr>
+            <tr>
+                <td style="border-bottom:1px solid black; text-align:center; width:85px">1.6.7 Hotfix <br /> 1.6.6 </td>
+                <td style="border-bottom:1px solid black; width:480px">- Check redicteredURL is valid <br /> - Fixed faulty negation </td>
+            </tr>
+            <tr>
+                <td style="border-bottom:1px solid black; text-align:center; width:85px">1.6.5</td>
+                <td style="border-bottom:1px solid black; width:480px">- Fix saveAllButton state <br /> - Implement CheckOtherMovieDatabaseURL (priorize port.hu or mafab from NFO) <br /> - Update game category where localfile was used <br /> - Optimize some ImageOperations &amp; Log to XXX <br /> - Fixed
+                    Movie category - tmdb search <br /> - Remove XXX required thumbnails <br /> - Able to change Thumbnail positions <br /> - Add new regex what match with XXX-IMAGESET </td>
+            </tr>
+            <tr>
+                <td style="border-bottom:1px solid black; text-align:center; width:85px">1.6.4</td>
+                <td style="border-bottom:1px solid black; width:480px">- Check resolutionMatch is valid int <br /> - Check XXX thumbnails before save <br /> - Fix predbCategory is null <br /> - Fix predbCalls </td>
+            </tr>
+            <tr>
+                <td style="border-bottom:1px solid black; text-align:center; width:85px">1.6.3</td>
+                <td style="border-bottom:1px solid black; width:480px">- Added predb.de for backup site <br /> - Update resolutionRegex <br /> - Fix yearRegex and MovieTitle <br /> - Using await instead of .Result <br /> - DownloadStringWithPolly - async <br /> - AutoSize RemoveExistTorrent form <br /> -
+                    Implement RemoveTorrentAfterUploadFailed method <br /> - Add MessageBox Icon to uninstaller </td>
+            </tr>
+            <tr>
+                <td style="border-bottom:1px solid black; text-align:center; width:85px">1.6.2</td>
+                <td style="border-bottom:1px solid black; width:480px">- Fix when predb.ovh is down</td>
+            </tr>
+            <tr>
+                <td style="border-bottom:1px solid black; text-align:center; width:85px">1.6.1</td>
+                <td style="border-bottom:1px solid black; width:480px">- Fixed foundGame&#39;s name <br /> - Improve dateRegexInSeries <br /> - Add GetVerificationlinkFromNFO to XXX category <br /> - Implement Torrents.IsImageFromTorrent instead of Files <br /> - Handle if game categorized as movie <br />                    - Implement CheckUploadProgress method <br /> - Fix same torrents with different names <br /> - Fix error if Directory isnt exist <br /> - Check movieYear property is valid <br /> - Improve nCore API Search query string <br /> - Music
+                    Cover primary is the FileSource <br /> - Improve predb API Search query string <br /> - Fix Lock() method null exception </td>
+            </tr>
+            <tr>
+                <td style="border-bottom:1px solid black; text-align:center; width:85px">1.6</td>
+                <td style="border-bottom:1px solid black; width:480px">- Fixed dateRegexInSeries <br /> - Add GetVerificationlinkFromNFO to XXX category <br /> - Using torrent&#39;s stored files instead of local files <br /> - Handle if game categorized as movie <br /> - Fixed same torrents with different
+                    names <br /> - Fix error if Directory does not exist <br /> - Store ExistCheck and AnonymousUpload states in settings <br /> - Check movieYear property is valid </td>
+            </tr>
+            <tr>
+                <td style="border-bottom:1px solid black; text-align:center; width:85px">1.5</td>
+                <td style="border-bottom:1px solid black; width:480px">- Fixed predb.ovh API 429 error <br /> - Fix thumbnail arrow buttons after reset <br /> - Fix Steam/GoG ID when its 0 <br /> - Fix GetVerificationlinkFromNFO - NullReferenceException <br /> - Fix OtherMovieDatabaseURL <br /> - Add Movie&amp;Series
+                    category null checks <br /> - Check if file locked by another process <br /> - Implement better webClient tries <br /> - Implement tinyurl reverse engineering <br /> - Fix StripNameString method if object is null <br /> - Fixed some
+                    typo </td>
+            </tr>
+            <tr>
+                <td style="border-bottom:1px solid black; text-align:center; width:85px">1.4</td>
+                <td style="border-bottom:1px solid black; width:480px">- Fixed GOG API data pulls <br /> - Implement Custom Image upload (right click) <br /> - Implement create torrent before read <br /> - Improved request search <br /> - Implement RequestMovieTitle method if movie title would be empty <br
+                    /> - Implement new Feature: AlwaysAddReleaseNameToDescription (settings) <br /> - Added TimeOut in qBittorrentClient <br /> - Lot of other fixes... </td>
+            </tr>
+            <tr>
+                <td style="border-bottom:1px solid black; text-align:center; width:85px">1.3</td>
+                <td style="border-bottom:1px solid black; width:480px">- Fixed Tools&#39; directory <br /> - Stored log messages to separeted class <br /> - Added tests for TMDB API Key </td>
+            </tr>
+            <tr>
+                <td style="border-bottom:1px solid black; text-align:center; width:85px">1.2</td>
+                <td style="border-bottom:1px solid black; width:480px">- Some bug fixes <br /> - Code clean up <br /> - Changed Bencode.NET to MonoTorrent </td>
+            </tr>
+            <tr>
+                <td style="border-bottom:1px solid black; text-align:center; width:85px">1.1</td>
+                <td style="border-bottom:1px solid black; width:480px">- Many bug fixes</td>
+            </tr>
+            <tr>
+                <td style="text-align:center; width:85px">1.0</td>
+                <td style="width:480px">&nbsp;- Initial release</td>
+            </tr>
+    </tbody>
 </table>
