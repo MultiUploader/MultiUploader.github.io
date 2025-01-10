@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <item>
-  <version>3.0.1.0</version>
-  <url>https://github.com/MultiUploader/MultiUploader.github.io/releases/download/3.0.1/MultiUploaderSetup.msi</url>
+  <version>3.0.2.0</version>
+  <url>https://github.com/MultiUploader/MultiUploader.github.io/releases/download/3.0.2/MultiUploaderSetup.msi</url>
   <changelog>https://multiuploader.github.io/changelog.html</changelog>
   <mandatory>false</mandatory>
-  <checksum algorithm="MD5">9e71b029aee5126611c547fc505ba7a6</checksum>
+  <checksum algorithm="MD5">3ff87fd2530f4d5d63626935adf82eae</checksum>
 </item>
