@@ -5,5 +5,5 @@
   <changelog>https://multiuploader.github.io/changelog.html</changelog>
   <mandatory>false</mandatory>
   <checksum algorithm="MD5">3a4e0692c3fad0c46778892e163fb110</checksum>
-  <args>msiexec.exe /x {222440DE-B465-4751-AE48-62FCA830F684}</args>
+  <args>"msiexec.exe /x {222440DE-B465-4751-AE48-62FCA830F684}"</args>
 </item>
