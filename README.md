@@ -51,6 +51,29 @@
 * Minden egyes hibáról hibaüzenetet az `%AppData%\MultiUploader` mappába tesz.
 </details>
 
+<details>
+  <summary><strong>Program nyelve és telepítési infó testreszabása</strong></summary>
+
+#### Program szövegének lefordítása saját nyelvre
+
+A program első indításkor automatikusan létrehozza a `%AppData%\MultiUploader\Languages\translation.json` fájlt, benne a jelenlegi (angol) vezérlő-szövegekkel. Ha le szeretnéd fordítani a felületet a saját nyelvedre:
+
+* Nyisd meg ezt a fájlt egy szövegszerkesztőben.
+* Fordítsd le az értékeket (a `:` utáni rész) - a kulcsokhoz (a `:` előtti rész) ne nyúlj, azok mondják meg, melyik vezérlőhöz tartozik a szöveg.
+* Mentsd el a fájlt, nincs szükség újraindításra - a következő ablak-megnyitáskor már a fordítás jelenik meg.
+
+Ha egy kulcsot kihagysz vagy hibásan szerkeszted a fájlt, az adott szöveg (vagy akár az egész fájl, ha érvénytelen JSON lesz belőle) egyszerűen angolul marad - a program futása emiatt nem lesz hibás. A fájl csak akkor jön létre, ha még nem létezik, utána a program sosem írja felül automatikusan, még frissítés után sem.
+
+#### Telepítési infó testreszabása (Játék kategória)
+
+Játék kategóriánál a leírásba kerülő "Telepítés" szakasz szövegét is testre lehet szabni a `%AppData%\MultiUploader\InstallInfo\installInfo.json` fájlban (ez is automatikusan létrejön első induláskor):
+
+* Az általános, mindenkire vonatkozó alapértelmezett szövegeket a `$General:` kezdetű kulcsok alatt írhatod át (pl. `$General:ImageMount`, `$General:RunInstallerFile`). Ezekben a `{0}`/`{1}` jelölések helyére a program automatikusan behelyettesíti a talált fájlneveket - ezeket a jelöléseket hagyd meg valahol a szövegben, de szabadon mozgathatod, átfogalmazhatod körülöttük a mondatot.
+* Ha egy adott release csoportnak (pl. `SKIDROW`, `RELOADED` vagy `CODEX`) teljesen egyedi telepítési szöveget szeretnél, adj hozzá egy `"CsoportNév": "egyedi szöveg"` bejegyzést - ez a csoport minden feltöltésénél teljesen lecseréli az általános szöveget (ebben nincsenek `{0}`/`{1}` behelyettesítések, a teljes szöveget te írod).
+
+Ugyanúgy biztonságosan szerkeszthető, mint a fordítási fájl: hibás szerkesztés esetén a program a beépített alapértelmezésre esik vissza, nem lesz tőle hibás a futás, és a fájlt sosem írja felül automatikusan.
+</details>
+
 ### <p style="text-align: center;"><strong>Kategóriák</strong></p>
 
 <details>
@@ -176,5 +199,5 @@
 
 ## Működés közben
 <kbd>
-  <img src="sample.gif">
+  <img src="https://github.com/MultiUploader/MultiUploader.github.io/blob/main/sample.gif">
 </kbd>
