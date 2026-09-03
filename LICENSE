@@ -1,8 +1,6 @@
-The MIT License (MIT)
+MIT License / Disclaimer and Terms of Use
 
-Copyright (c) MultiUploader
-
-All rights reserved.
+Copyright (C) 2022-2026 MultiUploader
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -17,7 +15,51 @@ copies or substantial portions of the Software.
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
+
+---
+
+DISCLAIMER AND TERMS OF USE
+
+1. Nature of the Software
+This application is an independent utility designed for data organization, processing, metadata formatting, and information management.
+
+2. Content and Data Sources
+The software does not itself contain, provide, or distribute digital content. Files and data processed by the software are provided by the user's own device or by external data sources specified by the user.
+The software does not provide user accounts or authentication credentials. Any account information, data, and configuration required for its operation are provided by the user.
+
+3. User Responsibility
+The user is responsible for their use of the software, the data they provide, and for ensuring that their use complies with applicable laws and the terms of any third-party services they use.
+
+4. Limitation of Liability
+The software is provided on an "AS IS" basis. To the fullest extent permitted by applicable law, the developers exclude or limit liability for damages, data loss, service or account restrictions, or other consequences arising from the use of the software or its interaction with third-party services.
+Nothing in these terms excludes or limits liability that cannot lawfully be excluded or limited under applicable law.
+
+5. Acceptance
+By downloading, installing, or using the software, the user acknowledges and accepts these terms.
+
+---
+
+FELELŐSSÉGKIZÁRÁS ÉS FELHASZNÁLÁSI FELTÉTELEK
+
+1. A szoftver jellege
+Az alkalmazás egy független segédeszköz, amely adatok rendszerezésére, feldolgozására, metaadatok formázására és információkezelésre szolgál.
+
+2. Tartalom és adatforrások
+A szoftver önmagában nem tartalmaz, nem biztosít és nem terjeszt digitális tartalmakat. A szoftver által feldolgozott fájlokat és adatokat a felhasználó saját eszköze, illetve a felhasználó által megadott külső adatforrások biztosítják.
+A szoftver nem biztosít felhasználói fiókokat vagy hitelesítési adatokat. Az alkalmazás működéséhez szükséges fiókadatokat, adatokat és beállításokat a felhasználó adja meg.
+
+3. Felhasználói felelősség
+A felhasználó felel a szoftver használatáért, az általa megadott adatokért, valamint azért, hogy használata megfeleljen az alkalmazandó jogszabályoknak és az igénybe vett harmadik fél szolgáltatások feltételeinek.
+
+4. Felelősségkorlátozás
+A szoftver "AS IS" alapon kerül rendelkezésre bocsátásra. A fejlesztők a jogszabályok által megengedett legteljesebb mértékben kizárják vagy korlátozzák a szoftver használatából, illetve harmadik fél szolgáltatásaival való kapcsolatából eredő károkért, adatvesztésért, szolgáltatás- vagy fiókkorlátozásért fennálló felelősségüket.
+A jelen feltételek nem zárják ki vagy korlátozzák azokat a felelősségi eseteket, amelyek kizárását vagy korlátozását az alkalmazandó jog nem teszi lehetővé.
+
+5. Elfogadás
+A szoftver letöltésével, telepítésével vagy használatával a felhasználó tudomásul veszi és elfogadja a fenti feltételeket.
+
+Copyright (C) 2022-2026 MultiUploader. Minden jog fenntartva.
