@@ -181,6 +181,10 @@ Ugyanúgy biztonságosan szerkeszthető, mint a fordítási fájl: hibás szerke
 * Ha ISBN alapján van találat Google Books-on akkor tud leírást csinálni. [Opcionális, beállításokban kikapcsolható]
 
 * Mivel ebben a kategóriában nem lehet fájlból kiolvasni és még pre oldalakon sincsen címke megnevezve így ezt bekéri a program.
+
+* Automatikusan készít mintaképeket a fájlból az alábbi formátumoknál: PDF, EPUB, CBZ, CBR, FB2, MOBI, AZW, AZW3, PRC, DOCX, XPS, OXPS, TXT, HTM, HTML.
+
+* MOBI, AZW, AZW3 és PRC formátumnál a fájlban tárolt borítóképet infobar képként is felhasználja.
 </details>
 
 <details>
