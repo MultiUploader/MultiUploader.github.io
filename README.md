@@ -9,6 +9,7 @@
 <br>
 
 <a href="../../releases/latest"><img src="https://img.shields.io/badge/Let%C3%B6lt%C3%A9s-legfrissebb_telep%C3%ADt%C5%91-2ea44f?style=for-the-badge&logo=github&logoColor=white" alt="Letöltés"></a>
+<a href="../../releases"><img src="https://img.shields.io/github/downloads/MultiUploader/MultiUploader.github.io/total?style=for-the-badge&logo=github&logoColor=white&label=Let%C3%B6lt%C3%A9sek&color=2ea44f" alt="Letöltések"></a>
 <img src="https://img.shields.io/badge/Windows-10_%2F_11-0078D6?style=for-the-badge&logo=windows&logoColor=white" alt="Windows 10/11">
 <img src="https://img.shields.io/badge/.NET_Framework-4.8-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt=".NET Framework 4.8">
 <a href="LICENSE"><img src="https://img.shields.io/badge/Licenc-MIT_%2B_felt%C3%A9telek-blue?style=for-the-badge" alt="Licenc"></a>
