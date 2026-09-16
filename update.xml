@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <item>
-  <version>3.3.0.0</version>
-  <url>https://github.com/MultiUploader/MultiUploader.github.io/releases/download/3.3/MultiUploader_Setup_3.3.exe</url>
+  <version>3.4.0.0</version>
+  <url>https://github.com/MultiUploader/MultiUploader.github.io/releases/download/3.4/MultiUploader_Setup_3.4.exe</url>
   <changelog>https://multiuploader.github.io/changelog.html</changelog>
   <mandatory>false</mandatory>
-  <checksum algorithm="SHA256">92bd24211252a3f6cae32342bedbc4cd256a0971521c7268a24dd97266186dfa</checksum>
+  <checksum algorithm="SHA256">0ef53d8cdc0e08b83faf28083439d58137a9294e09a70a5ec5ba7c95b487673e</checksum>
 </item>
