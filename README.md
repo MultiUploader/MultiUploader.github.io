@@ -27,6 +27,7 @@
 <a href="#-kategóriák">Kategóriák</a> &nbsp;•&nbsp;
 <a href="#-haladó-beállítások">Haladó</a> &nbsp;•&nbsp;
 <a href="#-hibaelhárítás">Hibaelhárítás</a> &nbsp;•&nbsp;
+<a href="#-ismert-hibák">Ismert hibák</a> &nbsp;•&nbsp;
 <a href="#-változásnapló">Változásnapló</a>
 
 <sub>📷 <a href="docs/main.png">Főablak</a> &nbsp;·&nbsp; 📷 <a href="docs/settings.png">Beállítások</a> &nbsp;·&nbsp; 🎞️ <a href="docs/sample.gif">Működés közben (GIF)</a></sub>
@@ -234,7 +235,21 @@ A kategóriát a program a release nevéből és a [predb.club](https://predb.cl
 
 * **Kategória automatikusan:** film vagy sorozat (csak évszám → film; évad/epizód/dátum → sorozat), SD vagy HD.
 * **IMDb keresés sorrendje:** NFO-ban lévő link → [srrDB](https://www.srrdb.com/) → [xREL](https://www.xrel.to) → cím alapján, a beállított *Minimum similarity* egyezéssel (90% fölé ajánlott).
-* **Leírás (plot)** forrásai sorrendben: port.hu → mafab.hu → TMDB (magyar) → JustWatch → TMDB (angol) → TVmaze. Ha az IMDb-n nincs kép, TVmaze/TMDB-ről veszi.
+* Az NFO-ban lévő IMDb-link és a kézzel megadott vagy statikus IMDb-azonosító mindenhol az alap. A többi forrásból (TVmaze/TMDB/TheTVDB link, srrDB, xREL) kapott azonosítót az IMDb-ről azonosító alapján kéri le, és a címét (AKA-listával együtt) a release nevéhez méri: ha egyik cím sem egyezik **és** a cím alapú keresés másik azonosítót talál, azt veszi; ha a keresés nem talál mást, a linkelt azonosító marad.
+* **Az adatok forrása, a legmegbízhatóbbtól:** az infobar adatait az IMDb adja azonosító alapján (egy lekérdezés), a többi forrás csak azt tölti ki, amit az IMDb nem ad.
+
+  | Mező | 1. | 2. | 3. | 4. |
+  |---|---|---|---|---|
+  | Angol cím | IMDb | TVmaze | nCore IMDb-segéd | TMDB |
+  | Magyar cím | IMDb magyar AKA | TVmaze magyar AKA | nCore IMDb-segéd | TMDB (magyar) |
+  | Eredeti cím | IMDb (latin betűs, pl. *Gisaengchung*) | JustWatch | TMDB | – |
+  | Év, értékelés, ország, rendező, szereplők | IMDb | nCore IMDb-segéd | TVmaze | – |
+  | Hossz | IMDb | TVmaze | nCore IMDb-segéd | – |
+  | Műfajok | IMDb (az nCore magyar neveivel) | nCore IMDb-segéd | TMDB (magyar) | – |
+  | Infobar kép | IMDb | TVmaze | TMDB | nCore IMDb-segéd |
+  | Leírás (plot) | port.hu | mafab.hu | TMDB (magyar) | JustWatch → TMDB (angol) → TVmaze |
+
+  Az nCore IMDb-segédje (`imdb_movie` ajax) csak akkor fut, ha az IMDb nem válaszol, vagy ha egy műfajnak nincs magyar neve – ilyenkor csak a műfajokat kéri onnan. A műfajok nCore-os magyar neveit a program tanulja is: 30 naponta egyszer (és minden ilyen segéd-lekérésnél) összeveti az IMDb műfajait az nCore szavaival, az eltérést eltárolja (`%AppData%\MultiUploader\imdb-genres.json`) és a naplóban jelzi – a beépített szótárt nem kell kézzel frissíteni.
 * Az NFO-ban talált egyéb linkeket (TVmaze, TheTVDB, Rotten Tomatoes, mafab, port.hu, MyAnimeList, Netflix) is beteszi a feltöltésbe.
 * Ha az IMDb magyar címe egyezik a release nevével, az infobarba az angol cím kerül eredeti/magyar címként.
 * **3 mintakép** a film elejéről (évadpack esetén az első epizódból). Az arányok, a fekete/fehér kockák kiszűrése a *Thumbnail picture's settings*-ben állítható.
@@ -400,13 +415,59 @@ Hibás szerkesztésnél a beépített alapértelmezésre esik vissza, a fájlt s
 | 🎯 Rossz IMDb egy sorozathoz | *Static ImdbID* beállítás – lásd a Film/Sorozat kategóriánál. |
 | ❓ Bármi más | A főablak alsó naplója és a `%AppData%\MultiUploader` mappa hibafájljai megmondják, hol akadt el. |
 
+> [!NOTE]
+> Ha olyat találsz, ami **nem jó**, nem az **nCore szabályai szerint** lett feltöltve, vagy az alkalmazás **valamit hibásan talált meg** – nyiss egy [[Issue](../../issues)]-t! A leírással és ha lehet, az `%AppData%\MultiUploader` hibafájljaival együtt segíted a javítást.
+
+<br>
+
+## 🐞 Ismert hibák
+
+<details>
+<summary>⚽ <strong>Sportesemények infobarja</strong> – ismert hiba</summary>
+<br>
+
+* Sporteseményeknél (pl. UFC, foci, F1) az infobar adatai nem mindig a nCore szabályai szerint töltődnek ki – ismert hiba. **Mentés előtt** a beolvasott release-ek listájában jobb klikk → *Edit infobar titles*; feltöltés után már csak nCore-on javítható. (A már mentett tételnél a menüpont csak megmutatja az adatokat.)
+
+</details>
+
 <br>
 
 ## 📝 Változásnapló
 
 <details>
-<summary>🆕 <strong>3.4</strong> – a legutóbbi kiadás változásai</summary>
+<summary>🆕 <strong>3.5</strong> – a legutóbbi kiadás változásai</summary>
 <br>
+
+* New: Epic Games Store support - a game is imported from its store link or slug with full metadata, and a store search runs when there is no link
+* New: Epic search link in the game URL dialog, next to the Steam and GOG ones
+* New: the infobar titles (English, Hungarian, original) and the IMDb title search come from the IMDb GraphQL API; the nCore imdb_movie helper is only a fallback
+* New: an IMDb id that comes from another database is verified against IMDb itself; an id from the NFO or typed by hand stays final
+* New: API responses are cached for the session, so the same data is not queried twice during a run
+* New: long category reads report their progress periodically
+* Oversized kek.sh screenshots are uploaded as high-quality JPEG instead of being dropped
+* Images above the pixel limit are resized instead of rejected
+* The infobar English title no longer carries the network name of a show (Dateline NBC to Dateline), and the same title no longer fills two infobar fields
+* NFO database links are the primary source, dropped only when their title is foreign to the release
+* Game search: punctuation-free similarity, never a demo, the patch notes link of the loaded game, Steam apps only
+* The HTTP retry policy was rewritten on Polly v8 and honours Retry-After
+* A TMDb HTTP error counts as a miss instead of an ERROR.log entry
+* The Settings form shows a loading indicator during the exist check that runs before a read
+* The "Still working on" log line pauses while a modal form waits for an answer; the game ID request labels are left-aligned
+* Right-click on an already selected torrent no longer reloads its images
+* Interlaced video is read from the ffprobe field_order (FFMpegCore 5.5.0)
+* Fixed: an unknown ffprobe video size classified the release as SD
+* Fixed: the qBittorrent test overwrote the result icon of the authentication test
+* Fixed: left-over Hungarian and incorrect English UI and log strings
+* Fixed six findings of a full code audit: the log link cache grew without a bound, an unreadable torrent threw instead of skipping the sample, a single-file torrent's stored path was resolved wrongly, the error log did not redact api_key=, a corrupt secret swallowed every exception, and an abandoned single-instance mutex crashed the start
+* Bump FFMpegCore to 5.5.0, Polly.Core to 8.8.0 (instead of the Polly shim package) and xunit.v3 to 4.0.1
+
+</details>
+
+<details>
+<summary>🗂️ <strong>Korábbi verziók</strong> – 3.4 … 1.0</summary>
+<br>
+
+**3.4**
 
 * New: browser login in Settings - the nCore cookie, passkey and API token are filled in automatically (the WebView2 runtime is installed on demand)
 * New: Hungarian plot from mafab.hu and JustWatch; JustWatch moved to its GraphQL API (the old lookups no longer found anything)
@@ -440,12 +501,6 @@ Hibás szerkesztésnél a beépített alapértelmezésre esik vissza, a fájlt s
 * Newtonsoft.Json.Schema replaced by NJsonSchema 11.6.1 (MIT license)
 * Added Microsoft.Web.WebView2 1.0.4191.47
 * Bump SharpCompress from the unlisted 1.0.0 build to 0.50.4
-
-</details>
-
-<details>
-<summary>🗂️ <strong>Korábbi verziók</strong> – 3.3 … 1.0</summary>
-<br>
 
 **3.3**
 
