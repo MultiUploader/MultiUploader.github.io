@@ -1,4 +1,4 @@
-<table border="0" cellpadding="1" cellspacing="1" style="width:581px">
+﻿<table border="0" cellpadding="1" cellspacing="1" style="width:581px">
   <tbody>
     <tr>
       <td style="border-bottom:1px solid black; text-align:center">
@@ -7,6 +7,12 @@
       <td style="border-bottom:1px solid black; text-align:center; width:480px">
         <strong>Changes</strong>
       </td>
+    </tr>
+  </tbody>
+  <tbody>
+    <tr>
+      <td style="border-bottom:1px solid black; text-align:center; width:85px">3.6</td>
+      <td style="border-bottom:1px solid black; width:480px">- New: itch.io and Big Fish Games support - a game is imported from its store link (never by a name search); a Big Fish link for the other platform is swapped to the release&#39;s Windows or Mac version <br /> - New: itch.io and Big Fish search links in the game URL dialog <br /> - New: Epic release group list in the game search settings; the message that blocks the save names every group listed for two stores <br /> - New: &quot;Search only on Epic&quot; and store-order search types (Steam &rarr; GoG &rarr; Epic, GoG &rarr; Steam &rarr; Epic, Epic &rarr; Steam &rarr; GoG); every store is searched at most once per release <br /> - New: the category group is decided from the release name and the torrent&#39;s files before the predb chain (music videos, MDVDR/MViD, XXX releases with a full date, retro console tokens, packed eBook releases) <br /> - New: every categorized torrent is checked for a nuke on Corrupt-Net, and its section is the last category source when every predb site fails <br /> - New: a non-scene upload of an IMDb sports broadcast unknown to TVmaze (e.g. UFC) is uploaded as a sports event <br /> - New: the app reconnects by itself when the network comes back; AutoUpload retries the connection and switches itself off after the Max reconnect attempts setting <br /> - New: the video snapshots are taken concurrently; Parallel ffmpeg snapshots setting (1-8, default 3) on the Thumbnail picture settings <br /> - Faster connections on every network: IPv4 is used where it is reachable instead of waiting 21 seconds on a broken IPv6 path, unresponsive server addresses are skipped, up to 8 connections per host, TLS 1.3 where Windows supports it, and a fast connection failure of a GET request is retried once <br /> - Infobar English title: the TVmaze/TMDB English name comes before the IMDb primary title (Broken Lives instead of Kirik Hayatlar); a foreign release without a Hungarian title keeps its original title in the Eredeti/magyar field, and when the Hungarian title is the original title only the English field is filled <br /> - Fewer requests: the Hungarian and English TMDb data are requested together, the decoded torrent and NFO are reused, downloaded images are cached, and the nCore request page is searched once per release name <br /> - A torrent whose comment already carries the MultiUploader signature is no longer rewritten on every read <br /> - Fixed: with the exact-only request setting a Linux or Mac release could match the Windows request <br /> - Fixed: an unnuked release was offered for removal as nuked (Corrupt-Net, predb.club) <br /> - Fixed: the game thumbnail arrows were enabled when the store had no other picture to step to <br /> - An unknown predb section is a normal miss instead of a red log line; a gyan.dev checksum outage is no longer written to ERROR.log <br /> - The rate-limit line of the log file names the release that triggered it; stack traces no longer contain build machine paths </td>
     </tr>
   </tbody>
   <tbody>

@@ -50,7 +50,7 @@ Ha feltöltesz nCore-ra, ismered a menetet: megnyitod a feltöltő oldalt, kiker
     <td align="center" width="33%">
       <h3>🌐</h3>
       <b>Összegyűjti</b><br>
-      <sub>Leírás, borító, IMDb · TMDB · Steam · GOG adatok, előadó és tracklista, ISBN – attól függően, mi a tartalom</sub>
+      <sub>Leírás, borító, IMDb · TMDB · Steam · GOG · Epic · itch.io · Big Fish adatok, előadó és tracklista, ISBN – attól függően, mi a tartalom</sub>
     </td>
     <td align="center" width="33%">
       <h3>🖼️</h3>
@@ -67,7 +67,7 @@ Ha feltöltesz nCore-ra, ismered a menetet: megnyitod a feltöltő oldalt, kiker
     <td align="center">
       <h3>✅</h3>
       <b>Ellenőrzi</b><br>
-      <sub>Nincs-e már fent ugyanez a release, van-e rá nyitott kérés</sub>
+      <sub>Nincs-e már fent ugyanez a release, nem nuked-e, van-e rá nyitott kérés</sub>
     </td>
     <td align="center">
       <h3>🚀</h3>
@@ -188,11 +188,12 @@ Kattints a **`Save settings`** gombra. Kész – a program használatra kész! �
 ```mermaid
 flowchart LR
     A[📁 .torrent fájlok<br/>a Torrents folderben] --> B[🔍 <b>Read</b>]
-    B --> C[🌐 Adatgyűjtés<br/>NFO · IMDb · TMDB · Steam · predb…]
-    C --> D[👀 Ellenőrzöd,<br/>javítod ha kell]
-    D --> E[💾 <b>Save</b>]
-    E --> F[🚀 <b>Upload</b>]
-    F --> G[🧲 Torrent a kliensbe<br/>→ seed indul]
+    B --> C[🏷️ Kategória + nuke<br/>NFO-link · név és fájlok<br/>predb · xREL · srrDB · Corrupt-Net]
+    C --> D[🌐 Adatgyűjtés<br/>fent van-e már · IMDb · TMDB<br/>Steam · GOG · Epic · itch.io · Big Fish…]
+    D --> E[👀 Ellenőrzöd,<br/>javítod ha kell]
+    E --> F[💾 <b>Save</b>]
+    F --> G[🚀 <b>Upload</b>]
+    G --> H[🧲 Torrent a kliensbe<br/>→ seed indul]
 ```
 
 A számok a főablak képén lévő jelölőkre utalnak – nyisd le:
@@ -207,7 +208,7 @@ A számok a főablak képén lévő jelölőkre utalnak – nyisd le:
 2. 🔍 **`Read`** – a program beolvassa a *Torrents folder* összes `.torrent` fájlját, kikeresi hozzájuk az adatokat a netről, és megnézi, nincs-e már fent az oldalon. Ha egy release-hez nincs NFO, megkérdezi, letöltse-e az [srrDB](https://www.srrdb.com/)-ről; ha nem biztos a kategóriában, egy kis ablakban rákérdez.
 3. 📋 **A beolvasott release-ek listája** – kattints egyre, és a jobb oldalon megjelenik minden, amit a program összegyűjtött róla.
 4. 👀 **Nézd át, javítsd ha kell** – a három mintakép és az infobar kép (jobb klikk → saját kép), a leírás (szabadon szerkeszthető), a kategória legördülő.
-5. 💾 **`Save selected`** (vagy `Save All`, ha mind jó) – a release átkerül a bal alsó, „feltöltendő" listába.
+5. 💾 **`Save selected`** (vagy `Save All`, ha mind jó) – a release átkerül a bal alsó, „feltöltendő” listába.
 6. 🚀 **`Upload torrent(s)`** – a program egyesével feltölti őket (köztük legalább 5 mp szünettel), majd a kész torrentet átadja a kliensnek vagy a figyelt mappába teszi.
 7. 📜 **Napló** – itt látod, mi történik, és ha valami nem sikerül, itt írja ki, miért.
 
@@ -215,7 +216,7 @@ A számok a főablak képén lévő jelölőkre utalnak – nyisd le:
 > A **`Read & Create torrent(s)`** gombbal a `.torrent` fájlt is elkészítheted a programban: kijelölöd a mappákat/fájlokat, választasz szeletméretet (vagy hagyod automatikusan), és a program elkészíti, majd rögtön be is olvassa.
 
 > [!WARNING]
-> A duplikáció-ellenőrzés azt nézi, hogy *pontosan ugyanez a release-név* fent van-e már. Ha ugyanaz a film más csoporttól már fent van, azt neked kell észrevenned.
+> A duplikáció-ellenőrzés azt nézi, hogy *pontosan ugyanez a release-név* fent van-e már. Ha ugyanaz a film más release-csoporttól már fent van, azt neked kell észrevenned.
 
 <details>
 <summary>🎞️ <b>Nézd meg működés közben</b> – <i>egy teljes beolvasás és feltöltés animált GIF-en (14 MB)</i></summary>
@@ -227,7 +228,14 @@ A számok a főablak képén lévő jelölőkre utalnak – nyisd le:
 
 ## 📚 Kategóriák
 
-A kategóriát a program a release nevéből és a [predb.club](https://predb.club) / [predb.net](https://predb.net) / [xREL](https://www.xrel.to) pre-adatbázisokból állapítja meg – ha rosszul sorolnák be, beolvasás után szabadon átváltható. **Minden kategóriában** feltölthetsz saját infobar képet vagy mintaképet (jobb klikk a képen); az infobar képet a program méretre igazítja.
+A kategóriát a program ebben a sorrendben állapítja meg – az első forrás dönt, amelyik biztosat mond:
+
+1. **Játék-link az NFO-ban** (Steam, GOG, Epic, itch.io, Big Fish) → játék.
+2. **A release neve és a torrent fájllistája** – amit pre-adatbázis nélkül is el lehet dönteni: `MDVDR` / `MVID` / `MBLURAY` jelölés → zene; évad/epizód vagy dátum a névben videófájlokkal, illetve évszám + felbontás → film/sorozat (a zenei `-Év-ReleaseCsoport` végződés kivétel); `XXX` + `IMAGESET` → XXX; csak hangfájlok → zene; `EBOOK` a névben vagy könyvfájlok → könyv; mobil telepítő → mobil; konzol jelölés (`NSW`, `PS4`, `XBOX`…) → konzol játék; `GOG` a névben vagy a *Game Uploader settings*-ben boltra rendelt release-csoport → PC játék.
+3. **Pre-adatbázisok:** [predb.club](https://predb.club) → [predb.net](https://predb.net) → [xREL](https://www.xrel.to) → [srrDB](https://www.srrdb.com/) (ha ott van IMDb-azonosítója → film/sorozat) → [Corrupt-Net](https://pre.corrupt-net.org/) szekció. A pre oldal szekcióját a torrent tartalmához méri: ha zenének mondja, de nincs benne hangfájl, nem fogadja el.
+4. Ha egyik sem tud semmit, egy kis ablakban **rákérdez** (auto upload módban kihagyja a release-t).
+
+Ha rosszul sorolná be, beolvasás után szabadon átváltható. Minden besorolt release-t **nuke-ra is ellenőriz** – a pre-adatbázisban és a Corrupt-Neten –, a nuked release-t felajánlja törlésre; a visszavont nuke („unnuke”) nem számít nuke-nak. **Minden kategóriában** feltölthetsz saját infobar képet vagy mintaképet (jobb klikk a képen); az infobar képet a program méretre igazítja.
 
 <details>
 <summary>🎬 <strong>Film és Sorozat</strong></summary>
@@ -236,11 +244,11 @@ A kategóriát a program a release nevéből és a [predb.club](https://predb.cl
 * **Kategória automatikusan:** film vagy sorozat (csak évszám → film; évad/epizód/dátum → sorozat), SD vagy HD.
 * **IMDb keresés sorrendje:** NFO-ban lévő link → [srrDB](https://www.srrdb.com/) → [xREL](https://www.xrel.to) → cím alapján, a beállított *Minimum similarity* egyezéssel (90% fölé ajánlott).
 * Az NFO-ban lévő IMDb-link és a kézzel megadott vagy statikus IMDb-azonosító mindenhol az alap. A többi forrásból (TVmaze/TMDB/TheTVDB link, srrDB, xREL) kapott azonosítót az IMDb-ről azonosító alapján kéri le, és a címét (AKA-listával együtt) a release nevéhez méri: ha egyik cím sem egyezik **és** a cím alapú keresés másik azonosítót talál, azt veszi; ha a keresés nem talál mást, a linkelt azonosító marad.
-* **Az adatok forrása, a legmegbízhatóbbtól:** az infobar adatait az IMDb adja azonosító alapján (egy lekérdezés), a többi forrás csak azt tölti ki, amit az IMDb nem ad.
+* **Az adatok forrása, a legmegbízhatóbbtól:** az infobar adatait az IMDb adja azonosító alapján (egy lekérdezés), a többi forrás csak azt tölti ki, amit az IMDb nem ad. Kivétel az angol cím: nem angol nyelvű produkciónál az IMDb főcíme gyakran az eredeti cím vagy egy másik változat (*Kirik Hayatlar* – *Broken Lives*, *A Night's Tale* – *The Nightfall*), ezért ott a TVmaze GB/US AKA-ja és a TMDB angol fordítása előrébb áll; az IMDb címe akkor kerül be, ha ezek nem adtak angol címet, vagy ha ugyanazt adja bővebben (*Tougen Anki* – *Tougen Anki: Dark Demon of Paradise*). A TMDB magyar neve csak akkor számít magyar címnek, ha nem az eredeti cím (magyar produkciónál az).
 
   | Mező | 1. | 2. | 3. | 4. |
   |---|---|---|---|---|
-  | Angol cím | IMDb | TVmaze | nCore IMDb-segéd | TMDB |
+  | Angol cím | TVmaze GB/US AKA | TMDB (angol fordítás) | IMDb | nCore IMDb-segéd |
   | Magyar cím | IMDb magyar AKA | TVmaze magyar AKA | nCore IMDb-segéd | TMDB (magyar) |
   | Eredeti cím | IMDb (latin betűs, pl. *Gisaengchung*) | JustWatch | TMDB | – |
   | Év, értékelés, ország, rendező, szereplők | IMDb | nCore IMDb-segéd | TVmaze | – |
@@ -251,10 +259,10 @@ A kategóriát a program a release nevéből és a [predb.club](https://predb.cl
 
   Az nCore IMDb-segédje (`imdb_movie` ajax) csak akkor fut, ha az IMDb nem válaszol, vagy ha egy műfajnak nincs magyar neve – ilyenkor csak a műfajokat kéri onnan. A műfajok nCore-os magyar neveit a program tanulja is: 30 naponta egyszer (és minden ilyen segéd-lekérésnél) összeveti az IMDb műfajait az nCore szavaival, az eltérést eltárolja (`%AppData%\MultiUploader\imdb-genres.json`) és a naplóban jelzi – a beépített szótárt nem kell kézzel frissíteni.
 * Az NFO-ban talált egyéb linkeket (TVmaze, TheTVDB, Rotten Tomatoes, mafab, port.hu, MyAnimeList, Netflix) is beteszi a feltöltésbe.
-* Ha az IMDb magyar címe egyezik a release nevével, az infobarba az angol cím kerül eredeti/magyar címként.
-* **3 mintakép** a film elejéről (évadpack esetén az első epizódból). Az arányok, a fekete/fehér kockák kiszűrése a *Thumbnail picture's settings*-ben állítható.
+* Ha az IMDb magyar címe egyezik a release nevével, az infobarba az angol cím kerül eredeti/magyar címként. Idegen nyelvű release-nél magyar cím nélkül az eredeti/magyar címhez az eredeti cím kerül (*Kodenavn Hunter*). Ha a magyar cím szó szerint az eredeti cím (*Gomorra*), csak az angol cím marad kitöltve (*Gomorrah*); magyar gyártású filmnél a magyar cím marad.
+* **3 mintakép** a film elejéről (évadpack esetén az első epizódból). A *Thumbnail picture's settings*-ben állítható az arányuk, a fekete/fehér kockák kiszűrése, hogy kerüljön-e **6 véletlen kép** a leírásba, és hogy egyszerre hány ffmpeg mintakép készülhessen (*Parallel ffmpeg snapshots*, alapértelmezés 3, 1 és 8 között) – ez utóbbi a film és a lemez terhelését osztja be, nem a képek számát.
 * **Technikai infó** opcionálisan a leírásba: hangsávok, feliratok nyelve – magyarra fordítva vagy bekérve.
-* **Nem scene release** (saját rip, NFO nélkül): bekapcsolható – a program maga generálja a MediaInfót, bekéri a címet és a torrent nevét, filmnél opcionálisan **sample fájlt** is készít – a scene szokását követve külön `sample` mappába. Megadhatsz IMDb- vagy TVmaze-linket: ilyenkor pontos találattal egészíti ki az adatokat, és ha sportesemény, magától sorozat kategóriába kerül. Link nélkül a beírt cím alapján keres az IMDb-n, a TVmaze-en és a TMDB-n (a release-névre épülő srrDB / xREL / JustWatch itt értelemszerűen kimarad).
+* **Nem scene release** (saját rip, NFO nélkül): bekapcsolható – a program maga generálja a MediaInfót, bekéri a címet és a torrent nevét, filmnél opcionálisan **sample fájlt** is készít – a scene szokását követve külön `sample` mappába. Megadhatsz IMDb- vagy TVmaze-linket: ilyenkor pontos találattal egészíti ki az adatokat, és ha sportesemény, magától sorozat kategóriába kerül, generált epizódszám nélkül, sport-infobarral. Sporteseménynek a TVmaze *Sports* műsorait veszi, és ha a TVmaze nem ismeri (pl. UFC), akkor az olyan IMDb-tételt, amely tévéműsor/-epizód/-különkiadás és az egyetlen műfaja a *Sport* – a sportfilmek és -dokumentumfilmek más műfajt is hordoznak, azok filmek maradnak. Link nélkül a beírt cím alapján keres az IMDb-n, a TVmaze-en és a TMDB-n (a release-névre épülő srrDB / xREL / JustWatch itt értelemszerűen kimarad).
 
 <details>
 <summary><i>Rossz IMDb-t talál egy sorozathoz?</i></summary>
@@ -275,11 +283,13 @@ Rögzítsd a *Settings → Movie/Serie Uploader settings → Static ImdbID* mez�
 <br>
 
 * **Kategória automatikusan:** ISO / RIP, a konzol kategóriát név vagy predb alapján dönti el.
-* Ha az NFO-ban **Steam, GOG vagy Epic** link van, biztosan játék kategória lesz.
-* Az adatokat a **Steam** és **GOG** API-ból tölti ki: leírás, rendszerkövetelmény, telepítési infó, 3 véletlen kép és az infobar kép is innen jön. YouTube videó és igazoló link is hozzáadható.
+* Ha az NFO-ban **Steam, GOG, Epic, itch.io vagy Big Fish** link van, biztosan játék kategória lesz, és az adatok abból a boltból jönnek.
+* **Öt bolt:** Steam, GOG és Epic linkből vagy név alapján kereséssel; **itch.io és Big Fish csak linkből** (NFO-ból vagy a bekérő ablakban megadva) – ott a név alapú keresés túl sok hamis találatot adna (rajongói játékok ugyanazzal a címmel, nyelvi duplikátumok).
+* **Az adatok a boltból:** leírás, rendszerkövetelmény, 3 kép a bolt képernyőképeiből (a képek melletti nyilakkal léptethető, amíg van még kép) és az infobar kép. YouTube videó és igazoló link is hozzáadható. Ha a bolt nem közöl rendszerkövetelményt (itch.io), a szakasz kimarad a leírásból. Big Fish linknél a release platformjának (Windows / Mac) megfelelő változatot tölti be, ha van olyan.
+* **Név alapú keresés** (*Game Uploader settings → Select search type*): *Auto determinate by name/nfo* – Steam → GOG → Epic sorrendben, de ha a névben `GOG` van, a GOG az első; *Search by release groups* – a *Search this release on Steam / GoG / Epic* listákba írt release-csoportok a saját boltjukban indulnak, utána a többi jön (egy release-csoport csak egy listában szerepelhet, ütközésnél a mentés megnevezi); *Search only on Steam / GoG / Epic* – csak az egyik bolt; *Steam → GoG → Epic* (és a GoG, illetve Epic kezdetű változat) – a választott bolt után a másik kettő az alap Steam → GOG → Epic sorrendben; *Disabled*. Minden boltot legfeljebb egyszer kérdez le release-enként, a találathoz a *Minimum similarity percent* egyezés kell.
 * A leírás elemei (mit tegyen bele) a *Game Uploader settings*-ben kapcsolhatók.
-* Ha sem linket, sem találatot nem talál: beállítástól függően **bekéri** a Steam/GOG linket, vagy **üresen** tölti fel (opcionális sablonnal).
-* A „Telepítés” szakasz szövege csoportonként testreszabható – lásd [lent](#-testreszabás).
+* Ha sem linket, sem találatot nem talál: beállítástól függően **bekéri** a bolt linkjét (az ablakban Steam / GoG / Epic / itch.io / Big Fish keresőlink segít), vagy **üresen** tölti fel (opcionális sablonnal).
+* A „Telepítés” szakasz szövege release-csoportonként testreszabható – lásd [lent](#-testreszabás).
 </details>
 
 <details>
@@ -317,7 +327,7 @@ Rögzítsd a *Settings → Movie/Serie Uploader settings → Static ImdbID* mez�
 
 * **Kategória automatikusan:** HD / SD / Imageset.
 * **3 mintakép** a videó elejéről.
-* Imageset esetén 3 véletlen képet tölt fel, és opcionálisan megkeresi a cover képet (pl. `cover;poster` nevű fájl) az infobarhoz.
+* Imageset esetén 3 véletlen képet tölt fel, és opcionálisan megkeresi a borítóképet (pl. `cover` vagy `poster` nevű fájl) az infobarhoz.
 </details>
 
 <br>
@@ -339,20 +349,21 @@ Rögzítsd a *Settings → Movie/Serie Uploader settings → Static ImdbID* mez�
 
 `Enable request search on nCore?` – feltöltés előtt megkeresi, van-e nyitott **kérés** a release-re, és ha igen, hozzákapcsolja (a főablak *RequestID* mezőjében látod és átírhatod).
 
-Két lépcsőben keres: először a pontos release-névre, majd – ha be van kapcsolva az `If the exact search didn't find anything, try using the game/movie name?` – a címre is (pl. `Shoresy.S01E06.720p.WEB.h264-KOGi` → `Shoresy`). Ez utóbbi téves találatot is adhat, **ellenőrizd, mielőtt feltöltöd** – a rossz kérésre feltöltött torrentet utólag már csak törölni lehet (vagy a kérő vonhatja vissza), a kérés ID-jét módosítani nem lehet.
+Két lépcsőben keres: először a pontos release-névre, majd – ha be van kapcsolva az `If the exact search didn't find anything, try using the game/movie name?` – a címre is (pl. `Shoresy.S01E06.720p.WEB.h264-KOGi` → `Shoresy`). Ez utóbbi téves találatot is adhat, **ellenőrizd, mielőtt feltöltöd** – a rossz kérésre feltöltött torrentet utólag már csak törölni lehet (vagy a kérő vonhatja vissza), a kérés azonosítóját módosítani nem lehet.
 </details>
 
 <details>
 <summary>🤖 <strong>Auto upload mód</strong></summary>
 <br>
 
-A *Auto upload settings*-ben bekapcsolható **felügyelet nélküli** mód: a program adott időközönként figyeli a *Torrents foldert*, és minden új `.torrent`-et automatikusan beolvas és feltölt – kérdések nélkül.
+Az *Auto upload settings*-ben bekapcsolható **felügyelet nélküli** mód: a program adott időközönként figyeli a *Torrents foldert*, és minden új `.torrent`-et automatikusan beolvas és feltölt – kérdések nélkül.
 
-* **Skip torrent if…** – mikor hagyja ki a release-t (hiányzik az NFO, hiányzik a data mappa, hiányzó epizód, hibás torrent-újragenerálás, hiányzó zene/könyv műfaj…).
+* **Skip torrent if…** – mikor hagyja ki a release-t (hiányzik az NFO, hiányzik a release mappája, hiányzó epizód, hibás torrent-újragenerálás, hiányzó zene/könyv műfaj…).
 * **If torrent exist/nuked** – mi legyen, ha már fent van vagy nuked.
 * **Max retries after upload failure** – hányszor próbálja újra.
 * **Upload game empty if no Steam/GOG link found?** – játéknál üresen töltse fel, ha nem talál adatot.
 * **Check for updates every** – ebben a módban ennyi óránként nézi meg, van-e programfrissítés.
+* **Max reconnect attempts** – ha megszakad az nCore-kapcsolat, a program a *Torrent's folder checking interval* ütemében magától újracsatlakozik; ennyi egymást követő sikertelen próbálkozás után kikapcsolja az auto upload módot (a beállításban is), és a naplóban jelzi, hogy kézzel kell újracsatlakozni.
 
 Ebben a módban a *Read* és a listák le vannak tiltva, a főablakon piros felirat jelzi, hogy aktív.
 </details>
@@ -363,10 +374,11 @@ Ebben a módban a *Read* és a listák le vannak tiltva, a főablakon piros feli
 
 * **Exist checking** (főablak) – beolvasás előtt megnézi, mi van már fent, és eleve kihagyja azokat.
 * **Anonymous Upload** (főablak) – névtelen feltöltés.
+* **Reconnect** (főablak) – csak akkor jelenik meg, ha a legutóbbi nCore-kapcsolódás nem sikerült; ezzel lehet kézzel újracsatlakozni. Ha közben visszajön a hálózat, a program **magától** lefuttatja ugyanezt: a hálózati változás után 3 másodperccel (hogy a DHCP és a DNS beálljon), kivéve ha épp feltöltés fut. A naplóban jelzi, amikor megpróbálja.
 * `Remove torrent file after uploaded?` – sikeres feltöltés után törölje-e a `.torrent` fájlt a *Torrents folderből*.
 * `Always add release's name to description?` – a release nevét mindig tegye a leírásba.
 * A feltöltések közti szünet minimum **5 másodperc**, feljebb állítható – lejjebb nem, mert nem akarjuk spammelni az nCore-t.
-* `Logging` / `Log file location` – a napló fájlba is mehet, méret és archívumszám szerint forog.
+* `Logging` / `Log file location` – a napló fájlba is mehet: naponta új fájlt kezd, ha *Days to archive*-nál több napi fájl gyűlt össze, a régebbieket egy zip-be tömöríti, és legfeljebb *Max archives* archívumot tart meg.
 * Minden hibáról részletes hibafájl készül: `%AppData%\MultiUploader`
 * `Clear Settings` – minden beállítás törlése.
 </details>
@@ -396,7 +408,7 @@ Ha egy szövegben hibás a jelölés, csak az marad angolul; ha az egész fájl 
 A `%AppData%\MultiUploader\InstallInfo\installInfo.json` fájlban (első indításkor létrejön):
 
 * **Általános szövegek** a `$General:` kulcsok alatt (pl. `$General:ImageMount`, `$General:RunInstallerFile`) – a `{0}`/`{1}` helyére a talált fájlnevek kerülnek, hagyd meg őket valahol a mondatban.
-* **Csoportonkénti egyedi szöveg:** adj hozzá egy `"CsoportNév": "egyedi szöveg"` bejegyzést (pl. `SKIDROW`, `RELOADED`, `CODEX`) – ennél a csoportnál a teljes általános szöveget lecseréli, behelyettesítés nélkül.
+* **Release-csoportonkénti egyedi szöveg:** adj hozzá egy `"ReleaseCsoport": "egyedi szöveg"` bejegyzést (pl. `SKIDROW`, `RELOADED`, `CODEX`) – ennél a release-csoportnál a teljes általános szöveget lecseréli, behelyettesítés nélkül.
 
 Hibás szerkesztésnél a beépített alapértelmezésre esik vissza, a fájlt sosem írja felül.
 </details>
@@ -426,7 +438,7 @@ Hibás szerkesztésnél a beépített alapértelmezésre esik vissza, a fájlt s
 <summary>⚽ <strong>Sportesemények infobarja</strong> – ismert hiba</summary>
 <br>
 
-* Sporteseményeknél (pl. UFC, foci, F1) az infobar adatai nem mindig a nCore szabályai szerint töltődnek ki – ismert hiba. **Mentés előtt** a beolvasott release-ek listájában jobb klikk → *Edit infobar titles*; feltöltés után már csak nCore-on javítható. (A már mentett tételnél a menüpont csak megmutatja az adatokat.)
+* Sporteseményeknél (pl. UFC, foci, F1) az infobar adatai nem mindig az nCore szabályai szerint töltődnek ki – ismert hiba. **Mentés előtt** a beolvasott release-ek listájában jobb klikk → *Edit infobar titles*; feltöltés után már csak nCore-on javítható. (A már mentett tételnél a menüpont csak megmutatja az adatokat.)
 
 </details>
 
@@ -435,8 +447,35 @@ Hibás szerkesztésnél a beépített alapértelmezésre esik vissza, a fájlt s
 ## 📝 Változásnapló
 
 <details>
-<summary>🆕 <strong>3.5</strong> – a legutóbbi kiadás változásai</summary>
+<summary>🆕 <strong>3.6</strong> – a legutóbbi kiadás változásai</summary>
 <br>
+
+* New: itch.io and Big Fish Games support - a game is imported from its store link (never by a name search); a Big Fish link for the other platform is swapped to the release's Windows or Mac version
+* New: itch.io and Big Fish search links in the game URL dialog
+* New: Epic release group list in the game search settings; the message that blocks the save names every group listed for two stores
+* New: "Search only on Epic" and store-order search types (Steam → GoG → Epic, GoG → Steam → Epic, Epic → Steam → GoG); every store is searched at most once per release
+* New: the category group is decided from the release name and the torrent's files before the predb chain (music videos, MDVDR/MViD, XXX releases with a full date, retro console tokens, packed eBook releases)
+* New: every categorized torrent is checked for a nuke on Corrupt-Net, and its section is the last category source when every predb site fails
+* New: a non-scene upload of an IMDb sports broadcast unknown to TVmaze (e.g. UFC) is uploaded as a sports event
+* New: the app reconnects by itself when the network comes back; AutoUpload retries the connection and switches itself off after the Max reconnect attempts setting
+* New: the video snapshots are taken concurrently; Parallel ffmpeg snapshots setting (1-8, default 3) on the Thumbnail picture settings
+* Faster connections on every network: IPv4 is used where it is reachable instead of waiting 21 seconds on a broken IPv6 path, unresponsive server addresses are skipped, up to 8 connections per host, TLS 1.3 where Windows supports it, and a fast connection failure of a GET request is retried once
+* Infobar English title: the TVmaze/TMDB English name comes before the IMDb primary title (Broken Lives instead of Kirik Hayatlar); a foreign release without a Hungarian title keeps its original title in the Eredeti/magyar field, and when the Hungarian title is the original title only the English field is filled
+* Fewer requests: the Hungarian and English TMDb data are requested together, the decoded torrent and NFO are reused, downloaded images are cached, and the nCore request page is searched once per release name
+* A torrent whose comment already carries the MultiUploader signature is no longer rewritten on every read
+* Fixed: with the exact-only request setting a Linux or Mac release could match the Windows request
+* Fixed: an unnuked release was offered for removal as nuked (Corrupt-Net, predb.club)
+* Fixed: the game thumbnail arrows were enabled when the store had no other picture to step to
+* An unknown predb section is a normal miss instead of a red log line; a gyan.dev checksum outage is no longer written to ERROR.log
+* The rate-limit line of the log file names the release that triggered it; stack traces no longer contain build machine paths
+
+</details>
+
+<details>
+<summary>🗂️ <strong>Korábbi verziók</strong> – 3.5 … 1.0</summary>
+<br>
+
+**3.5**
 
 * New: Epic Games Store support - a game is imported from its store link or slug with full metadata, and a store search runs when there is no link
 * New: Epic search link in the game URL dialog, next to the Steam and GOG ones
@@ -460,12 +499,6 @@ Hibás szerkesztésnél a beépített alapértelmezésre esik vissza, a fájlt s
 * Fixed: left-over Hungarian and incorrect English UI and log strings
 * Fixed six findings of a full code audit: the log link cache grew without a bound, an unreadable torrent threw instead of skipping the sample, a single-file torrent's stored path was resolved wrongly, the error log did not redact api_key=, a corrupt secret swallowed every exception, and an abandoned single-instance mutex crashed the start
 * Bump FFMpegCore to 5.5.0, Polly.Core to 8.8.0 (instead of the Polly shim package) and xunit.v3 to 4.0.1
-
-</details>
-
-<details>
-<summary>🗂️ <strong>Korábbi verziók</strong> – 3.4 … 1.0</summary>
-<br>
 
 **3.4**
 
