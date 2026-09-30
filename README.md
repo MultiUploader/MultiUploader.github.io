@@ -11,7 +11,7 @@
 <a href="../../releases/latest"><img src="https://img.shields.io/github/v/release/MultiUploader/MultiUploader.github.io?style=for-the-badge&logo=github&logoColor=white&label=Let%C3%B6lt%C3%A9s" alt="Letöltés"></a>
 <a href="../../releases"><img src="https://img.shields.io/github/downloads/MultiUploader/MultiUploader.github.io/total?style=for-the-badge&logo=github&logoColor=white&label=Let%C3%B6lt%C3%A9sek&color=2ea44f" alt="Letöltések"></a>
 <img src="https://img.shields.io/badge/Windows-10_%2F_11-0078D6?style=for-the-badge&logo=windows&logoColor=white" alt="Windows 10/11">
-<img src="https://img.shields.io/badge/.NET_Framework-4.8-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt=".NET Framework 4.8">
+<img src="https://img.shields.io/badge/.NET-10-512BD4?style=for-the-badge&logo=dotnet&logoColor=white" alt=".NET 10">
 <a href="LICENSE"><img src="https://img.shields.io/badge/Licenc-MIT_%2B_felt%C3%A9telek-blue?style=for-the-badge" alt="Licenc"></a>
 
 <br>
@@ -30,7 +30,7 @@
 <a href="#-ismert-hibák">Ismert hibák</a> &nbsp;•&nbsp;
 <a href="#-változásnapló">Változásnapló</a>
 
-<sub>📷 <a href="docs/main.png">Főablak</a> &nbsp;·&nbsp; 📷 <a href="docs/settings.png">Beállítások</a> &nbsp;·&nbsp; 🎞️ <a href="docs/sample.gif">Működés közben (GIF)</a></sub>
+<sub>📷 Főablak (<a href="docs/main_light.png">világos</a> · <a href="docs/main_dark.png">sötét</a>) &nbsp;·&nbsp; 📷 Beállítások (<a href="docs/settings_light.png">világos</a> · <a href="docs/settings_dark.png">sötét</a>) &nbsp;·&nbsp; 🎞️ <a href="docs/sample.gif">Működés közben (GIF)</a></sub>
 
 </div>
 
@@ -114,20 +114,23 @@ Ha feltöltesz nCore-ra, ismered a menetet: megnyitod a feltöltő oldalt, kiker
 2. Indítsd el, Tovább → Tovább → Befejezés. A program a Start menübe kerül.
 3. Indítsd el a MultiUploadert, majd kattints a jobb felső sarokban a **⚙️ fogaskerékre** – ez a Beállítások.
 
+> [!NOTE]
+> A programnak **két megjelenítési módja** van: az alapértelmezett **Modern** és a klasszikus **Simple** felület. A leírás a Modern felületet mutatja, ahol a Simple eltér, azt külön jelzi. Hogy mi a különbség és hogyan válthatsz (a Modernben világos és sötét téma is van), lásd a [Testreszabás](#-testreszabás) részt.
+
 ### 2️⃣ Bejelentkezés nCore-ra
 
-A Beállítások ablak felső, **Auth settings** része kell most.
+A Beállítások ablak **Connections** oldalán az **Auth settings** kártya kell most (Simple felületen az ablak felső része).
 
 <details>
 <summary>📷 <i>Képernyőkép: Beállítások ablak</i></summary>
 <br>
-<p align="center"><img src="docs/settings.png" alt="Beállítások ablak – Auth settings, qBittorrent settings, mappák" width="570"></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/settings_dark.png"><img src="docs/settings_light.png" alt="Beállítások ablak – Connections oldal: Auth settings, qBittorrent settings" width="570"></picture></p>
 </details>
 
 1. Kattints a **`Log in via browser...`** gombra.
 2. Megnyílik egy ablak az nCore bejelentkező oldalával. Jelentkezz be úgy, ahogy szoktál.
-3. Az ablak magától bezárul, és a program **kitölti** a *nCore Username*, *Cookie Password*, *Passkey* és *API Token* mezőket. Ezekhez nem kell hozzányúlnod.
-4. Kattints az **`Auth Test`** gombra – ha **zöld pipa** jelenik meg mellette, kész.
+3. Az ablak magától bezárul, és a program **kitölti** a *nCore Username*, *nCore Cookie Password*, *nCore Passkey* és *nCore API Token* mezőket. Ezekhez nem kell hozzányúlnod.
+4. Kattints az **`Auth Test`** gombra – ha mellette **zöld OK** jelenik meg (Simple felületen zöld pipa), kész.
 
 > [!IMPORTANT]
 > Belépésnél **pipáld be a „Ne léptessen ki” opciót**, különben a bejelentkezésed pár óra után lejár, és a program nem tud majd feltölteni.
@@ -139,6 +142,7 @@ A Beállítások ablak felső, **Auth settings** része kell most.
 * **Cookie Password:** Chrome-ban, az nCore belépő oldalán kapcsold be a `Csökkentett biztonság` opciót, lépj be, majd F12 → [itt találod](https://i.kek.sh/BwsW6ykghEC.png).
 * **API Token:** nyisd meg pl. a [Prémium](https://ncore.pro/shop) oldalt, F12 → [itt találod](https://i.kek.sh/y00g5YkHcPL.png). 60 napig érvényes.
 * **Passkey:** a profilodban, a „Saját Passkey” sorban.
+* **nCore Domain:** alapból `https://ncore.pro`, csak akkor írd át, ha más címen éred el az oldalt.
 
 A mezőkbe **ne írj idézőjelet** – ha mégis, a program kitörli.
 </details>
@@ -148,15 +152,17 @@ A mezőkbe **ne írj idézőjelet** – ha mégis, a program kitörli.
 1. Regisztrálj a [themoviedb.org](https://www.themoviedb.org/signup) oldalon (ingyenes).
 2. Nyisd meg az [API igénylő oldalt](https://www.themoviedb.org/settings/api/request), válaszd a **Developer** típust, töltsd ki az űrlapot (személyes használatra bármit írhatsz, pl. alkalmazás neve: *MultiUploader*, URL: *none*).
 3. Másold ki az **API Key** *(v3 auth)* értéket.
-4. A Beállításokban nyisd meg a **`Movie/Serie Uploader settings`** gombot (alul), és illeszd be a **TMDB API Key** mezőbe, majd **`Submit`**.
+4. A Beállításokban nyisd meg az **Uploader settings** oldalt, kattints a **Movie/Serie** csempére, és illeszd be a kulcsot a **TMDB API Key** mezőbe. (Simple felületen: **`Movie/Serie Uploader settings`** gomb alul, majd **`Submit`**.)
 
 <details>
 <summary>📷 <i>Képernyőkép: Movie/Serie settings</i></summary>
 <br>
-<p align="center"><img src="docs/movie_settings.png" alt="Movie/Serie settings – TMDB API Key mező" width="370"></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/movie_settings_dark.png"><img src="docs/movie_settings_light.png" alt="Uploader settings › Movie/Serie – TMDB API Key mező" width="570"></picture></p>
 </details>
 
 ### 4️⃣ A két mappa
+
+A Beállítások **Folders & logging** oldalán (Simple felületen az *Other settings* részben):
 
 | Mező | Mit adj meg | Példa |
 |---|---|---|
@@ -165,15 +171,51 @@ A mezőkbe **ne írj idézőjelet** – ha mégis, a program kitörli.
 
 ### 5️⃣ Torrent kliens – nem kötelező
 
-**🧲 Ha qBittorrentet használsz** – `qBittorrent settings` doboz:
+Feltöltés után a program letölti az nCore-ról a kész torrentet, és kétféleképpen adhatja át a kliensnek: a qBittorrent **WebUI**-ján keresztül, vagy egy **figyelt mappába** (*Watch folder*) mentve. A Beállítások ablak első megnyitásakor megkérdezi, melyiket választod (*Do you want to use qBittorrent WebUI…?*): **Yes** → a `qBittorrent settings` doboz él, **No** → az `Optional settings without qBittorrent`; a másik doboz *Disabled by User!* jelzést kap (Modernben összecsukódik, csak a fejléce látszik, Simple felületen kiszürkül). Később a letiltott doboz **`Use this`** gombjával válthatsz át rá, majd **`Save settings`** – a program ilyenkor újracsatlakozik.
 
-1. qBittorrentben kapcsold be a WebUI-t: *Eszközök → Beállítások → Webes felület*, jegyezd meg a portot, felhasználónevet, jelszót.
-2. Írd be a **WebUI URL** (pl. `http://localhost:8080`), **Username** és **Password** mezőket.
-3. Kattints a **`qBittorrent Test`** gombra – zöld pipa = jó.
+**🧲 qBittorrent – mindkét módhoz** (*Eszközök → Beállítások… → Letöltések*):
 
-Feltöltés után a program letölti az nCore-ról a kész torrentet, hozzáadja a klienshez, és **azonnal indul a seed**.
+* **Alapértelmezett mentési útvonal** = a MultiUploader **Torrent data folder**-e. A program nem ad meg mentési helyet, a qBittorrent ide teszi a torrentet, és itt kell megtalálnia a release mappáját.
+* **Torrent tartalom elrendezése:** *Eredeti* – a másik két beállítás más mappaszerkezetet vár, mint ami a lemezen van.
+* **Ne induljon el automatikusan a letöltés** legyen kikapcsolva, különben a torrent megállítva kerül be, és nem indul a seed.
 
-**📁 Ha mást használsz** (uTorrent, Deluge…) – `Optional settings without qBittorrent` doboz: add meg a kliensed **figyelt mappáját** (*Watch folder*). A program ide teszi a kész torrentet, a kliensed pedig felveszi.
+<details>
+<summary>📷 <i>Képernyőkép: qBittorrent – Letöltések</i></summary>
+<br>
+<p align="center"><img src="docs/qbittorrent_downloads.png" alt="qBittorrent Beállítások – Letöltések: Torrent tartalom elrendezése, Ne induljon el automatikusan a letöltés" width="570"></p>
+</details>
+
+**🌐 qBittorrent WebUI-val** – `qBittorrent settings` doboz:
+
+**Automatikusan** (ha a qBittorrent ugyanezen a gépen fut): kattints a **`Set up automatically`** gombra. A program megkeresi a qBittorrent beállításfájlját (ha nem találja, rákérdez a `qBittorrent.ini` helyére), és ha a WebUI még nincs bekapcsolva, megkér, hogy lépj ki a qBittorrentből – az ablak bezárása nem elég, a tálcaikonon jobb klikk → **Kilépés**. Ezután biztonsági mentést készít (`qBittorrent.ini.bak`), bekapcsolja a WebUI-t a **Hitelesítés mellőzése a helyi gépen lévő klienseknél** opcióval (jelszót csak akkor állít be, ha még nincs), újraindítja a qBittorrentet, kitölti a **WebUI URL** mezőt, lefuttatja a `qBittorrent Test`-et, és kiírja, sikerült-e. Utána már csak a **Save settings** kell.
+
+**Kézzel:**
+
+1. qBittorrentben: *Eszközök → Beállítások… → Web UI*, pipáld be a **Webes felhasználói felület (Távoli vezérlés)** opciót.
+2. Jegyezd meg a **Port**ot, a *Hitelesítés* részben adj meg **Felhasználónevet** és **Jelszót**, majd **OK**. Ha a qBittorrent ugyanezen a gépen fut, elég bepipálni a **Hitelesítés mellőzése a helyi gépen lévő klienseknél** opciót – ilyenkor felhasználónév és jelszó nem kell.
+3. A MultiUploaderben írd be a **WebUI URL** (`http://localhost:<port>`, ha a qBittorrent másik gépen fut, annak IP-címével), **Username** és **Password** mezőket (a hitelesítés mellőzésénél ez a kettő üresen maradhat). A **Done category** és **Working category** mezőt hagyd üresen – ezek nem szükségesek, lásd [Haladó beállítások](#-haladó-beállítások).
+4. Kattints a **`qBittorrent Test`** gombra – zöld OK (Simple felületen zöld pipa) = jó. Ha a qBittorrent alapértelmezett mentési útvonala eltér a *Torrent data folder*-től, a program felajánlja, hogy átírja – válaszd a **Yes**-t.
+
+A program hash-ellenőrzés nélkül adja hozzá a torrentet (a fájlok már a helyükön vannak), így **azonnal indul a seed**.
+
+<details>
+<summary>📷 <i>Képernyőkép: qBittorrent – Web UI</i></summary>
+<br>
+<p align="center"><img src="docs/qbittorrent_webui.png" alt="qBittorrent Beállítások – Web UI: Webes felhasználói felület, Port, Felhasználónév, Jelszó" width="570"></p>
+</details>
+
+**📁 Figyelt mappával** – `Optional settings without qBittorrent` doboz:
+
+1. Adj meg egy üres mappát a **Watch folder** mezőben (pl. `E:\Watch`).
+2. qBittorrentben: *Eszközök → Beállítások… → Letöltések*, lent a **Torrentek automatikus hozzáadása innen** résznél **Hozzáadás…**, válaszd ki ugyanezt a mappát, majd **OK**.
+
+A program feltöltés után `<torrent azonosító>.torrent` néven ide menti a kész torrentet, a qBittorrent felveszi, ellenőrzi a meglévő fájlokat, és indul a seed. Más kliens (uTorrent, Deluge…) is így használható: a saját figyelt mappáját add meg.
+
+<details>
+<summary>📷 <i>Képernyőkép: qBittorrent – figyelt mappa</i></summary>
+<br>
+<p align="center"><img src="docs/qbittorrent_watch_folder.png" alt="qBittorrent Beállítások – Letöltések: Alapértelmezett mentési útvonal, Torrentek automatikus hozzáadása innen" width="570"></p>
+</details>
 
 **🚫 Ha egyiket sem akarod:** hagyd üresen, a program akkor is feltölt, csak a seedet kézzel kell indítanod.
 
@@ -201,14 +243,14 @@ A számok a főablak képén lévő jelölőkre utalnak – nyisd le:
 <details>
 <summary>📷 <i>Képernyőkép: főablak a lépések számaival</i></summary>
 <br>
-<p align="center"><img src="docs/main.png" alt="MultiUploader főablak – 1 Beállítások, 2 Read, 3 lista, 4 képek és leírás, 5 Save, 6 Upload, 7 napló" width="900"></p>
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="docs/main_dark.png"><img src="docs/main_light.png" alt="MultiUploader főablak – 1 Beállítások, 2 Read, 3 lista, 4 képek és leírás, 5 Save, 6 Upload, 7 napló" width="900"></picture></p>
 </details>
 
 1. ⚙️ **Beállítások** (fogaskerék) – ezt már megcsináltad fent.
-2. 🔍 **`Read`** – a program beolvassa a *Torrents folder* összes `.torrent` fájlját, kikeresi hozzájuk az adatokat a netről, és megnézi, nincs-e már fent az oldalon. Ha egy release-hez nincs NFO, megkérdezi, letöltse-e az [srrDB](https://www.srrdb.com/)-ről; ha nem biztos a kategóriában, egy kis ablakban rákérdez.
-3. 📋 **A beolvasott release-ek listája** – kattints egyre, és a jobb oldalon megjelenik minden, amit a program összegyűjtött róla.
+2. 🔍 **`Read`** – a program beolvassa a *Torrents folder* összes `.torrent` fájlját, kikeresi hozzájuk az adatokat a netről, és megnézi, nincs-e már fent az oldalon. Ha egy release-hez nincs NFO, megkérdezi, letöltse-e a pre-adatbázisból vagy az [srrDB](https://www.srrdb.com/)-ről; ha nem biztos a kategóriában, egy kis ablakban rákérdez.
+3. 📋 **A beolvasott release-ek listája** – kattints egyre, és a jobb oldalon megjelenik minden, amit a program összegyűjtött róla. A **Tab** / **Shift+Tab** a következő / előző release-re lép, a lista végéről körbe az elejére; csak az éppen használt listán belül mozog (a *Torrents* és a *Ready* lista között – Simple felületen a két lista között – nem ugrik át). Ha egy release-t ki akarsz venni, jobb klikk → **Remove from the list** – a program előtte megerősítést kér, a **No** mindent úgy hagy. Ugyanebben a jobb klikkes menüben adhatod meg vagy cserélheted az IMDb-azonosítót (*Add / Change IMDb ID*), a játék azonosítóját (*Add / Change GameID*), zenénél és könyvnél a műfajt (*Add / Change genre*), állíthatod vissza az előző azonosítót (*Reset to previous ID*), és szerkesztheted az infobar címeit (*Edit infobar titles*).
 4. 👀 **Nézd át, javítsd ha kell** – a három mintakép és az infobar kép (jobb klikk → saját kép), a leírás (szabadon szerkeszthető), a kategória legördülő.
-5. 💾 **`Save selected`** (vagy `Save All`, ha mind jó) – a release átkerül a bal alsó, „feltöltendő” listába.
+5. 💾 **`Save selected`** (vagy `Save All`, ha mind jó) – a release átkerül a feltöltendők közé: a lista alján a **Ready** fülre (Simple felületen a bal alsó listába). A release-ek a beolvasás sorrendjében kerülnek át, és a program ebben a sorrendben is tölti fel őket. Az **`Undo selected`** a kijelölt mentett release-t visszateszi a beolvasottak közé.
 6. 🚀 **`Upload torrent(s)`** – a program egyesével feltölti őket (köztük legalább 5 mp szünettel), majd a kész torrentet átadja a kliensnek vagy a figyelt mappába teszi.
 7. 📜 **Napló** – itt látod, mi történik, és ha valami nem sikerül, itt írja ki, miért.
 
@@ -231,18 +273,23 @@ A számok a főablak képén lévő jelölőkre utalnak – nyisd le:
 A kategóriát a program ebben a sorrendben állapítja meg – az első forrás dönt, amelyik biztosat mond:
 
 1. **Játék-link az NFO-ban** (Steam, GOG, Epic, itch.io, Big Fish) → játék.
-2. **A release neve és a torrent fájllistája** – amit pre-adatbázis nélkül is el lehet dönteni: `MDVDR` / `MVID` / `MBLURAY` jelölés → zene; évad/epizód vagy dátum a névben videófájlokkal, illetve évszám + felbontás → film/sorozat (a zenei `-Év-ReleaseCsoport` végződés kivétel); `XXX` + `IMAGESET` → XXX; csak hangfájlok → zene; `EBOOK` a névben vagy könyvfájlok → könyv; mobil telepítő → mobil; konzol jelölés (`NSW`, `PS4`, `XBOX`…) → konzol játék; `GOG` a névben vagy a *Game Uploader settings*-ben boltra rendelt release-csoport → PC játék.
+2. **A release neve és a torrent fájllistája** – amit pre-adatbázis nélkül is el lehet dönteni: `MDVDR` / `MVID` / `MBLURAY` jelölés → zene; évad/epizód vagy dátum a névben videófájlokkal, illetve évszám + felbontás → film/sorozat (a zenei `-Év-ReleaseCsoport` végződés kivétel); `XXX` + `IMAGESET`, illetve `XXX` jelölés videófájlokkal → XXX; csak hangfájlok → zene; `EBOOK` a névben vagy könyvfájlok → könyv; mobil telepítő → mobil; konzol jelölés (`NSW`, `PS4`, `XBOX`…) → konzol játék; `GOG` a névben vagy a *Game Uploader settings*-ben boltra rendelt release-csoport → PC játék.
 3. **Pre-adatbázisok:** [predb.club](https://predb.club) → [predb.net](https://predb.net) → [xREL](https://www.xrel.to) → [srrDB](https://www.srrdb.com/) (ha ott van IMDb-azonosítója → film/sorozat) → [Corrupt-Net](https://pre.corrupt-net.org/) szekció. A pre oldal szekcióját a torrent tartalmához méri: ha zenének mondja, de nincs benne hangfájl, nem fogadja el.
 4. Ha egyik sem tud semmit, egy kis ablakban **rákérdez** (auto upload módban kihagyja a release-t).
 
+Ha a Beállítások → *Other settings* → **Category selection** értéke *Manual*, a program minden release-nél megmutatja ezt az ablakot, és kiemeli benne az automatikusan talált kategóriát – elég jóváhagyni, vagy másikat választani. Auto upload módban ilyenkor is az automatikus kategória marad.
+
 Ha rosszul sorolná be, beolvasás után szabadon átváltható. Minden besorolt release-t **nuke-ra is ellenőriz** – a pre-adatbázisban és a Corrupt-Neten –, a nuked release-t felajánlja törlésre; a visszavont nuke („unnuke”) nem számít nuke-nak. **Minden kategóriában** feltölthetsz saját infobar képet vagy mintaképet (jobb klikk a képen); az infobar képet a program méretre igazítja.
+
+**nCore-szabályok:** beolvasáskor a program azt is megnézi, nem tiltja-e a release-t az nCore feltöltési szabályzata – XviD/DivX videó, x265 1080p alatt vagy 1080p-ben HDR/Dolby Vision nélkül (a Blu-ray anime kivétel), 2160p nem x265-tel, `.ts`/`.m2ts` fájl Blu-ray lemezszerkezeten kívül, NFO nélküli 480p (az anime kivétel), RAR-okra bontott release (csak PC játék és program RIP-nél megengedett), Early Access / Alpha / Beta (a GOG kivétel) és demó játék, XXX SD, 128 kbps alatti MP3. Ilyenkor megmutatja az okokat, és választhatsz: **`Upload anyway`** vagy **`Delete .torrent file`**; auto upload módban kihagyja a release-t. A `.txt` könyvet és a jelszóval védett PDF-et kérdés nélkül kihagyja, a naplóban jelzi.
 
 <details>
 <summary>🎬 <strong>Film és Sorozat</strong></summary>
 <br>
 
 * **Kategória automatikusan:** film vagy sorozat (csak évszám → film; évad/epizód/dátum → sorozat), SD vagy HD.
-* **IMDb keresés sorrendje:** NFO-ban lévő link → [srrDB](https://www.srrdb.com/) → [xREL](https://www.xrel.to) → cím alapján, a beállított *Minimum similarity* egyezéssel (90% fölé ajánlott).
+* **IMDb keresés sorrendje:** NFO-ban lévő link vagy rögzített azonosító (lásd lent) → [srrDB](https://www.srrdb.com/) → [xREL](https://www.xrel.to) → [JustWatch](https://www.justwatch.com/) → cím alapján az IMDb-n. A JustWatch és a cím alapú keresés a beállított *Minimum similarity percent in search* egyezéssel dolgozik (90% fölé ajánlott); ha az NFO-ban TVmaze- vagy TheTVDB-link van, a JustWatch kimarad.
+* A *Movie/Serie settings*-ben kikapcsolható az automatikus keresés (*Disable automatic IMDb/TVmaze/TMDB search?*), és kérheted, hogy beolvasáskor minden scene release-nél rákérdezzen a film/sorozat kategóriára (*Always ask for Movie/Series category before upload?*; auto upload módban nem kérdez).
 * Az NFO-ban lévő IMDb-link és a kézzel megadott vagy statikus IMDb-azonosító mindenhol az alap. A többi forrásból (TVmaze/TMDB/TheTVDB link, srrDB, xREL) kapott azonosítót az IMDb-ről azonosító alapján kéri le, és a címét (AKA-listával együtt) a release nevéhez méri: ha egyik cím sem egyezik **és** a cím alapú keresés másik azonosítót talál, azt veszi; ha a keresés nem talál mást, a linkelt azonosító marad.
 * **Az adatok forrása, a legmegbízhatóbbtól:** az infobar adatait az IMDb adja azonosító alapján (egy lekérdezés), a többi forrás csak azt tölti ki, amit az IMDb nem ad. Kivétel az angol cím: nem angol nyelvű produkciónál az IMDb főcíme gyakran az eredeti cím vagy egy másik változat (*Kirik Hayatlar* – *Broken Lives*, *A Night's Tale* – *The Nightfall*), ezért ott a TVmaze GB/US AKA-ja és a TMDB angol fordítása előrébb áll; az IMDb címe akkor kerül be, ha ezek nem adtak angol címet, vagy ha ugyanazt adja bővebben (*Tougen Anki* – *Tougen Anki: Dark Demon of Paradise*). A TMDB magyar neve csak akkor számít magyar címnek, ha nem az eredeti cím (magyar produkciónál az).
 
@@ -250,31 +297,34 @@ Ha rosszul sorolná be, beolvasás után szabadon átváltható. Minden besorolt
   |---|---|---|---|---|
   | Angol cím | TVmaze GB/US AKA | TMDB (angol fordítás) | IMDb | nCore IMDb-segéd |
   | Magyar cím | IMDb magyar AKA | TVmaze magyar AKA | nCore IMDb-segéd | TMDB (magyar) |
-  | Eredeti cím | IMDb (latin betűs, pl. *Gisaengchung*) | JustWatch | TMDB | – |
-  | Év, értékelés, ország, rendező, szereplők | IMDb | nCore IMDb-segéd | TVmaze | – |
+  | Eredeti cím | IMDb (latin betűs, pl. *Gisaengchung*) | nCore IMDb-segéd | JustWatch | TMDB |
+  | Év, értékelés, ország | IMDb | nCore IMDb-segéd | TVmaze | – |
+  | Rendező, szereplők | IMDb (rendező híján az alkotók, pl. sorozatnál) | nCore IMDb-segéd | – | – |
   | Hossz | IMDb | TVmaze | nCore IMDb-segéd | – |
   | Műfajok | IMDb (az nCore magyar neveivel) | nCore IMDb-segéd | TMDB (magyar) | – |
   | Infobar kép | IMDb | TVmaze | TMDB | nCore IMDb-segéd |
-  | Leírás (plot) | port.hu | mafab.hu | TMDB (magyar) | JustWatch → TMDB (angol) → TVmaze |
+  | Leírás (plot) | port.hu | mafab.hu | TMDB (magyar) | JustWatch → TMDB (angol) → TVmaze → IMDb (angol) |
 
-  Az nCore IMDb-segédje (`imdb_movie` ajax) csak akkor fut, ha az IMDb nem válaszol, vagy ha egy műfajnak nincs magyar neve – ilyenkor csak a műfajokat kéri onnan. A műfajok nCore-os magyar neveit a program tanulja is: 30 naponta egyszer (és minden ilyen segéd-lekérésnél) összeveti az IMDb műfajait az nCore szavaival, az eltérést eltárolja (`%AppData%\MultiUploader\imdb-genres.json`) és a naplóban jelzi – a beépített szótárt nem kell kézzel frissíteni.
+  Ha az IMDb-n nincs értékelés, az értékelés `0` lesz (ahogy az nCore-on is), a TVmaze pontszáma nem kerül a helyére. Az nCore IMDb-segédje (`imdb_movie` ajax) csak akkor fut, ha az IMDb nem válaszol, vagy ha egy műfajnak nincs magyar neve – ilyenkor csak a műfajokat kéri onnan. A műfajok nCore-os magyar neveit a program tanulja is: 30 naponta egyszer (és minden ilyen segéd-lekérésnél) összeveti az IMDb műfajait az nCore szavaival, az eltérést eltárolja (`%AppData%\MultiUploader\imdb-genres.json`) és a naplóban jelzi – a beépített szótárt nem kell kézzel frissíteni.
 * Az NFO-ban talált egyéb linkeket (TVmaze, TheTVDB, Rotten Tomatoes, mafab, port.hu, MyAnimeList, Netflix) is beteszi a feltöltésbe.
 * Ha az IMDb magyar címe egyezik a release nevével, az infobarba az angol cím kerül eredeti/magyar címként. Idegen nyelvű release-nél magyar cím nélkül az eredeti/magyar címhez az eredeti cím kerül (*Kodenavn Hunter*).
-* **3 mintakép** a film elejéről (évadpack esetén az első epizódból). A *Thumbnail picture's settings*-ben állítható az arányuk, a fekete/fehér kockák kiszűrése, hogy kerüljön-e **6 véletlen kép** a leírásba, és hogy egyszerre hány ffmpeg mintakép készülhessen (*Parallel ffmpeg snapshots*, alapértelmezés 3, 1 és 8 között) – ez utóbbi a film és a lemez terhelését osztja be, nem a képek számát.
+* **3 mintakép** a film elejéről (alapból a hossz 5, 7 és 9%-ánál; évadpack esetén az első epizódból). A *Thumbnail picture's settings*-ben állítható a helyük, a fekete/fehér kockák kiszűrése, hogy kerüljön-e **6 véletlen kép** a leírásba, és hogy egyszerre hány ffmpeg mintakép készülhessen (*Parallel ffmpeg snapshots*, alapértelmezés 3, 1 és 8 között) – ez utóbbi a film és a lemez terhelését osztja be, nem a képek számát. HEVC videónál a kockát a videókártya dekódolja. Az *FFmpeg for the thumbnails* beállításban választható, melyik FFmpeg töltődjön le: a **Full** (~60 MB, alapértelmezés) a HDR10, HLG és Dolby Vision filmek mintaképét a videókártyán SDR-re képezi le (libplacebo, Vulkan), így az eredetihez hű színeket ad; az **Essentials** (~35 MB, kisebb letöltés) ezt nem tudja, ezért azokon a filmeken a mintakép fakó, a Dolby Vision Profile 5-ösöknél lila-zöld. Normál (SDR) videónál a kettő ugyanazt a képet adja.
 * **Technikai infó** opcionálisan a leírásba: hangsávok, feliratok nyelve – magyarra fordítva vagy bekérve.
-* **Nem scene release** (saját rip, NFO nélkül): bekapcsolható – a program maga generálja a MediaInfót, bekéri a címet és a torrent nevét, filmnél opcionálisan **sample fájlt** is készít – a scene szokását követve külön `sample` mappába. Megadhatsz IMDb- vagy TVmaze-linket: ilyenkor pontos találattal egészíti ki az adatokat, és ha sportesemény, magától sorozat kategóriába kerül, generált epizódszám nélkül, sport-infobarral. Sporteseménynek a TVmaze *Sports* műsorait veszi, és ha a TVmaze nem ismeri (pl. UFC), akkor az olyan IMDb-tételt, amely tévéműsor/-epizód/-különkiadás és az egyetlen műfaja a *Sport* – a sportfilmek és -dokumentumfilmek más műfajt is hordoznak, azok filmek maradnak. Link nélkül a beírt cím alapján keres az IMDb-n, a TVmaze-en és a TMDB-n (a release-névre épülő srrDB / xREL / JustWatch itt értelemszerűen kimarad).
+* **Nem scene release** (saját rip, NFO nélkül): bekapcsolható – a program maga generálja a MediaInfót, bekéri a címet és a torrent nevét, filmnél **sample fájlt** is készít – a scene szokását követve külön `sample` mappába (a *Sample create options* szerint, a megadott méret fölötti fájloknál). HD filmnél 2 GB fölött az nCore szabálya kötelezővé teszi: ha a sample nem sikerül, a program megkérdezi, próbálja-e újra, töltse-e fel nélküle, vagy törölje a `.torrent` fájlt. Megadhatsz IMDb- vagy TVmaze-linket: ilyenkor pontos találattal egészíti ki az adatokat, és ha sportesemény, magától sorozat kategóriába kerül, generált epizódszám nélkül, sport-infobarral. Sporteseménynek a TVmaze *Sports* műsorait veszi, és ha a TVmaze nem ismeri (pl. UFC), akkor az olyan IMDb-tételt, amely tévéműsor/-epizód/-különkiadás és az egyetlen műfaja a *Sport* – a sportfilmek és -dokumentumfilmek más műfajt is hordoznak, azok filmek maradnak. Link nélkül a beírt cím alapján keres az IMDb-n, a TVmaze-en és a TMDB-n (a release-névre épülő srrDB / xREL / JustWatch itt értelemszerűen kimarad).
 
 <details>
 <summary><i>Rossz IMDb-t talál egy sorozathoz?</i></summary>
 <br>
 
-Rögzítsd a *Settings → Movie/Serie Uploader settings → Static ImdbID* mezőben, pl.:
+Rögzítsd a *Movie/Serie settings → Add static imdb with Movie's/Serie's name* mezőben, pl.:
 
 > "The Voice AU" - "tt2334429"<br>
 > "The Block AU" - "tt0418372"<br>
 > "Insight AU" - "tt1604928"<br>
 > "World War Two Battles Won And Lost" - "tt9394316"<br>
 > "Gruen" - "tt5957238"
+
+Ha egy release-nél jobb klikkel (*Change IMDb ID*) kézzel adod meg az IMDb-azonosítót, a program felajánlja, hogy a címet és az azonosítót ebbe a listába is elmentse – legközelebb ennél a címnél már magától ezt használja. A kérdésnél bejelölheted, hogy jegyezze meg a választásodat és ne kérdezzen többet; ezt a *Save a manually given IMDb ID* beállításban (*Ask* / *Always save* / *Never save*) bármikor visszaállíthatod.
 </details>
 </details>
 
@@ -308,7 +358,7 @@ Rögzítsd a *Settings → Movie/Serie Uploader settings → Static ImdbID* mez�
 * **Stílus:** a fájlból, vagy a pre oldalról; ha egyik sem ad, bekéri.
 * Zenénél **teljes leírás**: előadó, albumcím, tracklista *(kikapcsolható)*; albumborító a fájlból *(kikapcsolható)*.
 * Ha az NFO-ban talál linket, a leírás végére beszúrja *(kikapcsolható)*.
-* **Nem scene release:** bekapcsolható – a program generálja a MediaInfót, bekéri az igazoló linket, extrákat és a torrent nevét.
+* **Nem scene release:** bekapcsolható – a program generálja a MediaInfót, bekéri az igazoló linket, extrákat és a torrent nevét; klipnél a filmhez hasonlóan sample fájlt is készít.
 </details>
 
 <details>
@@ -316,9 +366,11 @@ Rögzítsd a *Settings → Movie/Serie Uploader settings → Static ImdbID* mez�
 <br>
 
 * **Nyelv automatikusan** (magyar / külföldi) a release nevéből.
-* **ISBN** alapján a Google Books-ról leírást és műfajt tölt *(kikapcsolható)*; ha a pre oldal sem ad műfajt, bekéri.
-* **Mintaképek** automatikusan: PDF, EPUB, CBZ, CBR, FB2, MOBI, AZW, AZW3, PRC, DOCX, XPS, OXPS, TXT, HTM, HTML.
+* **Műfaj:** a pre oldalról; ha az NFO-ban ISBN van, a Google Books kategóriái magyarra fordítva kiegészítik; magazinnál és képregénynél a release nevéből; ha egyik sem ad, bekéri.
+* **ISBN** (az NFO-ból) alapján a Google Books-ról leírást (író, cím, kiadás dátuma) és – ha nincs más – borítót is tölt *(kikapcsolható)*.
+* **Mintaképek** automatikusan: PDF, EPUB, CBZ, CBR, FB2, MOBI, AZW, AZW3, PRC, DOCX, XPS, OXPS, HTM, HTML.
 * MOBI / AZW / AZW3 / PRC fájlból a borítót infobar képnek is használja.
+* `.txt` könyvet és jelszóval védett PDF-et nem tölt fel (nCore-szabály), a naplóban jelzi.
 </details>
 
 <details>
@@ -326,7 +378,8 @@ Rögzítsd a *Settings → Movie/Serie Uploader settings → Static ImdbID* mez�
 <br>
 
 * **Kategória automatikusan:** HD / SD / Imageset.
-* **3 mintakép** a videó elejéről.
+* **3 mintakép** a videó elejéről; videónál kérhetsz a videóból egy infobar képet is (*Should we create an infobar image for the movie XXX?*).
+* Ha az NFO-ban talál linket, a leírás végére beszúrja *(kikapcsolható)*.
 * Imageset esetén 3 véletlen képet tölt fel, és opcionálisan megkeresi a borítóképet (pl. `cover` vagy `poster` nevű fájl) az infobarhoz.
 </details>
 
@@ -338,7 +391,9 @@ Rögzítsd a *Settings → Movie/Serie Uploader settings → Static ImdbID* mez�
 <summary>🧲 <strong>qBittorrent kategóriák</strong></summary>
 <br>
 
-* **Working category in client** – ha megadod, feltöltésnél kihagyja azokat a release-eket, amelyek ebben a kategóriában vannak és még nincsenek kész / nincsenek megállítva.
+A kategóriák **nem szükségesek** a feltöltéshez és a seedhez: egyedi, plusz funkciók egy olyan munkafolyamathoz, ahol a qBittorrent kategóriákkal különíti el a még letöltődő és a feltöltésre kész release-eket. Ha nem így dolgozol, hagyd üresen mindkettőt.
+
+* **Working category in client** – ha megadod, beolvasáskor megnézi ezt a kategóriát: ha a release itt megállítva van, és a *Done category*-ben nincs belőle megállított példány, kihagyja (*still in the progress*); ha a *Done category*-ben is megállítva van, a Working category-beli példányt törli a kliensből (a fájlokat nem), és beolvassa.
 * **Done category in client** – ebből a kategóriából feltöltés után törli az eredeti torrentet, hogy ne legyen duplikáció a kliensben (az nCore-os példány veszi át a seedet).
 
 </details>
@@ -347,7 +402,7 @@ Rögzítsd a *Settings → Movie/Serie Uploader settings → Static ImdbID* mez�
 <summary>🔎 <strong>Keresés kérésekben</strong></summary>
 <br>
 
-`Enable request search on nCore?` – feltöltés előtt megkeresi, van-e nyitott **kérés** a release-re, és ha igen, hozzákapcsolja (a főablak *RequestID* mezőjében látod és átírhatod).
+`Enable request search on nCore?` – a beolvasás végén (és ha a kategóriát vagy az azonosítót átírod, újra) megkeresi, van-e nyitott **kérés** a release-re – auto upload módban nem keres –, és ha igen, hozzákapcsolja (a főablak *RequestID* mezőjében látod és átírhatod).
 
 Két lépcsőben keres: először a pontos release-névre, majd – ha be van kapcsolva az `If the exact search didn't find anything, try using the game/movie name?` – a címre is (pl. `Shoresy.S01E06.720p.WEB.h264-KOGi` → `Shoresy`). Ez utóbbi téves találatot is adhat, **ellenőrizd, mielőtt feltöltöd** – a rossz kérésre feltöltött torrentet utólag már csak törölni lehet (vagy a kérő vonhatja vissza), a kérés azonosítóját módosítani nem lehet.
 </details>
@@ -373,10 +428,12 @@ Ebben a módban a *Read* és a listák le vannak tiltva, a főablakon piros feli
 <br>
 
 * **Exist checking** (főablak) – beolvasás előtt megnézi, mi van már fent, és eleve kihagyja azokat.
-* **Anonymous Upload** (főablak) – névtelen feltöltés.
-* **Reconnect** (főablak) – csak akkor jelenik meg, ha a legutóbbi nCore-kapcsolódás nem sikerült; ezzel lehet kézzel újracsatlakozni. Ha közben visszajön a hálózat, a program **magától** lefuttatja ugyanezt: a hálózati változás után 3 másodperccel (hogy a DHCP és a DNS beálljon), kivéve ha épp feltöltés fut. A naplóban jelzi, amikor megpróbálja.
+* **Anonymous Upload** (főablak) – névtelen feltöltés. Csak akkor jelenik meg, ha az nCore-rangod engedi (Feltöltő, Releaser, VIP, HelpDesk, Moderátor, Admin, Tulaj).
+* **Reconnect** (főablak) – csak akkor jelenik meg, ha a legutóbbi nCore-kapcsolódás nem sikerült; ezzel lehet kézzel újracsatlakozni. Ha közben visszajön a hálózat, a program **magától** lefuttatja ugyanezt: a hálózati változás után 3 másodperccel (hogy a DHCP és a DNS beálljon); ha épp feltöltés, beolvasás, torrentkészítés vagy auto upload fut, megvárja, amíg végez. A naplóban jelzi, amikor megpróbálja.
 * `Remove torrent file after uploaded?` – sikeres feltöltés után törölje-e a `.torrent` fájlt a *Torrents folderből*.
-* `Always add release's name to description?` – a release nevét mindig tegye a leírásba.
+* `Always add release's name to description (length doesn't matter)?` – a release nevét mindig tegye a leírásba.
+* `Ask for confirmation when exiting if the list is not empty or read in progress?` – kilépéskor rákérdez, ha van még release a listán, vagy fut a beolvasás.
+* `Update checking` – nCore-kapcsolódáskor megnézi, van-e programfrissítés (alapból bekapcsolva).
 * A feltöltések közti szünet minimum **5 másodperc**, feljebb állítható – lejjebb nem, mert nem akarjuk spammelni az nCore-t.
 * `Logging` / `Log file location` – a napló fájlba is mehet: naponta új fájlt kezd, ha *Days to archive*-nál több napi fájl gyűlt össze, a régebbieket egy zip-be tömöríti, és legfeljebb *Max archives* archívumot tart meg.
 * Minden hibáról részletes hibafájl készül: `%AppData%\MultiUploader`
@@ -388,17 +445,33 @@ Ebben a módban a *Read* és a listák le vannak tiltva, a főablakon piros feli
 ## 🌍 Testreszabás
 
 <details>
+<summary>🎨 <strong>Megjelenés: Modern vagy Simple felület, világos vagy sötét téma</strong></summary>
+<br>
+
+A programnak két megjelenítési módja van:
+
+* **Modern** *(alapértelmezett)* – kártyás elrendezés, átméretezhető panelek, oldalsávos Beállítások ablak, **világos** vagy **sötét** témával. A leírás képei ezt mutatják.
+* **Simple** – a klasszikus, egy ablakba rendezett régi felület.
+
+Váltani a Beállítások → *Other settings* → *Appearance* kártyán lehet (Simple felületen a Beállítások ablak **Interface** sorában): az **Interface** sorban a felületet, a **Theme** sorban (csak Modern felületen) a témát. A téma mentéskor azonnal átvált, a felület váltásához újra kell indítani a programot – mentéskor rákérdez.
+
+<p align="center"><img src="docs/main_simple.png" alt="MultiUploader főablak Simple felülettel" width="900"></p>
+</details>
+
+<details>
 <summary>🗣️ <strong>A program szövegének lefordítása</strong></summary>
 <br>
 
-Első indításkor létrejön a `%AppData%\MultiUploader\Languages\translation.json` fájl a program **összes** megjelenített szövegével, angolul: ablakfeliratok (`AblakNév.vezérlőNév.Text`), üzenetek, menük, tooltipek (`UiText.`), napló- és értesítő szövegek (`StaticLogStrings.`).
+A program nyelvenként egy fájlt olvas a `%AppData%\MultiUploader\Languages\` mappából, a neve `language_<kód>.json`, ahol a kód a nyelv kódja (pl. `hu`, `fr`, `de`, `pt-BR`). Alapból csak a `language_en.json` van ott, a program **összes** megjelenített szövegével, angolul: ablakfeliratok (`AblakNév.vezérlőNév.Text`), üzenetek, menük, tooltipek (`UiText.`), napló- és értesítő szövegek (`StaticLogStrings.`).
 
-1. Nyisd meg egy szövegszerkesztőben.
-2. Fordítsd le az **értékeket** (a `:` utáni részt) – a kulcsokhoz ne nyúlj.
-3. A `{0}`, `{1}` jelöléseket **hagyd meg** (ide kerül pl. a release neve) – a mondatban mozgathatod, de egyet sem hagyhatsz el és újat sem adhatsz hozzá.
-4. Mentsd el, indítsd újra a programot.
+1. Nyisd meg a `%AppData%\MultiUploader\Languages\` mappát, és másold le a `language_en.json`-t a nyelved kódjával, pl. `language_hu.json`, `language_fr.json`.
+2. Fordítsd le az **értékeket** (a `:` utáni részt) – a kulcsokhoz ne nyúlj. A `{0}`, `{1}` jelöléseket **hagyd meg** (ide kerül pl. a release neve) – a mondatban mozgathatod, de egyet sem hagyhatsz el és újat sem adhatsz hozzá.
+3. Beállítások → Other settings → Language: válaszd ki a nyelvet (a saját nevén jelenik meg, pl. Magyar, Français), mentsd el, és indítsd újra a programot.
+4. A `language_en.json`-t ne szerkeszd: a program minden indításkor visszaírja. Más nevű fájlt a program nem olvas be.
 
-Ha egy szövegben hibás a jelölés, csak az marad angolul; ha az egész fájl érvénytelen JSON, minden angolul jelenik meg, amíg ki nem javítod – a program ettől nem hibásodik meg. Frissítéskor az új szövegek kulcsai angolul bekerülnek, a már nem használtak törlődnek, a fordításaidhoz a program sosem nyúl – az angolul hagyott sorokba viszont bekerül a frissítés javított angol szövege (ehhez a program a fájl mellett tart egy `translation.template.json` másolatot, azt ne szerkeszd). A release-nevek, a netről/NFO-ból jövő adatok és a feltöltött leírás nem fordíthatók.
+Ha egy szövegben hibás a jelölés, csak az marad angolul. Ha egy nyelvi fájl nem olvasható vagy érvénytelen JSON, a Beállításokban szürkén, a hiba okával (JSON-hibánál a sor számával) jelenik meg, és nem választható ki; ha a már kiválasztott nyelv fájlja romlik el, a program angolul indul, amíg ki nem javítod – a program ettől nem hibásodik meg. Frissítéskor az új szövegek kulcsai angolul bekerülnek minden nyelvi fájlba, a már nem használtak törlődnek, a fordításaidhoz a program sosem nyúl – az angolul hagyott sorokba viszont bekerül a frissítés javított angol szövege (ezt az előző `language_en.json`-ból tudja). A release-nevek, a netről/NFO-ból jövő adatok és a feltöltött leírás nem fordíthatók.
+
+A régi `translation.json`-t az első induláskor a program átnézi: ha nincs benne lefordított sor, törli; ha van, meghagyja, és a naplóba kiírja, hogy nevezd át `language_<kód>.json`-ra (pl. `language_hu.json`), majd válaszd ki a Beállításokban.
 </details>
 
 <details>
@@ -423,8 +496,8 @@ Hibás szerkesztésnél a beépített alapértelmezésre esik vissza, a fájlt s
 | 🎬 Filmnél nincs adat / TMDB hiba | Nincs vagy rossz a TMDB API kulcs a *Movie/Serie Uploader settings*-ben – a **v3** kulcs kell. |
 | 🔁 „Már fent van” – pedig nincs | A program pontos release-névre keres. Nézd meg az oldalon; ha tényleg nincs fent, kapcsold ki az *Exist checking* pipát erre a beolvasásra. |
 | 🖼️ Nincs mintakép | A *Torrent data folder* rossz, vagy a release mappája nincs benne – a program nem találja a videófájlt. |
-| 🌐 A böngészős belépés gomb nem elérhető | A WebView2 futtatókörnyezet hiányzik és a program nem tudta telepíteni – töltsd le [innen](https://developer.microsoft.com/microsoft-edge/webview2/), vagy töltsd ki kézzel a mezőket. |
-| 🎯 Rossz IMDb egy sorozathoz | *Static ImdbID* beállítás – lásd a Film/Sorozat kategóriánál. |
+| 🌐 A böngészős belépés hibaüzenettel leáll (WebView2) | A WebView2 futtatókörnyezet hiányzik, és a program nem tudta telepíteni – töltsd le [innen](https://developer.microsoft.com/microsoft-edge/webview2/), vagy töltsd ki kézzel a mezőket. |
+| 🎯 Rossz IMDb egy sorozathoz | *Add static imdb with Movie's/Serie's name* beállítás – lásd a Film/Sorozat kategóriánál. |
 | ❓ Bármi más | A főablak alsó naplója és a `%AppData%\MultiUploader` mappa hibafájljai megmondják, hol akadt el. |
 
 > [!NOTE]
@@ -447,8 +520,49 @@ Hibás szerkesztésnél a beépített alapértelmezésre esik vissza, a fájlt s
 ## 📝 Változásnapló
 
 <details>
-<summary>🆕 <strong>3.6</strong> – a legutóbbi kiadás változásai</summary>
+<summary>🆕 <strong>4.0</strong> – a legutóbbi kiadás változásai</summary>
 <br>
+
+* Runs on .NET 10; the installer brings its own runtime, so no separate .NET install is needed
+* New: Modern interface - themed controls, a card layout, Settings with a side menu, designed dialogs and a dark mode that switches without a restart; the Simple interface can still be chosen with the Interface switch in Settings
+* New: the interface language is chosen in Settings from `language_<code>.json` files
+* New: qBittorrent WebUI is set up automatically from Settings; the WebUI and the watch folder mode can be switched without Clear Settings
+* New: update installers are verified with a publisher signature before they start, on both interfaces (AutoUpdater.NET removed)
+* New: a manually given IMDb ID can be saved to the static IMDb IDs
+* New: answered prompts are remembered across re-reads and ID or category changes, including the Movie/Series question
+* New: Manual category selection asks for every release
+* New: removing a torrent from the list asks for confirmation; Tab / Shift+Tab steps through the active list in a circle; saving keeps the reading order
+* New: ebook sample images are taken from the text pages
+* New: the IMDb plot is the last fallback for the description
+* HEVC thumbnails are decoded on the GPU; HDR and Dolby Vision thumbnails are tone-mapped
+* Faster torrent hashing with one sequential reader and parallel hashers; the Corrupt-Net lookup and the upload image preparation run during waits
+* GOG system requirements without empty blocks, addon releases uploaded as updates; symbol-bulleted store paragraphs become a BBCode list
+* The sample size limit is set in MB instead of GB
+* Windows are scaled correctly across monitors with different DPI
+* The log window shows only the time and a dot separator before each line
+* The rule-required parts of an upload without NFO stay on regardless of the switches
+* An exhausted Google Books daily quota is no longer retried for a minute per ebook; the host is skipped until the quota resets
+* An unreachable nCore in the settings check is no longer written to ERROR.log
+* Includes the 3.6.1 fixes: the main window stays responsive while FFmpeg is installed and while images are processed
+* Fixed: the exist check again removes the same-name torrent from any category
+* Fixed: every Hungarian letter of the nCore rank is read correctly
+* Fixed: overlapping and squeezed dialog layouts
+* Fixed: the findings of two full code reviews (data safety, lifecycle, security and correctness)
+
+</details>
+
+<details>
+<summary>🗂️ <strong>Korábbi verziók</strong> – 3.6.1 … 1.0</summary>
+<br>
+
+**3.6.1**
+
+* The last version for .NET Framework 4.8; the next version runs on .NET 10
+* The main window stays responsive while FFmpeg or the MediaInfo CLI is being installed
+* Screenshots, thumbnails and cover images are processed off the UI thread, so the main window no longer freezes during reading and uploading
+* The previous nCore browser login profile is deleted in the background when the login window opens
+
+**3.6**
 
 * New: itch.io and Big Fish Games support - a game is imported from its store link (never by a name search); a Big Fish link for the other platform is swapped to the release's Windows or Mac version
 * New: itch.io and Big Fish search links in the game URL dialog
@@ -468,12 +582,6 @@ Hibás szerkesztésnél a beépített alapértelmezésre esik vissza, a fájlt s
 * Fixed: the game thumbnail arrows were enabled when the store had no other picture to step to
 * An unknown predb section is a normal miss instead of a red log line; a gyan.dev checksum outage is no longer written to ERROR.log
 * The rate-limit line of the log file names the release that triggered it; stack traces no longer contain build machine paths
-
-</details>
-
-<details>
-<summary>🗂️ <strong>Korábbi verziók</strong> – 3.5 … 1.0</summary>
-<br>
 
 **3.5**
 
