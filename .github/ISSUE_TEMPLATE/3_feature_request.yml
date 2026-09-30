@@ -1,0 +1,46 @@
+name: ✨ Funkciókérés
+description: Új funkció vagy fejlesztés javaslata
+title: "[Javaslat]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problema
+    attributes:
+      label: Milyen problémát oldana meg?
+      placeholder: "Pl. minden zenei release-nél kézzel kell kijavítanom a …"
+    validations:
+      required: true
+
+  - type: textarea
+    id: megoldas
+    attributes:
+      label: Javasolt megoldás
+    validations:
+      required: true
+
+  - type: dropdown
+    id: terulet
+    attributes:
+      label: Melyik részét érinti?
+      multiple: true
+      options:
+        - Beolvasás / felismerés
+        - Adatgyűjtés / új forrás
+        - Mintaképek / képfeltöltés
+        - Feltöltés / auto upload
+        - qBittorrent / torrent kliens
+        - Felület / beállítások
+        - Új kategória vagy platform
+        - Egyéb
+
+  - type: textarea
+    id: alternativak
+    attributes:
+      label: Megfontolt alternatívák
+      description: Van most kerülőút, vagy más megoldás, amin gondolkodtál?
+
+  - type: textarea
+    id: egyeb
+    attributes:
+      label: Egyéb
+      description: Képek, példa release-ek, linkek.

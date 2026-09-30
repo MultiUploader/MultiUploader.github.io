@@ -1,0 +1,92 @@
+name: 🔎 Hibás adat / nem szabályos feltöltés
+description: A program rossz adatot talált, vagy a kitöltött űrlap nem felel meg az nCore szabályainak
+title: "[Adat]: "
+labels: ["bug", "wrong data"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Ide jöhet, ha a program **rossz** IMDb/TMDB/bolti találatot, címet, leírást, borítót, kategóriát vagy infobar-adatot adott, vagy a feltöltés **nem az nCore szabályai szerint** lett kitöltve.
+
+  - type: input
+    id: verzio
+    attributes:
+      label: MultiUploader verzió
+      placeholder: "Pl. 4.0"
+    validations:
+      required: true
+
+  - type: input
+    id: release
+    attributes:
+      label: Release neve
+      placeholder: "Pl. Some.Movie.2024.1080p.WEB-DL.H264.HUN-XYZ"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: kategoria
+    attributes:
+      label: Kategória
+      options:
+        - Film
+        - Sorozat
+        - Játék
+        - Konzol
+        - Program
+        - Mobil
+        - Zene
+        - Klip
+        - Könyv
+        - XXX
+    validations:
+      required: true
+
+  - type: dropdown
+    id: mi_rossz
+    attributes:
+      label: Mi a rossz?
+      multiple: true
+      options:
+        - Rossz találat (IMDb, TMDB, Steam, GOG, Epic, itch.io, Big Fish, ISBN…)
+        - Cím (magyar / eredeti / angol)
+        - Leírás
+        - Borító / mintaképek
+        - nCore kategória (HD/SD, ISO/RIP, MP3/Lossless…)
+        - Infobar adatai
+        - Technikai infó (hangsávok, feliratok)
+        - Nyelv (magyar / külföldi)
+        - Egyéb
+    validations:
+      required: true
+
+  - type: textarea
+    id: kapott
+    attributes:
+      label: Mit adott a program?
+    validations:
+      required: true
+
+  - type: textarea
+    id: helyes
+    attributes:
+      label: Mi lett volna a helyes?
+      description: Ha tudod, add meg a helyes linket (IMDb, bolt stb.) vagy a vonatkozó nCore-szabályt.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: feltoltve
+    attributes:
+      label: Fel lett már töltve így nCore-ra?
+      options:
+        - Nem, még mentés / feltöltés előtt vettem észre
+        - Igen, fent van
+    validations:
+      required: true
+
+  - type: textarea
+    id: naplo
+    attributes:
+      label: Napló / képernyőképek
+      description: A release-hez tartozó naplósorok vagy képek. Cookie, passkey, token ne legyen benne!

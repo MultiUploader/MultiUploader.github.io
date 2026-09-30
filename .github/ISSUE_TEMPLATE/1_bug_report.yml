@@ -1,0 +1,136 @@
+name: 🐞 Hibabejelentés
+description: A program hibát ír, lefagy, kilép, vagy valami nem úgy működik, ahogy kellene
+title: "[Hiba]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Köszönöm, hogy jelzed a hibát! Beküldés előtt nézd meg a README [Hibaelhárítás](https://github.com/MultiUploader/MultiUploader.github.io#-hibaelhárítás) és [Ismert hibák](https://github.com/MultiUploader/MultiUploader.github.io#-ismert-hibák) részét.
+
+        ⚠️ Ne másolj be **cookie-t, passkey-t, API tokent vagy TMDB kulcsot** – sem a naplóba, sem képernyőképre.
+
+  - type: input
+    id: verzio
+    attributes:
+      label: MultiUploader verzió
+      placeholder: "Pl. 4.0"
+    validations:
+      required: true
+
+  - type: textarea
+    id: leiras
+    attributes:
+      label: Mi történt?
+      description: Röviden írd le a hibát.
+      placeholder: "Pl. a Read gomb után a program lefagy, a napló utolsó sora: ..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: lepesek
+    attributes:
+      label: Reprodukálás lépései
+      placeholder: |
+        1. Betettem a .torrent fájlt a torrent mappába
+        2. Megnyomtam a Read gombot
+        3. ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: vart
+    attributes:
+      label: Várt működés
+    validations:
+      required: true
+
+  - type: dropdown
+    id: resz
+    attributes:
+      label: Melyik részénél jön elő?
+      multiple: true
+      options:
+        - Indítás / telepítés
+        - Beállítások / bejelentkezés (Auth Test, böngészős belépés)
+        - Beolvasás (Read)
+        - Adatgyűjtés (IMDb, TMDB, Steam, GOG, Epic, itch.io, Big Fish…)
+        - Mintaképek / képfeltöltés
+        - Mentés (Save)
+        - Feltöltés (Upload) / auto upload
+        - qBittorrent / figyelt mappa
+        - Egyéb
+    validations:
+      required: true
+
+  - type: dropdown
+    id: kategoria
+    attributes:
+      label: Kategória
+      description: Milyen release-nél jött elő?
+      multiple: true
+      options:
+        - Nem kategóriafüggő
+        - Film
+        - Sorozat
+        - Játék
+        - Konzol
+        - Program
+        - Mobil
+        - Zene
+        - Klip
+        - Könyv
+        - XXX
+
+  - type: input
+    id: release
+    attributes:
+      label: Release neve
+      description: Ha egy konkrét release-nél jön elő.
+      placeholder: "Pl. Some.Movie.2024.1080p.WEB-DL.H264.HUN-XYZ"
+
+  - type: dropdown
+    id: felulet
+    attributes:
+      label: Felület
+      options:
+        - Modern – világos
+        - Modern – sötét
+        - Simple
+    validations:
+      required: true
+
+  - type: dropdown
+    id: windows
+    attributes:
+      label: Windows
+      options:
+        - Windows 11
+        - Windows 10
+        - Egyéb
+    validations:
+      required: true
+
+  - type: textarea
+    id: naplo
+    attributes:
+      label: Napló / hibafájl
+      description: |
+        A főablak alsó naplójának releváns sorai, és ha van, a `%AppData%\MultiUploader` mappa hibafájljának (ERROR.log) tartalma.
+      render: text
+
+  - type: textarea
+    id: kepek
+    attributes:
+      label: Képernyőképek
+      description: Ide húzhatod a képeket.
+
+  - type: checkboxes
+    id: ellenorzes
+    attributes:
+      label: Ellenőrzés
+      options:
+        - label: Megnéztem, hogy nincs-e már ugyanerről nyitott issue, és nem szerepel az Ismert hibák között.
+          required: true
+        - label: A bemásolt naplóban és a képeken nincs cookie, passkey, API token vagy kulcs.
+          required: true
