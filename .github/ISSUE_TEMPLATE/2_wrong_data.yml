@@ -12,7 +12,7 @@ body:
     id: verzio
     attributes:
       label: MultiUploader verzió
-      placeholder: "Pl. 4.0"
+      placeholder: "Pl. 4.1"
     validations:
       required: true
 
