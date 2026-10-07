@@ -50,7 +50,7 @@ Ha feltöltesz nCore-ra, ismered a menetet: megnyitod a feltöltő oldalt, kiker
     <td align="center" width="33%">
       <h3>🌐</h3>
       <b>Összegyűjti</b><br>
-      <sub>Leírás, borító, IMDb · TMDB · Steam · GOG · Epic · itch.io · Big Fish adatok, előadó és tracklista, ISBN – attól függően, mi a tartalom</sub>
+      <sub>Leírás, borító, IMDb · TMDB · Steam · GOG · Epic · itch.io · Big Fish · MusicBrainz adatok, előadó és tracklista, ISBN – attól függően, mi a tartalom</sub>
     </td>
     <td align="center" width="33%">
       <h3>🖼️</h3>
@@ -94,6 +94,7 @@ Ha feltöltesz nCore-ra, ismered a menetet: megnyitod a feltöltő oldalt, kiker
 | | Mi | Miért | Honnan |
 |:---:|---|---|---|
 | 🪟 | **Windows 10 vagy 11** | A program Windows-os asztali alkalmazás | – |
+| ⚙️ | **.NET 10 Desktop Runtime** | A program ezzel fut | Ha hiányzik, a telepítő letölti és telepíti |
 | 👤 | **nCore fiók** | Erre a fiókra fog feltölteni | – |
 | 🎬 | **TMDB API kulcs** *(csak filmhez/sorozathoz)* | Innen jönnek a filmadatok, ingyenes, 3 perc regisztráció | [themoviedb.org](https://www.themoviedb.org/settings/api/request) – lásd a [3. lépést](#3-tmdb-kulcs--csak-filmhez-és-sorozathoz) |
 | 🧲 | **qBittorrent** *(nem kötelező)* | Ha használod, a program feltöltés után automatikusan hozzáadja a torrentet és indul a seed | [qbittorrent.org](https://www.qbittorrent.org/) |
@@ -111,11 +112,14 @@ Ha feltöltesz nCore-ra, ismered a menetet: megnyitod a feltöltő oldalt, kiker
 ### 1️⃣ Telepítés
 
 1. Töltsd le a legfrissebb `MultiUploader_Setup_x.x.exe` fájlt a repó [Releases](../../releases/latest) füléről.
-2. Indítsd el, Tovább → Tovább → Befejezés. A program a Start menübe kerül.
+2. Indítsd el, Tovább → Tovább → Befejezés. A program a Start menübe kerül. Ha a gépen nincs .NET 10 Desktop Runtime, a telepítő az elején felajánlja, hogy letölti és telepíti (kb. 60 MB, a Microsoft oldaláról); **Nem** esetén a telepítő kilép.
+
+   > [!TIP]
+   > A .NET biztonsági javításait a Windows Update hozza, ha a *Beállítások → Windows Update → Speciális beállítások* alatt a **Frissítések fogadása más Microsoft-termékekhez** be van kapcsolva. Ehhez nem kell új MultiUploader-verzió.
 3. Indítsd el a MultiUploadert, majd kattints a jobb felső sarokban a **⚙️ fogaskerékre** – ez a Beállítások.
 
 > [!NOTE]
-> A programnak **két megjelenítési módja** van: az alapértelmezett **Modern** és a klasszikus **Simple** felület. A leírás a Modern felületet mutatja, ahol a Simple eltér, azt külön jelzi. Hogy mi a különbség és hogyan válthatsz (a Modernben világos és sötét téma is van), lásd a [Testreszabás](#-testreszabás) részt.
+> A programnak **két megjelenítési módja** van: a **Modern** (ha a képernyőn elfér, ez az alapértelmezett) és a klasszikus **Simple** felület. A leírás a Modern felületet mutatja, ahol a Simple eltér, azt külön jelzi. Hogy mi a különbség és hogyan válthatsz (a Modernben világos és sötét téma is van), lásd a [Testreszabás](#-testreszabás) részt.
 
 ### 2️⃣ Bejelentkezés nCore-ra
 
@@ -153,6 +157,8 @@ A mezőkbe **ne írj idézőjelet** – ha mégis, a program kitörli.
 2. Nyisd meg az [API igénylő oldalt](https://www.themoviedb.org/settings/api/request), válaszd a **Developer** típust, töltsd ki az űrlapot (személyes használatra bármit írhatsz, pl. alkalmazás neve: *MultiUploader*, URL: *none*).
 3. Másold ki az **API Key** *(v3 auth)* értéket.
 4. A Beállításokban nyisd meg az **Uploader settings** oldalt, kattints a **Movie/Serie** csempére, és illeszd be a kulcsot a **TMDB API Key** mezőbe. (Simple felületen: **`Movie/Serie Uploader settings`** gomb alul, majd **`Submit`**.)
+
+Kulcs nélkül csatlakozáskor a program megkérdezi, használod-e a film- és sorozatfeltöltést TMDB nélkül. Ha igen, működik, csak a találatok pontatlanabbak (a TMDB-ből nem jön magyar cím és leírás); ha nem, a film/sorozat feltöltés ki van kapcsolva. Auto upload módban nem kérdez, ott kulcs nélkül ki van kapcsolva.
 
 <details>
 <summary>📷 <i>Képernyőkép: Movie/Serie settings</i></summary>
@@ -288,7 +294,7 @@ Ha rosszul sorolná be, beolvasás után szabadon átváltható. Minden besorolt
 <br>
 
 * **Kategória automatikusan:** film vagy sorozat (csak évszám → film; évad/epizód/dátum → sorozat), SD vagy HD.
-* **IMDb keresés sorrendje:** NFO-ban lévő link vagy rögzített azonosító (lásd lent) → [srrDB](https://www.srrdb.com/) → [xREL](https://www.xrel.to) → [JustWatch](https://www.justwatch.com/) → cím alapján az IMDb-n. A JustWatch és a cím alapú keresés a beállított *Minimum similarity percent in search* egyezéssel dolgozik (90% fölé ajánlott); ha az NFO-ban TVmaze- vagy TheTVDB-link van, a JustWatch kimarad.
+* **IMDb keresés sorrendje:** NFO-ban lévő link vagy rögzített azonosító (lásd lent) → [srrDB](https://www.srrdb.com/) → [xREL](https://www.xrel.to) → [JustWatch](https://www.justwatch.com/) → cím alapján az IMDb-n. A JustWatch és a cím alapú keresés a beállított *Minimum similarity percent in search* egyezéssel dolgozik (alapértelmezés 90%); ha az NFO-ban TVmaze- vagy TheTVDB-link van, a JustWatch kimarad.
 * A *Movie/Serie settings*-ben kikapcsolható az automatikus keresés (*Disable automatic IMDb/TVmaze/TMDB search?*), és kérheted, hogy beolvasáskor minden scene release-nél rákérdezzen a film/sorozat kategóriára (*Always ask for Movie/Series category before upload?*; auto upload módban nem kérdez).
 * Az NFO-ban lévő IMDb-link és a kézzel megadott vagy statikus IMDb-azonosító mindenhol az alap. A többi forrásból (TVmaze/TMDB/TheTVDB link, srrDB, xREL) kapott azonosítót az IMDb-ről azonosító alapján kéri le, és a címét (AKA-listával együtt) a release nevéhez méri: ha egyik cím sem egyezik **és** a cím alapú keresés másik azonosítót talál, azt veszi; ha a keresés nem talál mást, a linkelt azonosító marad.
 * **Az adatok forrása, a legmegbízhatóbbtól:** az infobar adatait az IMDb adja azonosító alapján (egy lekérdezés), a többi forrás csak azt tölti ki, amit az IMDb nem ad. Kivétel az angol cím: nem angol nyelvű produkciónál az IMDb főcíme gyakran az eredeti cím vagy egy másik változat (*Kirik Hayatlar* – *Broken Lives*, *A Night's Tale* – *The Nightfall*), ezért ott a TVmaze GB/US AKA-ja és a TMDB angol fordítása előrébb áll; az IMDb címe akkor kerül be, ha ezek nem adtak angol címet, vagy ha ugyanazt adja bővebben (*Tougen Anki* – *Tougen Anki: Dark Demon of Paradise*). A TMDB magyar neve csak akkor számít magyar címnek, ha nem az eredeti cím (magyar produkciónál az).
@@ -309,8 +315,10 @@ Ha rosszul sorolná be, beolvasás után szabadon átváltható. Minden besorolt
 * Az NFO-ban talált egyéb linkeket (TVmaze, TheTVDB, Rotten Tomatoes, mafab, port.hu, MyAnimeList, Netflix) is beteszi a feltöltésbe.
 * Ha az IMDb magyar címe egyezik a release nevével, az infobarba az angol cím kerül eredeti/magyar címként. Idegen nyelvű release-nél magyar cím nélkül az eredeti/magyar címhez az eredeti cím kerül (*Kodenavn Hunter*).
 * **3 mintakép** a film elejéről (alapból a hossz 5, 7 és 9%-ánál; évadpack esetén az első epizódból). A *Thumbnail picture's settings*-ben állítható a helyük, a fekete/fehér kockák kiszűrése, hogy kerüljön-e **6 véletlen kép** a leírásba, és hogy egyszerre hány ffmpeg mintakép készülhessen (*Parallel ffmpeg snapshots*, alapértelmezés 3, 1 és 8 között) – ez utóbbi a film és a lemez terhelését osztja be, nem a képek számát. HEVC videónál a kockát a videókártya dekódolja. Az *FFmpeg for the thumbnails* beállításban választható, melyik FFmpeg töltődjön le: a **Full** (~60 MB, alapértelmezés) a HDR10, HLG és Dolby Vision filmek mintaképét a videókártyán SDR-re képezi le (libplacebo, Vulkan), így az eredetihez hű színeket ad; az **Essentials** (~35 MB, kisebb letöltés) ezt nem tudja, ezért azokon a filmeken a mintakép fakó, a Dolby Vision Profile 5-ösöknél lila-zöld. Normál (SDR) videónál a kettő ugyanazt a képet adja.
+* A leírásba kerülő képek a kek.sh-ra töltődnek. Ha a kek.sh nem válaszol, és a *Thumbnail picture's settings* jobb oldali oszlopában (Modern felületen az **API keys (optional)** kártyán) meg van adva egy ingyenes **imgbb API Key**, a képek az imgbb-re kerülnek. A kulcs nem kötelező; nélküle minden a régi módon megy.
+* Ha egy megadott opcionális API-kulcsot (Google Books, imgbb) a szolgáltatás elutasít, a program abban a munkamenetben nélküle megy tovább, és egyszer szól: kézi módban megkérdezi, törölje-e a kulcsot a beállításokból; AutoUpload alatt egy OK-gombos ablak jelzi, ami nem állítja meg a feltöltést.
 * **Technikai infó** opcionálisan a leírásba: hangsávok, feliratok nyelve – magyarra fordítva vagy bekérve.
-* **Nem scene release** (saját rip, NFO nélkül): bekapcsolható – a program maga generálja a MediaInfót, bekéri a címet és a torrent nevét, filmnél **sample fájlt** is készít – a scene szokását követve külön `sample` mappába (a *Sample create options* szerint, a megadott méret fölötti fájloknál). HD filmnél 2 GB fölött az nCore szabálya kötelezővé teszi: ha a sample nem sikerül, a program megkérdezi, próbálja-e újra, töltse-e fel nélküle, vagy törölje a `.torrent` fájlt. Megadhatsz IMDb- vagy TVmaze-linket: ilyenkor pontos találattal egészíti ki az adatokat, és ha sportesemény, magától sorozat kategóriába kerül, generált epizódszám nélkül, sport-infobarral. Sporteseménynek a TVmaze *Sports* műsorait veszi, és ha a TVmaze nem ismeri (pl. UFC), akkor az olyan IMDb-tételt, amely tévéműsor/-epizód/-különkiadás és az egyetlen műfaja a *Sport* – a sportfilmek és -dokumentumfilmek más műfajt is hordoznak, azok filmek maradnak. Link nélkül a beírt cím alapján keres az IMDb-n, a TVmaze-en és a TMDB-n (a release-névre épülő srrDB / xREL / JustWatch itt értelemszerűen kimarad).
+* **Nem scene release** (saját rip, NFO nélkül): bekapcsolható (*Movie/Serie settings* → *Turn on uploads without NFO?*), csak kézi beolvasással – auto upload módban nem –, és csak akkor, ha a torrentben kizárólag `.mkv`, `.avi`, `.mp4` vagy `.wmv` videó és felirat van; lemezkép (pl. DVD ISO) vagy DVD-mappa nem lehet benne. Ha nincs NFO, a program megkérdezi, hogy keressen-e hozzá, vagy a saját MediaInfójával töltse fel; ez utóbbinál maga generálja a MediaInfót, bekéri a címet és a torrent nevét, filmnél **sample fájlt** is készít – a scene szokását követve külön `sample` mappába (a *Sample create options* szerint, a megadott méret fölötti fájloknál). HD filmnél 2 GB fölött az nCore szabálya kötelezővé teszi: ha a sample nem sikerül, a program megkérdezi, próbálja-e újra, töltse-e fel nélküle, vagy törölje a `.torrent` fájlt. Megadhatsz IMDb- vagy TVmaze-linket: ilyenkor pontos találattal egészíti ki az adatokat, és ha sportesemény, magától sorozat kategóriába kerül, generált epizódszám nélkül, sport-infobarral. Sporteseménynek a TVmaze *Sports* műsorait veszi, és ha a TVmaze nem ismeri (pl. UFC), akkor az olyan IMDb-tételt, amely tévéműsor/-epizód/-különkiadás és az egyetlen műfaja a *Sport* – a sportfilmek és -dokumentumfilmek más műfajt is hordoznak, azok filmek maradnak. Link nélkül a beírt cím alapján keres az IMDb-n, a TVmaze-en és a TMDB-n (a release-névre épülő srrDB / xREL / JustWatch itt értelemszerűen kimarad).
 
 <details>
 <summary><i>Rossz IMDb-t talál egy sorozathoz?</i></summary>
@@ -337,9 +345,11 @@ Ha egy release-nél jobb klikkel (*Change IMDb ID*) kézzel adod meg az IMDb-azo
 * **Öt bolt:** Steam, GOG és Epic linkből vagy név alapján kereséssel; **itch.io és Big Fish csak linkből** (NFO-ból vagy a bekérő ablakban megadva) – ott a név alapú keresés túl sok hamis találatot adna (rajongói játékok ugyanazzal a címmel, nyelvi duplikátumok).
 * **Az adatok a boltból:** leírás, rendszerkövetelmény, 3 kép a bolt képernyőképeiből (a képek melletti nyilakkal léptethető, amíg van még kép) és az infobar kép. YouTube videó és igazoló link is hozzáadható. Ha a bolt nem közöl rendszerkövetelményt (itch.io), a szakasz kimarad a leírásból. Big Fish linknél a release platformjának (Windows / Mac) megfelelő változatot tölti be, ha van olyan.
 * **Név alapú keresés** (*Game Uploader settings → Select search type*): *Auto determinate by name/nfo* – Steam → GOG → Epic sorrendben, de ha a névben `GOG` van, a GOG az első; *Search by release groups* – a *Search this release on Steam / GoG / Epic* listákba írt release-csoportok a saját boltjukban indulnak, utána a többi jön (egy release-csoport csak egy listában szerepelhet, ütközésnél a mentés megnevezi); *Search only on Steam / GoG / Epic* – csak az egyik bolt; *Steam → GoG → Epic* (és a GoG, illetve Epic kezdetű változat) – a választott bolt után a másik kettő az alap Steam → GOG → Epic sorrendben; *Disabled*. Minden boltot legfeljebb egyszer kérdez le release-enként, a találathoz a *Minimum similarity percent* egyezés kell.
+* **DLC-release:** mindig az alapjáték adatait kapja (pl. `Stellaris_Utopia` → Stellaris, `Fallout_4_Far_Harbor` → Fallout 4). Ha a bolt magát a DLC-t nem találja, a név végéről legfeljebb 5 szót elhagyva keresi az alapjátékot; ilyenkor a bolti cím végén álló kiadásjelölő (pl. *Remastered*, *Game of the Year Edition*) nem számít. A sorszám nem maradhat le: az `Alan_Wake_2_Night_Springs` nem kapja meg az első Alan Wake-et.
 * A leírás elemei (mit tegyen bele) a *Game Uploader settings*-ben kapcsolhatók.
 * Ha sem linket, sem találatot nem talál: beállítástól függően **bekéri** a bolt linkjét (az ablakban Steam / GoG / Epic / itch.io / Big Fish keresőlink segít), vagy **üresen** tölti fel (opcionális sablonnal).
 * A „Telepítés” szakasz szövege release-csoportonként testreszabható – lásd [lent](#-testreszabás).
+* **Nem scene release** (NFO nélkül) nem tölthető fel: NFO kell – a torrentben, vagy név alapján megkeresi a pre-adatbázisokban; ha nincs, a naplóban jelzi és kihagyja a release-t.
 </details>
 
 <details>
@@ -348,6 +358,7 @@ Ha egy release-nél jobb klikkel (*Change IMDb ID*) kézzel adod meg az IMDb-azo
 
 * **Kategória automatikusan:** ISO / RIP / Mobil.
 * Ha az NFO-ban talál linket, a leírás végére beszúrja *(kikapcsolható)*.
+* **Nem scene release** (NFO nélkül) nem tölthető fel: NFO kell – a torrentben, vagy név alapján megkeresi a pre-adatbázisokban; ha nincs, a naplóban jelzi és kihagyja a release-t.
 </details>
 
 <details>
@@ -356,9 +367,9 @@ Ha egy release-nél jobb klikkel (*Change IMDb ID*) kézzel adod meg az IMDb-azo
 
 * **Kategória automatikusan:** MP3 / Lossless / Klip.
 * **Stílus:** a fájlból, vagy a pre oldalról; ha egyik sem ad, bekéri.
-* Zenénél **teljes leírás**: előadó, albumcím, tracklista *(kikapcsolható)*; albumborító a fájlból *(kikapcsolható)*.
+* Zenénél **teljes leírás**: előadó, albumcím, tracklista *(kikapcsolható)*; albumborító a fájlból *(kikapcsolható)*. Ha a fájlban nincs borító, a címkék (album, előadó) alapján a MusicBrainz-ből keresi meg, és a Cover Art Archive-ból tölti le. Kulcs nem kell hozzá, és csak egyértelmű találatot fogad el.
 * Ha az NFO-ban talál linket, a leírás végére beszúrja *(kikapcsolható)*.
-* **Nem scene release:** bekapcsolható – a program generálja a MediaInfót, bekéri az igazoló linket, extrákat és a torrent nevét; klipnél a filmhez hasonlóan sample fájlt is készít.
+* **Nem scene release:** bekapcsolható (*Music/Clip settings* → *Turn on uploads without NFO?*), csak kézi beolvasással – auto upload módban nem. Zenénél a torrentben csak MP3 vagy lossless hangfájl lehet (kísérőfájlokkal, képekkel). Klipnél csak `.mkv`, `.avi`, `.mp4` vagy `.wmv` videó és felirat, és ehhez a *Movie/Serie settings*-ben is be kell kapcsolni; ilyenkor a program megkérdezi, hogy film/sorozat vagy klip legyen. A program generálja a MediaInfót, bekéri az igazoló linket, extrákat és a torrent nevét; klipnél a filmhez hasonlóan sample fájlt is készít.
 </details>
 
 <details>
@@ -367,10 +378,12 @@ Ha egy release-nél jobb klikkel (*Change IMDb ID*) kézzel adod meg az IMDb-azo
 
 * **Nyelv automatikusan** (magyar / külföldi) a release nevéből.
 * **Műfaj:** a pre oldalról; ha az NFO-ban ISBN van, a Google Books kategóriái magyarra fordítva kiegészítik; magazinnál és képregénynél a release nevéből; ha egyik sem ad, bekéri.
-* **ISBN** (az NFO-ból) alapján a Google Books-ról leírást (író, cím, kiadás dátuma) és – ha nincs más – borítót is tölt *(kikapcsolható)*.
+* **ISBN** (az NFO-ból) alapján a Google Books-ról leírást (író, cím, kiadás dátuma) és – ha nincs más – borítót is tölt *(kikapcsolható)*. Ha a Google nem ad adatot, az Open Library-ból próbálja (cím, író, kiadás éve, borító – műfajt onnan nem vesz át).
+* **Google Books API kulcs** *(nem kötelező)*: kulcs nélkül a program minden felhasználója a Google közös napi keretén osztozik, ami gyakran elfogy, és ilyenkor az ISBN-adat üres marad. Saját, ingyenes kulccsal napi 1000 lekérés jár: a [Google Cloud Console](https://console.cloud.google.com/apis/library/books.googleapis.com)-ban hozz létre egy projektet, engedélyezd a *Books API*-t, majd a *Credentials* alatt készíts egy API kulcsot, és illeszd be a Beállítások **Uploader settings** oldalán az **Ebook** csempe **Google Books API Key** mezőjébe (Simple felületen: **`Ebook Uploader settings`** gomb). Ha a kulcs hibás, a program kulcs nélkül is megpróbálja.
 * **Mintaképek** automatikusan: PDF, EPUB, CBZ, CBR, FB2, MOBI, AZW, AZW3, PRC, DOCX, XPS, OXPS, HTM, HTML.
 * MOBI / AZW / AZW3 / PRC fájlból a borítót infobar képnek is használja.
 * `.txt` könyvet és jelszóval védett PDF-et nem tölt fel (nCore-szabály), a naplóban jelzi.
+* **Nem scene release** (NFO nélkül) nem tölthető fel: NFO kell – a torrentben, vagy név alapján megkeresi a pre-adatbázisokban; ha nincs, a naplóban jelzi és kihagyja a release-t.
 </details>
 
 <details>
@@ -381,6 +394,7 @@ Ha egy release-nél jobb klikkel (*Change IMDb ID*) kézzel adod meg az IMDb-azo
 * **3 mintakép** a videó elejéről; videónál kérhetsz a videóból egy infobar képet is (*Should we create an infobar image for the movie XXX?*).
 * Ha az NFO-ban talál linket, a leírás végére beszúrja *(kikapcsolható)*.
 * Imageset esetén 3 véletlen képet tölt fel, és opcionálisan megkeresi a borítóképet (pl. `cover` vagy `poster` nevű fájl) az infobarhoz.
+* **Nem scene release** (NFO nélkül) nem tölthető fel: NFO kell – a torrentben, vagy név alapján megkeresi a pre-adatbázisokban; ha nincs, a naplóban jelzi és kihagyja a release-t.
 </details>
 
 <br>
@@ -395,6 +409,8 @@ A kategóriák **nem szükségesek** a feltöltéshez és a seedhez: egyedi, plu
 
 * **Working category in client** – ha megadod, beolvasáskor megnézi ezt a kategóriát: ha a release itt megállítva van, és a *Done category*-ben nincs belőle megállított példány, kihagyja (*still in the progress*); ha a *Done category*-ben is megállítva van, a Working category-beli példányt törli a kliensből (a fájlokat nem), és beolvassa.
 * **Done category in client** – ebből a kategóriából feltöltés után törli az eredeti torrentet, hogy ne legyen duplikáció a kliensben (az nCore-os példány veszi át a seedet).
+
+A kategóriát legördülő mezőkből tudod kiválasztani: a **qBittorrent Test** lekéri a kliens kategóriáit, és ezek közül választhatsz (a lista a következő Testig megmarad). Az első Test előtt csak a már mentett kategóriák szerepelnek a listában. Ha a kliensben nincs egyedi kategória, és mentett sincs, a két mező meg sem jelenik.
 
 </details>
 
@@ -450,10 +466,12 @@ Ebben a módban a *Read* és a listák le vannak tiltva, a főablakon piros feli
 
 A programnak két megjelenítési módja van:
 
-* **Modern** *(alapértelmezett)* – kártyás elrendezés, átméretezhető panelek, oldalsávos Beállítások ablak, **világos** vagy **sötét** témával. A leírás képei ezt mutatják.
+* **Modern** *(alapértelmezett, ha elfér)* – kártyás elrendezés, átméretezhető panelek, oldalsávos Beállítások ablak, **világos** vagy **sötét** témával. A leírás képei ezt mutatják.
 * **Simple** – a klasszikus, egy ablakba rendezett régi felület.
 
-Váltani a Beállítások → *Other settings* → *Appearance* kártyán lehet (Simple felületen a Beállítások ablak **Interface** sorában): az **Interface** sorban a felületet, a **Theme** sorban (csak Modern felületen) a témát. A téma mentéskor azonnal átvált, a felület váltásához újra kell indítani a programot – mentéskor rákérdez.
+Első indításkor a program a fő monitorhoz választ: ha a Modern ablak legkisebb mérete (1100×720, a Windows skálázásával együtt) nem fér el a képernyőn a tálca nélkül, a **Simple** lesz az alapértelmezett. Ilyen például egy 1280×720-as, vagy egy 150%-os skálázású 1920×1080-as kijelző.
+
+Váltani a Beállítások → *Other settings* → *Appearance* kártyán lehet (Simple felületen a Beállítások ablak **Interface** sorában): az **Interface** sorban a felületet, alatta a **Theme** sorban a témát. A Theme sor csak akkor látszik, ha az Interface sorban a Modern van kiválasztva, mert a téma csak a Modern felületre vonatkozik. A téma mentéskor azonnal átvált, a felület váltásához újra kell indítani a programot – mentéskor rákérdez.
 
 <p align="center"><img src="docs/main_simple.png" alt="MultiUploader főablak Simple felülettel" width="900"></p>
 </details>
@@ -494,8 +512,10 @@ Hibás szerkesztésnél a beépített alapértelmezésre esik vissza, a fájlt s
 |---|---|
 | 🔴 `Auth Test` piros | Lejárt a cookie – nyomj újra a `Log in via browser...` gombra, **„Ne léptessen ki”** pipával. Az API Token 60 naponta lejár, ilyenkor is ez a megoldás. |
 | 🎬 Filmnél nincs adat / TMDB hiba | Nincs vagy rossz a TMDB API kulcs a *Movie/Serie Uploader settings*-ben – a **v3** kulcs kell. |
+| 📖 Könyvnél nincs ISBN-adat | Elfogyott a Google Books közös napi kerete – adj meg saját, ingyenes kulcsot az **Ebook** beállítások **Google Books API Key** mezőjében (lásd a *Könyv* részt). |
 | 🔁 „Már fent van” – pedig nincs | A program pontos release-névre keres. Nézd meg az oldalon; ha tényleg nincs fent, kapcsold ki az *Exist checking* pipát erre a beolvasásra. |
 | 🖼️ Nincs mintakép | A *Torrent data folder* rossz, vagy a release mappája nincs benne – a program nem találja a videófájlt. |
+| ⚙️ A program el sem indul, a Windows a .NET Desktop Runtime letöltését ajánlja | A .NET 10 Desktop Runtime hiányzik vagy megsérült – telepítsd (újra) a *.NET Desktop Runtime* x64-es változatát [innen](https://dotnet.microsoft.com/download/dotnet/10.0). |
 | 🌐 A böngészős belépés hibaüzenettel leáll (WebView2) | A WebView2 futtatókörnyezet hiányzik, és a program nem tudta telepíteni – töltsd le [innen](https://developer.microsoft.com/microsoft-edge/webview2/), vagy töltsd ki kézzel a mezőket. |
 | 🎯 Rossz IMDb egy sorozathoz | *Add static imdb with Movie's/Serie's name* beállítás – lásd a Film/Sorozat kategóriánál. |
 | ❓ Bármi más | A főablak alsó naplója és a `%AppData%\MultiUploader` mappa hibafájljai megmondják, hol akadt el. |
@@ -520,8 +540,44 @@ Hibás szerkesztésnél a beépített alapértelmezésre esik vissza, a fájlt s
 ## 📝 Változásnapló
 
 <details>
-<summary>🆕 <strong>4.0</strong> – a legutóbbi kiadás változásai</summary>
+<summary>🆕 <strong>4.1</strong> – a legutóbbi kiadás változásai</summary>
 <br>
+
+* The installer is about 17 MB instead of 67 MB: MultiUploader runs on the .NET 10 Desktop Runtime installed on the computer; if it is missing, the installer downloads and installs it from Microsoft once, and Windows Update keeps it up to date
+* New: optional API keys in the category settings - imgbb as a fallback image host when kek.sh does not answer, and a Google Books key for ebooks; an invalid key is reported once and the app continues without it
+* New: music without an embedded cover gets its album cover from MusicBrainz and the Cover Art Archive
+* New: every external request works behind a system or corporate proxy (Windows sign-in for NTLM/Negotiate proxies), including the Epic store and NFO downloads; local network addresses bypass the proxy
+* New: more categories are recognized from the release name and the torrent's files, and non-original releases are categorized by the nCore naming rules
+* New: the nCore exist check runs before the PreDB lookup, so a torrent already on nCore is skipped without PreDB requests
+* New: without a TMDB API key the app asks whether movie and series uploads should continue without TMDB; AutoUpload continues without TMDB when the key is invalid
+* New: Tab / Shift+Tab steps through the dialog fields in on-screen order
+* New: the qBittorrent Done and Working categories are chosen from a drop-down list of the client's categories
+* New: progress bars show that work is ongoing (a shimmer, and a moving bar when the size is unknown)
+* New: a fresh install starts with the Simple interface when the Modern window does not fit the screen
+* Epic Games Store: the name search works again, and newer Epic products get their description, images and system requirements; when a game store fails, the other stores are tried in the search order
+* A DLC release always gets the data of its base game; a collector's edition marker no longer stops the game search
+* Ebooks fall back to Open Library when Google Books has no data
+* Update, FFmpeg, MediaInfo and kek.sh transfers retry on temporary server errors; FFmpeg is downloaded from gyan.dev when GitHub does not serve the package
+* A source that keeps failing is written to ERROR.log once; a single failure is not
+* Mafab series without a year are found, and the port.hu year check works again
+* Framed NFO links broken across lines are joined
+* The browser nCore login no longer sends the visited addresses to SmartScreen; the saved upload error page also hides the nCore API token
+* The log stays scrollable during a delayed exit; the description no longer comes up fully selected
+* The Light/Dark row is hidden when the Simple interface is chosen
+* Fixed: the Corrupt-Net nuke check found nothing
+* Fixed: the qBittorrent automatic setup kept asking for qBittorrent.ini when qBittorrent runs with an empty --profile=
+* Fixed: a non-disc release in the DVDR PreDB section (e.g. a magazine DVD) was taken for a movie
+* Fixed: drop-down lists flashed when their items changed; open windows did not fully follow a live light/dark switch
+* Fixed: the MultiUploader comment was missing from a torrent when another program briefly held the .torrent file
+* Bump Microsoft.Web.WebView2 to 1.0.4258.31
+
+</details>
+
+<details>
+<summary>🗂️ <strong>Korábbi verziók</strong> – 4.0 … 1.0</summary>
+<br>
+
+**4.0**
 
 * Runs on .NET 10; the installer brings its own runtime, so no separate .NET install is needed
 * New: Modern interface - themed controls, a card layout, Settings with a side menu, designed dialogs and a dark mode that switches without a restart; the Simple interface can still be chosen with the Interface switch in Settings
@@ -548,12 +604,6 @@ Hibás szerkesztésnél a beépített alapértelmezésre esik vissza, a fájlt s
 * Fixed: every Hungarian letter of the nCore rank is read correctly
 * Fixed: overlapping and squeezed dialog layouts
 * Fixed: the findings of two full code reviews (data safety, lifecycle, security and correctness)
-
-</details>
-
-<details>
-<summary>🗂️ <strong>Korábbi verziók</strong> – 3.6.1 … 1.0</summary>
-<br>
 
 **3.6.1**
 
