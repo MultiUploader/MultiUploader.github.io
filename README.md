@@ -435,6 +435,7 @@ Az *Auto upload settings*-ben bekapcsolható **felügyelet nélküli** mód: a p
 * **Upload game empty if no Steam/GOG link found?** – játéknál üresen töltse fel, ha nem talál adatot.
 * **Check for updates every** – ebben a módban ennyi óránként nézi meg, van-e programfrissítés.
 * **Max reconnect attempts** – ha megszakad az nCore-kapcsolat, a program a *Torrent's folder checking interval* ütemében magától újracsatlakozik; ennyi egymást követő sikertelen próbálkozás után kikapcsolja az auto upload módot (a beállításban is), és a naplóban jelzi, hogy kézzel kell újracsatlakozni.
+* **If category is missing** – ha a PreDB még nem ismeri a release-t, a program kategória nélkül kihagyja. A *Retry only with the button* esetén csak a főablak **Retry skipped (no category)** gombja engedi vissza ezeket azonnal; a *Retry periodically* esetén a program a *Retry skipped torrents every* percenként, legfeljebb *Max retries per torrent* alkalommal magától is újra megpróbálja őket. A gomb a próbák elfogyása után is működik.
 
 Ebben a módban a *Read* és a listák le vannak tiltva, a főablakon piros felirat jelzi, hogy aktív.
 </details>
@@ -540,8 +541,19 @@ Hibás szerkesztésnél a beépített alapértelmezésre esik vissza, a fájlt s
 ## 📝 Változásnapló
 
 <details>
-<summary>🆕 <strong>4.1</strong> – a legutóbbi kiadás változásai</summary>
+<summary>🆕 <strong>4.1.1</strong> – a legutóbbi kiadás változásai</summary>
 <br>
+
+* New: AutoUpload can retry the torrents it skipped for a missing category (the PreDB may learn the release minutes after the pre) - with the new Retry skipped (no category) button on the main window, or periodically with a delay and a maximum number of tries set in the Auto upload settings
+* The main window shows how many torrents were skipped for other reasons
+
+</details>
+
+<details>
+<summary>🗂️ <strong>Korábbi verziók</strong> – 4.1 … 1.0</summary>
+<br>
+
+**4.1**
 
 * The installer is about 17 MB instead of 67 MB: MultiUploader runs on the .NET 10 Desktop Runtime installed on the computer; if it is missing, the installer downloads and installs it from Microsoft once, and Windows Update keeps it up to date
 * New: optional API keys in the category settings - imgbb as a fallback image host when kek.sh does not answer, and a Google Books key for ebooks; an invalid key is reported once and the app continues without it
@@ -570,12 +582,6 @@ Hibás szerkesztésnél a beépített alapértelmezésre esik vissza, a fájlt s
 * Fixed: drop-down lists flashed when their items changed; open windows did not fully follow a live light/dark switch
 * Fixed: the MultiUploader comment was missing from a torrent when another program briefly held the .torrent file
 * Bump Microsoft.Web.WebView2 to 1.0.4258.31
-
-</details>
-
-<details>
-<summary>🗂️ <strong>Korábbi verziók</strong> – 4.0 … 1.0</summary>
-<br>
 
 **4.0**
 
