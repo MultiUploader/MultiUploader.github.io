@@ -113,10 +113,10 @@ Ha feltöltesz nCore-ra, ismered a menetet: megnyitod a feltöltő oldalt, kiker
 
 1. Töltsd le a legfrissebb `MultiUploader_Setup_x.x.exe` fájlt a repó [Releases](../../releases/latest) füléről.
 2. Indítsd el, Tovább → Tovább → Befejezés. A program a Start menübe kerül. Ha a gépen nincs .NET 10 Desktop Runtime, a telepítő az elején felajánlja, hogy letölti és telepíti (kb. 60 MB, a Microsoft oldaláról); **Nem** esetén a telepítő kilép.
-
-   > [!TIP]
-   > A .NET biztonsági javításait a Windows Update hozza, ha a *Beállítások → Windows Update → Speciális beállítások* alatt a **Frissítések fogadása más Microsoft-termékekhez** be van kapcsolva. Ehhez nem kell új MultiUploader-verzió.
 3. Indítsd el a MultiUploadert, majd kattints a jobb felső sarokban a **⚙️ fogaskerékre** – ez a Beállítások.
+
+> [!TIP]
+> A .NET biztonsági javításait a Windows Update hozza, ha a *Beállítások → Windows Update → Speciális beállítások* alatt a **Frissítések fogadása más Microsoft-termékekhez** be van kapcsolva. Ehhez nem kell új MultiUploader-verzió.
 
 > [!NOTE]
 > A programnak **két megjelenítési módja** van: a **Modern** (ha a képernyőn elfér, ez az alapértelmezett) és a klasszikus **Simple** felület. A leírás a Modern felületet mutatja, ahol a Simple eltér, azt külön jelzi. Hogy mi a különbség és hogyan válthatsz (a Modernben világos és sötét téma is van), lásd a [Testreszabás](#-testreszabás) részt.
@@ -435,7 +435,7 @@ Az *Auto upload settings*-ben bekapcsolható **felügyelet nélküli** mód: a p
 * **Upload game empty if no Steam/GOG link found?** – játéknál üresen töltse fel, ha nem talál adatot.
 * **Check for updates every** – ebben a módban ennyi óránként nézi meg, van-e programfrissítés.
 * **Max reconnect attempts** – ha megszakad az nCore-kapcsolat, a program a *Torrent's folder checking interval* ütemében magától újracsatlakozik; ennyi egymást követő sikertelen próbálkozás után kikapcsolja az auto upload módot (a beállításban is), és a naplóban jelzi, hogy kézzel kell újracsatlakozni.
-* **If category is missing** – ha a PreDB még nem ismeri a release-t, a program kategória nélkül kihagyja. A *Retry only with the button* esetén csak a főablak **Retry skipped (no category)** gombja engedi vissza ezeket azonnal; a *Retry periodically* esetén a program a *Retry skipped torrents every* percenként, legfeljebb *Max retries per torrent* alkalommal magától is újra megpróbálja őket. A gomb a próbák elfogyása után is működik.
+* **If category is missing** – ha a PreDB még nem ismeri a release-t, a program kategória nélkül kihagyja. A *Retry only with the button* esetén csak a főablak **Retry skipped (no category)** gombja engedi vissza ezeket azonnal; a *Retry periodically* esetén a program a *Retry skipped torrents every* percenként, legfeljebb *Max retries per torrent* alkalommal magától is újra megpróbálja őket. A gomb ablakot nyit: ott a kategória nélkül kihagyott torrentek közül többet is kijelölhetsz, és egyszerre ugyanabba a kategóriába tölthetsz fel (a megadott kategória csak az adott feltöltésre érvényes), vagy a *Retry all* gombbal újra lekérdezheted a kategóriájukat. A gomb a próbák elfogyása után is működik.
 
 Ebben a módban a *Read* és a listák le vannak tiltva, a főablakon piros felirat jelzi, hogy aktív.
 </details>
@@ -541,773 +541,1260 @@ Hibás szerkesztésnél a beépített alapértelmezésre esik vissza, a fájlt s
 ## 📝 Változásnapló
 
 <details>
-<summary>🆕 <strong>4.1.1</strong> – a legutóbbi kiadás változásai</summary>
-<br>
+<summary>🆕 <strong>4.2</strong> – a legutóbbi kiadás változásai</summary>
 
-* New: AutoUpload can retry the torrents it skipped for a missing category (the PreDB may learn the release minutes after the pre) - with the new Retry skipped (no category) button on the main window, or periodically with a delay and a maximum number of tries set in the Auto upload settings
-* The main window shows how many torrents were skipped for other reasons
+### [4.2]
+
+#### Added
+
+- AutoUpload: the torrents skipped for a missing category can be given one category at once - Retry skipped (no category) opens a list with multiple selection, a category drop-down, a one-off Upload selected with this category and Retry all
+- Modern interface: Website and Check for updates now buttons in the main window header; the check runs even when automatic update checking is off or postponed
+- NFO links: a port.hu link without IMDb gives the Hungarian and original title, the year and the proof link; the year is taken from every linked database (port.hu, mafab, TMDB, TheTVDB)
+
+#### Changed
+
+- Steam store requests are paced (about 190 per 5 minutes), so a long AutoUpload run no longer hits Steam's rate limit and loses the Steam data for 10 minutes
+- Game search: no match rather than a wrong one - loose and one-word matches, retro and console releases and store links copied from a group's NFO template are checked; trailing scene tags (Plus N Trainer, Keygen, DIRFIX, NFOFIX) are dropped from the search name
+- nCore request search: hyphenated titles are found, programs, mobile and console releases are searched by name without version and group, and a movie or series request with a different year is not linked
+- Bump HtmlAgilityPack to 1.13.1 and SharpCompress to 0.50.5
+
+#### Fixed
+
+- Movie and series title matching ignores accents, so an accentless release name finds its accented title; an article of the searched title must also be in the found title
+- A series episode got an older series with the same title from xREL; the series whose episode aired around the release date is used
+- The shorter variant of an English title no longer goes into the Original/Hungarian title field
+- An audio or subtitle track without a language code is named through the language table by its title, and Hungarian accents in track titles are kept
+- The end of a longer number (e.g. 61850.7.3.) was taken for a series air date
+- A minimized or very narrow window could fail to create the thumbnail, and an image above the pixel limit was decoded at full size
 
 </details>
 
 <details>
-<summary>🗂️ <strong>Korábbi verziók</strong> – 4.1 … 1.0</summary>
-<br>
-
-**4.1**
-
-* The installer is about 17 MB instead of 67 MB: MultiUploader runs on the .NET 10 Desktop Runtime installed on the computer; if it is missing, the installer downloads and installs it from Microsoft once, and Windows Update keeps it up to date
-* New: optional API keys in the category settings - imgbb as a fallback image host when kek.sh does not answer, and a Google Books key for ebooks; an invalid key is reported once and the app continues without it
-* New: music without an embedded cover gets its album cover from MusicBrainz and the Cover Art Archive
-* New: every external request works behind a system or corporate proxy (Windows sign-in for NTLM/Negotiate proxies), including the Epic store and NFO downloads; local network addresses bypass the proxy
-* New: more categories are recognized from the release name and the torrent's files, and non-original releases are categorized by the nCore naming rules
-* New: the nCore exist check runs before the PreDB lookup, so a torrent already on nCore is skipped without PreDB requests
-* New: without a TMDB API key the app asks whether movie and series uploads should continue without TMDB; AutoUpload continues without TMDB when the key is invalid
-* New: Tab / Shift+Tab steps through the dialog fields in on-screen order
-* New: the qBittorrent Done and Working categories are chosen from a drop-down list of the client's categories
-* New: progress bars show that work is ongoing (a shimmer, and a moving bar when the size is unknown)
-* New: a fresh install starts with the Simple interface when the Modern window does not fit the screen
-* Epic Games Store: the name search works again, and newer Epic products get their description, images and system requirements; when a game store fails, the other stores are tried in the search order
-* A DLC release always gets the data of its base game; a collector's edition marker no longer stops the game search
-* Ebooks fall back to Open Library when Google Books has no data
-* Update, FFmpeg, MediaInfo and kek.sh transfers retry on temporary server errors; FFmpeg is downloaded from gyan.dev when GitHub does not serve the package
-* A source that keeps failing is written to ERROR.log once; a single failure is not
-* Mafab series without a year are found, and the port.hu year check works again
-* Framed NFO links broken across lines are joined
-* The browser nCore login no longer sends the visited addresses to SmartScreen; the saved upload error page also hides the nCore API token
-* The log stays scrollable during a delayed exit; the description no longer comes up fully selected
-* The Light/Dark row is hidden when the Simple interface is chosen
-* Fixed: the Corrupt-Net nuke check found nothing
-* Fixed: the qBittorrent automatic setup kept asking for qBittorrent.ini when qBittorrent runs with an empty --profile=
-* Fixed: a non-disc release in the DVDR PreDB section (e.g. a magazine DVD) was taken for a movie
-* Fixed: drop-down lists flashed when their items changed; open windows did not fully follow a live light/dark switch
-* Fixed: the MultiUploader comment was missing from a torrent when another program briefly held the .torrent file
-* Bump Microsoft.Web.WebView2 to 1.0.4258.31
-
-**4.0**
-
-* Runs on .NET 10; the installer brings its own runtime, so no separate .NET install is needed
-* New: Modern interface - themed controls, a card layout, Settings with a side menu, designed dialogs and a dark mode that switches without a restart; the Simple interface can still be chosen with the Interface switch in Settings
-* New: the interface language is chosen in Settings from `language_<code>.json` files
-* New: qBittorrent WebUI is set up automatically from Settings; the WebUI and the watch folder mode can be switched without Clear Settings
-* New: update installers are verified with a publisher signature before they start, on both interfaces (AutoUpdater.NET removed)
-* New: a manually given IMDb ID can be saved to the static IMDb IDs
-* New: answered prompts are remembered across re-reads and ID or category changes, including the Movie/Series question
-* New: Manual category selection asks for every release
-* New: removing a torrent from the list asks for confirmation; Tab / Shift+Tab steps through the active list in a circle; saving keeps the reading order
-* New: ebook sample images are taken from the text pages
-* New: the IMDb plot is the last fallback for the description
-* HEVC thumbnails are decoded on the GPU; HDR and Dolby Vision thumbnails are tone-mapped
-* Faster torrent hashing with one sequential reader and parallel hashers; the Corrupt-Net lookup and the upload image preparation run during waits
-* GOG system requirements without empty blocks, addon releases uploaded as updates; symbol-bulleted store paragraphs become a BBCode list
-* The sample size limit is set in MB instead of GB
-* Windows are scaled correctly across monitors with different DPI
-* The log window shows only the time and a dot separator before each line
-* The rule-required parts of an upload without NFO stay on regardless of the switches
-* An exhausted Google Books daily quota is no longer retried for a minute per ebook; the host is skipped until the quota resets
-* An unreachable nCore in the settings check is no longer written to ERROR.log
-* Includes the 3.6.1 fixes: the main window stays responsive while FFmpeg is installed and while images are processed
-* Fixed: the exist check again removes the same-name torrent from any category
-* Fixed: every Hungarian letter of the nCore rank is read correctly
-* Fixed: overlapping and squeezed dialog layouts
-* Fixed: the findings of two full code reviews (data safety, lifecycle, security and correctness)
-
-**3.6.1**
-
-* The last version for .NET Framework 4.8; the next version runs on .NET 10
-* The main window stays responsive while FFmpeg or the MediaInfo CLI is being installed
-* Screenshots, thumbnails and cover images are processed off the UI thread, so the main window no longer freezes during reading and uploading
-* The previous nCore browser login profile is deleted in the background when the login window opens
-
-**3.6**
-
-* New: itch.io and Big Fish Games support - a game is imported from its store link (never by a name search); a Big Fish link for the other platform is swapped to the release's Windows or Mac version
-* New: itch.io and Big Fish search links in the game URL dialog
-* New: Epic release group list in the game search settings; the message that blocks the save names every group listed for two stores
-* New: "Search only on Epic" and store-order search types (Steam → GoG → Epic, GoG → Steam → Epic, Epic → Steam → GoG); every store is searched at most once per release
-* New: the category group is decided from the release name and the torrent's files before the predb chain (music videos, MDVDR/MViD, XXX releases with a full date, retro console tokens, packed eBook releases)
-* New: every categorized torrent is checked for a nuke on Corrupt-Net, and its section is the last category source when every predb site fails
-* New: a non-scene upload of an IMDb sports broadcast unknown to TVmaze (e.g. UFC) is uploaded as a sports event
-* New: the app reconnects by itself when the network comes back; AutoUpload retries the connection and switches itself off after the Max reconnect attempts setting
-* New: the video snapshots are taken concurrently; Parallel ffmpeg snapshots setting (1-8, default 3) on the Thumbnail picture settings
-* Faster connections on every network: IPv4 is used where it is reachable instead of waiting 21 seconds on a broken IPv6 path, unresponsive server addresses are skipped, up to 8 connections per host, TLS 1.3 where Windows supports it, and a fast connection failure of a GET request is retried once
-* Infobar English title: the TVmaze/TMDB English name comes before the IMDb primary title (Broken Lives instead of Kirik Hayatlar); a foreign release without a Hungarian title keeps its original title in the Eredeti/magyar field
-* Fewer requests: the Hungarian and English TMDb data are requested together, the decoded torrent and NFO are reused, downloaded images are cached, and the nCore request page is searched once per release name
-* A torrent whose comment already carries the MultiUploader signature is no longer rewritten on every read
-* Fixed: with the exact-only request setting a Linux or Mac release could match the Windows request
-* Fixed: an unnuked release was offered for removal as nuked (Corrupt-Net, predb.club)
-* Fixed: the game thumbnail arrows were enabled when the store had no other picture to step to
-* An unknown predb section is a normal miss instead of a red log line; a gyan.dev checksum outage is no longer written to ERROR.log
-* The rate-limit line of the log file names the release that triggered it; stack traces no longer contain build machine paths
-
-**3.5**
-
-* New: Epic Games Store support - a game is imported from its store link or slug with full metadata, and a store search runs when there is no link
-* New: Epic search link in the game URL dialog, next to the Steam and GOG ones
-* New: the infobar titles (English, Hungarian, original) and the IMDb title search come from the IMDb GraphQL API; the nCore imdb_movie helper is only a fallback
-* New: an IMDb id that comes from another database is verified against IMDb itself; an id from the NFO or typed by hand stays final
-* New: API responses are cached for the session, so the same data is not queried twice during a run
-* New: long category reads report their progress periodically
-* Oversized kek.sh screenshots are uploaded as high-quality JPEG instead of being dropped
-* Images above the pixel limit are resized instead of rejected
-* The infobar English title no longer carries the network name of a show (Dateline NBC to Dateline), and the same title no longer fills two infobar fields
-* NFO database links are the primary source, dropped only when their title is foreign to the release
-* Game search: punctuation-free similarity, never a demo, the patch notes link of the loaded game, Steam apps only
-* The HTTP retry policy was rewritten on Polly v8 and honours Retry-After
-* A TMDb HTTP error counts as a miss instead of an ERROR.log entry
-* The Settings form shows a loading indicator during the exist check that runs before a read
-* The "Still working on" log line pauses while a modal form waits for an answer; the game ID request labels are left-aligned
-* Right-click on an already selected torrent no longer reloads its images
-* Interlaced video is read from the ffprobe field_order (FFMpegCore 5.5.0)
-* Fixed: an unknown ffprobe video size classified the release as SD
-* Fixed: the qBittorrent test overwrote the result icon of the authentication test
-* Fixed: left-over Hungarian and incorrect English UI and log strings
-* Fixed six findings of a full code audit: the log link cache grew without a bound, an unreadable torrent threw instead of skipping the sample, a single-file torrent's stored path was resolved wrongly, the error log did not redact api_key=, a corrupt secret swallowed every exception, and an abandoned single-instance mutex crashed the start
-* Bump FFMpegCore to 5.5.0, Polly.Core to 8.8.0 (instead of the Polly shim package) and xunit.v3 to 4.0.1
-
-**3.4**
-
-* New: browser login in Settings - the nCore cookie, passkey and API token are filled in automatically (the WebView2 runtime is installed on demand)
-* New: Hungarian plot from mafab.hu and JustWatch; JustWatch moved to its GraphQL API (the old lookups no longer found anything)
-* New: sports events are recognised (TVmaze Sports shows, PreDB section) and uploaded to series categories, with the infobar filled in per the nCore wiki
-* New: non-scene (NFO-less) uploads are looked up on TVmaze, IMDb and TMDB too; a release identified as a movie by a database id becomes a series when TVmaze knows the show
-* New: the disc image category (HD/DVD/DVD9) and the music category (MP3/lossless) are decided from the files; a lossless release without real lossless files is skipped
-* New: Delayed Exit option on the exit confirmation - the app closes by itself once the running read, upload or torrent creation finishes
-* New: Add/Change genre in the right-click menu for ebook and music torrents
-* New: AutoUpload checks for updates periodically during long runs (Check for updates every N hours, default 24)
-* New: every text the app displays is translatable through translation.json; lines left in English also receive later English corrections
-* New: automatic piece length goes up to 16 MiB, 32/64/128 MiB can be chosen manually (with a caution note)
-* The Would upload as preview shows the resolved category (e.g. Movies HD)
-* Samples are recognised by their Sample/Minta folder; a single-file release is moved into a folder named after the file
-* Game search finds names that write + as Plus and shortens update/trainer names; a store title with a different sequel number is refused
-* Movie/series matching leaves a release unmatched rather than accepting a doubtful candidate
-* Dialogs: long release names wrap instead of being cut off or pushing the window off the screen, controls are centered, texts are no longer clipped
-* Tab no longer moves the focus between controls, and forms open without a fully selected text box
-* The torrent creation progress dialog is modal and can be minimized
-* The connection test validates the passkey from the profile page instead of downloading a torrent
-* Settings are validated live (nCore domain, qBittorrent WebUI address, folders); a secret that cannot be decrypted is kept instead of being overwritten, and settings.json is written atomically
-* An infobar picture or screenshot that cannot be downloaded is left out with a warning instead of failing the whole upload
-* Clearer nCore error messages (expired cookie/token, rate limit, server error with its code)
-* Fixed AutoUpload hanging on a message box, not stopping after deciding to skip a release, and releasing the locks of saved items too early
-* Fixed single-file torrents being deleted during the NFO search and a wrong upload success detection
-* Fixed many category, genre, infobar title, TMDB/TVmaze and game lookup issues found by a full code audit
-* Security: NFO links and every redirect are validated (no private/loopback addresses), download and archive sizes are capped, API keys and the passkey are redacted from the error log, the downloaded MediaInfo CLI and WebView2 installer are verified before running
-* Reliability: every external tool call has a timeout; settings, NFO, torrent and tool files are written through temp files; a stale temp.lock left by a crash is removed; the log no longer corrupts non-ASCII text and the newest log archives are kept
-* Installer: correct version number, asks to close the running app, always removes previous versions (including the old MSI installs)
-* Performance: each torrent is decoded once per release, fewer folder walks, one AutoUpload timer across reconnects
-* Replaced F23.StringSimilarity, LazZiya.ImageResize, Syroot.Windows.IO.KnownFolders and TvMaze.Api.Client with built-in code
-* Newtonsoft.Json.Schema replaced by NJsonSchema 11.6.1 (MIT license)
-* Added Microsoft.Web.WebView2 1.0.4191.47
-* Bump SharpCompress from the unlisted 1.0.0 build to 0.50.4
-
-**3.3**
-
-* New: automatic sample thumbnails for ebooks (PDF, EPUB, CBZ, CBR, FB2, MOBI, AZW, AZW3, PRC, DOCX, XPS, OXPS, TXT, HTM, HTML)
-* MOBI/AZW/AZW3/PRC ebooks also set the infobar image from the file's embedded cover
-* Nuked torrents now show a dedicated nuke icon
-* Interlaced video is now detected and marked (1080i) in the upload title
-* AutoUpload settings now validate skip-option values, pruning invalid ones
-* Blockquotes are now stripped from Markdown descriptions too
-* Fixed the found-request name link in the log unreliably jumping to/selecting the matching item, including a case where it could leave both lists selected at once
-* Fixed NFO URL extraction truncating URLs that contain accented/non-ASCII characters or other valid URL symbols (parentheses, brackets, etc.)
-* The "Too many requests" retry log line now names which site is rate-limiting
-* Selecting an already-selected item in the list no longer redundantly re-fetches/re-renders its data
-* Fixed a NullReferenceException in Logger.LogToForm when the form isn't available yet
-* Fixed the thumbnail percentage display for movie/serie thumbnails
-* Centralized UI text into one place; small explorer.exe/URL/Auth fixes
-* Added 11 additional language name mappings
-* Cleaned up redundant audio/subtitle stream labels
-* Read/upload controls now stay disabled for the entire duration of a read
-* Re-enabled the torrent creation progress bar, now with real cancellation support
-* Rewrote the FFmpeg auto-downloader to use the GitHub Releases API with dual hash verification
-* Switched translation to GTranslate with automatic fallback and caching
-* Fixed the IMDb ID cache never actually persisting; added 429 backoff and a rate-limit cooldown for hosts that keep throttling
-* Fixed an NFO line-ending bug that truncated wrapped URLs
-* Settings dialog now only asks once whether to keep changes when closing
-* All auth errors are now logged during Test Connection too
-* Better handling of a mistyped nCore username or invalid domain
-* Fixed a NullReferenceException when testing the connection with an invalid cookie pass
-* Added passkey validation to the connection test
-* qBittorrent WebUI: torrents are now sent as a file instead of by URL
-* Added a warning log when an animated image is selected as the infobar picture
-* Fixed dynamic content being lost due to the localization system
-* Fixed localization overwriting runtime values set by Load handlers
-* Fixed AutoUpload using the description template even for empty uploads
-* Fixed 401/403 authentication errors being silently swallowed
-
-**3.2**
-
-* New feature: release-group-specific install info overrides
-* New setting: disable IMDb/TVmaze/TMDB search entirely, and always ask for Movie/Series category
-* AutoUpload: new option to upload a game empty when no game link is found
-* UI text is now community-translatable
-* Installer is now available in multiple languages
-* Sensitive settings (API keys, passwords) are now encrypted with Windows DPAPI instead of stored in plain text
-* Fixed XXX cover picture upload
-* Fixed saved torrents' request ID
-* Fixed newlines in Movie/Serie description
-* Recognize language packs more reliably in search value/update matching
-* Fixed several Movie/Series lookup bugs: wrong endpoint used for alternate titles on some branches, year filter throwing on dateless matches, last TMDB match always picked when no IMDb ID was found, missing flag when the IMDb ID came from TMDB, language code compared against country code
-* Fixed: 429 Too Many Requests responses were never actually retried (and got logged as real errors)
-* Fixed: a single shared 30s timeout could cut off an entire retry chain
-* Fixed: nCore cover image could get overwritten by a smaller TVmaze/TMDB image
-* Fixed a memory leak in the log window (torrent name/ID links no longer pile up as controls)
-* Fixed AutoUpload getting stuck after an exception instead of resuming on the next cycle
-* Fixed 3 range/index calculation bugs (e.g. episode range/gap detection)
-* Fixed several swallowed NullReferenceExceptions caused by missing null checks
-* Fixed 4 cases of swapped/mistyped variable references
-* Fixed a Bitmap handle leak, a stack-trace-losing rethrow, and a file write that didn't truncate old content
-* Fixed: TMDbClient instances were never disposed, accumulating over time
-* Fixed screenshot large-file counting and a missed folder scan
-* Fixed a bias in random picture index selection
-* Fixed 2 bugs in the non-TMDB search branches (an nCore 404 wrongly logged as an error; a swallowed NullReferenceException in the JustWatch lookup)
-* Fixed several Installer.iss bugs; the installer is now built (and translated) in CI too
-* Force TLS 1.2 on outgoing requests; fixed a null-reference in GOG changelog parsing
-* Fixed a PowerShell injection risk and broken TMDB genre building
-* Fixed FFprobe output being read with the wrong codepage for accented filenames
-* MediaInfo.exe is now launched directly instead of via PowerShell hosting
-* Audio/subtitle track titles now have accents stripped for normalization
-* Rewrote media analysis on top of FFMpegCore instead of Xabe.FFmpeg/NReco.VideoConverter
-* Fetch TMDB data with append_to_response instead of separate endpoint calls (fewer requests per torrent)
-* qBittorrent client now reuses its session instead of logging in on every call
-* Now reusing a single shared HttpClient instead of creating a new one per request
-* Music torrents are now decoded once per release instead of repeatedly
-* Video file search now does 1 directory walk instead of 4
-* Increased the regex cache size (94 patterns vs. the built-in 15-slot cache)
-* Log file's daily header check and old-log archiving now run once a day instead of on every line
-* Bump HtmlAgilityPack from 1.11.72 to 1.13.0
-* Bump Polly from 8.5.1 to 8.7.0
-* Bump MonoTorrent from 2.0.7 to 3.0.2
-* Bump ReverseMarkdown from 4.6.0 to 6.2.1
-* Bump F23.StringSimilarity from 5.1.0 to 7.0.1
-* Bump UTF.Unknown from 2.5.1 to 2.7.0
-* Bump Xabe.FFmpeg.Downloader from 5.2.6 to 6.0.2
-* Bump TMDbLib from 2.2.0 to 2.3.0
-
-**3.1**
-
-* Update builtin MediaInfo to v24.12
-* Update Logger method to maximize the entries (50 in form)
-* Bump Polly from 8.5.0 to 8.5.1
-* Filter setup files when AutoUpload is running
-* Validate year variables in Movie/Serie category
-* Improve otherSubtitleInfos
-* Improve Steam & GoG game search APIs
-* Implement a MediaInfoHelper to get up-to-date MediaInfo version
-* Exclude Polly's TimeoutRejectedException
-* Fixed port.hu url duplicate at infobar
-* Fixed filtering non-latin characters
-* Fixed log dates & log to file
-* Fixed empty Audio/Subtitle streams at description
-* Fixed Controls' state when AutoUpload mode enabled
-* Processing of all links in NFO, in the game category
-* Use HttpClient instead of WebClient
-* Now Auth test also test the nCore API token
-* New feature: generate infobar pic from XXX movie
-
-**3.0.2**
-
-* Implemented AutoUploadSkipList at settings
-
-**3.0.1**
-
-* Hotfix serie category
-
-**3.0**
-
-* Optimize CreateTorrent method
-* Check if an NFO file exists in the torrent file. If it doesn't, recreate it
-* Fixed music description if performers more than one
-* Rewrite the ExistChecker method
-* Exclude bad torrent file, and remove it
-* Fixed a mistake in the request search
-* Fixed form start positions
-* Fixed the UpdateTorrentInfo() method
-* New feature: AutoUpload! **(Since it cyclically polls the contents of the folder, it is possible that the antivirus will give you a false alarm!)**
-* Bump HtmlAgilityPack from 1.11.64 to 1.11.72
-* Bump Polly from 8.4.1 to 8.5.0
-* Bump QBittorrent.Client from 1.9.23349.1 to 1.9.24285.1
-
-**2.9**
-
-* Improved GogGame data model handling
-* Implemented a new method that checks for empty (zero-byte) files in torrents
-* Implemented a new method that checks if a series is incomplete, then pops up a warning
-* Rewrite the ExistChecker method
-* Error logging for 502 Bad Gateway errors has been turned off
-* Fixed a mistake in the request search
-* Fixed the bookware category in predb
-* Fixed the UpdateTorrentInfo() method
-* Updated MediaInfo CLI to 24.06
-
-**2.8.3**
-
-* Implement new feature what search local file in NFO
-* Set application icon
-* Show exist form instead of warning message when app is already running
-* Get url from NFO in game category when upload as empty
-* Requests: check Linux or Mac in request titles - match with game type
-* Remove music description if cannot get any data from files
-* Fix torrent create form
-* Improve post to kek.sh
-* Get the best quality picture from GOG api
-* Fixed torrents with multiple NFOs
-* Ignore country code in stream (Audio/Subtitle) title
-* Updated dependencies - [ReverseMarkdown from 4.3.0 to 4.4.0], [Newtonsoft.Json.Schema from 3.0.15 to 3.0.16], [Polly from 8.3.0 to 8.4.0], [Autoupdater.NET.Official from 1.8.5 to 1.8.6], [HtmlAgilityPack from 1.11.59 to 1.11.61], [TMDbLib from 2.1.0 to 2.2.0]
-
-**2.8.2**
-
-* Fixed the error when there are several soundtracks, but one of them is Hungarian
-
-**2.8.1**
-
-* Fixed Flurl.Http.FlurlHttpException in TVmaze API
-* Fixed url in GoG changelog
-* Fixed non-release infobar
-* Fixed music performer value in description
-* Add open TechInfo file button (same as Open NFO) it uses windows default notepad.exe if notepad++ is missing
-* Updated MediaInfo CLI to v24.01.1
-* Check for nukes and exits before reading
-* Add RetryPolicy to GetImdbInfoAsync
-
-**2.8**
-
-* Exclude translatedOtherStreamInfo if it same as AudioInfo or SubtitleInfo
-* Fixed settings changed checker
-* Fixed html headings
-
-**2.7.5**
-
-* Find and replace three or more newlines with a maximum of two
-* Check movieTitle and torrent's name missmatch
-* Option to turn off upload with mediainfo
-* Removed useless translate requests
-* Added new feature what allow to upload music/clip with mediaInfo
-* Fixed sample create method
-* Fixed MainForm torrentInfo's after upload terminated
-
-**2.7.4**
-
-* Fixed duplicated "forced" string in subtitle info
-* Fixed subtitle's title has bad character set
-* Fixed CreateTorrents form
-
-**2.7.3**
-
-* Add files to torrentCreate form
-* Implement DataModel's Identification (for better search)
-* Improve IsEbookFromTorrentAsync method
-* Improve IsTorrentContainsOnlyMediaFile method
-* Check if UserProvidedUploadTitle is contains MovieTitle
-* Check fileStream is exist before ask a question to download
-* Check NFO's & Torrent's size at read
-* RequestGameURL resize form by torrentDirectoryPath.Length
-* Exclude Menu info from series
-* Exclude HttpStatusCode.Forbidden from error log
-* Fixed AddCommentToTheTorrentAsync method
-* Fixed RequestExtraInfo when user wanna delete something
-
-**2.7.2**
-
-* Fixed UserProvidedUploadTitle when hun title found
-* Fixed RemoveItemAfterItFound method
-* Fixed duplicate requestMovieInfos form when imdbIDChanged
-* Fixed some null exceptions
-* Dont get steaminfos again after isImdbIDChanged
-* Add a request form if language is missing
-
-**2.7.1**
-
-* Add new method what count mediafiles without sample
-* Accept imdbID in RequestMovieInfos form
-* Check if userProvidedURL is valid url at RequestMovieInfos form
-* The user can specify the category in RequestMovieInfos form
-* Removed MediaInfo.Wrapper, use Xabe.FFmpeg instead
-* Improve IsTorrentContainsOnlyMediaFile method (it will check the local files exist)
-
-**2.7**
-
-* Fixed Auth test with comas
-* Fixed Unleashed's setup file
-* Update isFixOrUnlockerRegex with 'lang pack'
-* Add AppBundle to InstallInfo method (MacOS)
-* Read .torrent & NFO files directly to the memory instead of a local reference
-* Add "BOOKWARE" to program instead of ebook
-* Feature: !!!ready to upload movie/serie with mediainfo!!!
-* New settings options in Movie/Serie Uploader
-* Ask subtitle language if it included in the torrent
-
-**2.6.4**
-
-* Whoops fixed regex in gameCategory
-
-**2.6.3**
-
-* Fixed XrelAPI's "rating" variable (int to double)
-* Fixed IsRequestValid method
-* Improve TranslateString with auto lang detection
-* Translate genre only where needed
-* Adjust RequestMediaInfoLanguage form again (meh...)
-* Changed ExactRequestSearch to NotJustAnExactSearch (it update the settings.json so you should update your settings)
-
-**2.6.2**
-
-* Fix RequestMediaInfoLanguage form layout
-* Improve RequestMediaInfoLanguage methods
-* Implement new Feature: TranslateLanguageWithGoogle, default: false
-* Little code refactoring
-
-**2.6.1**
-
-* Whoops fixed log textbox colors
-* Bump QBittorrent.Client from 1.9.23340.1 to 1.9.23349.1
-
-**2.6**
-
-* Add "TRAiNER" string to filters
-* Implement xREL API (category and imdbID searches)
-* Read stored files from Torrent file
-* Improve setupFileSearch method if only one executable file found
-* Fix if nothing selected for torrentCreate
-* Update FoundMoreSetupFileChooser form
-* Remove the exist desktopShortcut before install
-* Update MediaInfo.dll to 23.11
-* Updated dependencies to the latest versions
-
-**2.5**
-
-* Remove any space from Releasename at exist check
-* Get changelog from gogAPI if changelog.txt missing
-* Validate Image what user selected
-* Remove whitespace in game descriptions
-* Add UploadTimeout (60s)
-* Add new feature: able to select multiple value for undo/saves
-* Add BallonNotification when program is minimized
-* Add request search for ebook's title
-* Fixed gameapibroken log message
-* Fixed NotificationFlash when foundTorrentsListBox is empty
-* Fixed RemoveFirstAndLastComa method
-* Fixed inappropriate game ID
-
-**2.4.1**
-
-* Added new MobileURLRegex
-* Fixed if any game api broken
-
-**2.4**
-
-* Fix SetupFileSearch
-* Fix if ImdbID missing but NFO has hun url
-* Add BOOKWARE to predbEbookCategory
-* Add ClickAble link when rls already exist
-* Update MediaInfo.dll to 23.09
-* Removed Timeout error logging
-
-**2.3.7**
-
-* Fixed game description after GameID removed
-* Fix MusicClip release's category
-
-**2.3.6**
-
-* Fix blank header picture in Clip category
-* Fix read buttons state
-* Improve category definition
-* Improve Imageset CoverPicture getting
-* Implement new Feature: get NFO from srrdb
-* Add NotificationFlash when form not active
-* Add ToolTip for selectedFolders
-
-**2.3.5**
-
-* predb.de changed to predb.net
-* Fixed some tipos
-* Fixed some cases when game category changed to console
-
-**2.3.4**
-
-* Fixed TooLongPath exceptions
-* Add flashing when got some error in upload
-* Add error message in TorrentCreate progress
-* Updater fixed - The previous version (2.3.3) throws an error when searching for a new version.
-
-**2.3.3**
-
-* Fixed deadlock when files to be deleted are in use
-* Check if program already running
-* Improve waitInSecondsBetweenUpload methods
-* Add existCheckBeforeReadIsFinished to Form's exit check
-* Add flashing when app is minimized
-* Change retryPolicy -&gt; except InternalServerError (it fixes predb.de errors)
-
-**2.3.2**
-
-* Fix upload button state when torrent already exist
-* Fix Thumbnail 3 image open
-* Fix updateChecking radio button state
-* Fix CheckRequestIsValid method
-* Add error string when found movie, but TMDB Api key is invalid
-* Add checks for video files if category is movie
-* Add checking to readProgress when form closing
-* Implement new searchType - Search by release groups
-* Get imdbID and hungarian plot from port.hu
-
-**2.3.1**
-
-* Added predb.club as a new pre site
-* Added check to qBittorrentWebUIAnswer's is valid
-* Fixed predb search query with a backup query
-* Added lossless file check in Music category
-* Fixed headerPictureBox ContextMenu
-* Added new feature: able to open every Thumbnails
-* Implement Exist check options (Right click)
-
-**2.3**
-
-* Fixed music description
-* Get genre and music infos with MediaInfo is success
-* Get ImdbLength from MediaInfo
-* Implement an Update checker
-* Trim last '/' char from OtherMovieDatabaseURL
-
-**2.2.2**
-
-* Improve request search with category match (exclude completed requests)
-* Correct otherDatabase url where hun title came from
-* Fixed createTorrents button state
-* Add nCoreDomain to settings form
-* Fixed null or empty genre in music
-* Fixed error exclamation mark when reconnect
-* Fixed IsSteamGame or IsGogGame states
-* Fiixed Hungarian category when MediaInfo lang is null
-* Added music description
-* Implement new settings form for Apps, Ebooks, Musics etc
-* Update MediaInfo DLL to v23.03
-* Fixed NumericUpDown text changed by user not triggered
-* Fixed PictureBoxContextMenu items at popup
-
-**2.2.1**
-
-* Fixed qBittorrentState method
-* Implement GenerateScreenshotsToDescription method
-* Implement Undo function
-* Function: able to set maxTries in bad pic detection
-
-**2.2**
-
-* Feature: GetAudioStreamAndSubtitles from videoStream
-* Add wmv file extension
-* Fix game pictures if screenshots is null
-* Update GetInfoFromTvmaze method
-* Fix MusicOrEbookGenre starts with dot
-* Prevent pure black thumbnails
-* Fix JustWatchAPI multiple imdbID-s
-* Add new settings option - Audio/Subtitle
-* Implement multi season request search
-* Add FFMpegConverter convertSettings to fix some rare error
-* Implement TorrentCreate form
-* Validate settings with jsonSchema
-
-**2.1.4**
-
-* Fix too long path
-* Add ExitConfirmation to settings
-* Trim movie/serie Descriptions
-
-**2.1.3**
-
-* Fix tvmaze hun title
-* Check WebContent if exists before upload
-
-**2.1.2**
-
-* Fixed imdbID when already found in NFO
-
-**2.1.1**
-
-* Replace first dot char in MusicOrEbook genre string
-* Fix tmdb api check in settingsvalider
-* Search tvmaze url in nfo to get hun title
-* Search movie database urls only once per movie
-
-**2.1**
-
-* Fix button states
-* Fix NullReferenceException in Attributes["data-ds-appid"] (Game category)
-* Improve ImdbSuggestionAPI search
-* Feature: check ImdbID is exist
-* Fix GetSearchValue trim last whitespace char
-* Fix Bluray disk's category
-* Add Warning message if foundTorrents listbox has value
-* Search tmdb url in NFO
-* Improve errorLogger with version number
-* Refactor webclients
-* Rmplement hungarian title from tvmaze's akas
-* Add able to skip/ignore tmdb error without reconnecting
-* Fix rightClick menu when check in progress
-* Check WatchFolder permissions and add log messages
-* Implement JustWatchAPI to search imdbID
-* Fix tvmaze GetShowAkasAsync method
-* Fix tmdbSearch with imdbID
-* Rewrite MovieAndSeries category's logic
-* Remove useless errorloggers
-* Fix if tmdb is ignored
-
-**2.0.1**
-
-* Fix RenameTorrentFiles
-* Updated TMDbLib to 2.0
-
-**2.0**
-
-* Fix RequestSearchString
-* Implement SrrdbAPI
-* Fix SetButtons method, change selectedIndex to selectedItem
-* Fix steamGame verificationText
-* New: able to choose another thumbnails in movie/serie category
-* Fix game search if game object is null
-* Add thumbnail chooser for XXX Videos
-* Fix tmdbAPI error message
-* Fix getSearchValueRegex
-* Improve searchTypeAutodeterminate
-* Implement able to add custom requestID
-* Fix IsNFOContainsGameURL to determinate category
-* Search year at port.hu and use it as criteria
-* Add XXX coverimage with CustomInfoBarImage
-* Fix NullReferenceException at SearchGameWithNameOnSteam
-* Implement Movies & Series & Games changeID
-* Fix: movieCategory - handle WebException NotFound & BadRequest
-* Improve AddOrChangeImdbID - checks for valid imdbID
-* Implement XXX Imageset search for cover pic
-* Add random XXX coverpicture if nothing found with keywords
-* Implement ThumbnailStep in movie settings
-
-**1.7**
-
-* Add search for port.hu url as other database
-* Try to optimize large imageFiles again
-* Fix XXX category log messages
-* Add more predbcategories (ask me if more needed)
-* Fix Thumbnail settings
-* Improve Checks for port.hu url
-* Change error color to red and regular to green
-* Fix multiSeriesPack's nfo
-* Implement GetEbookTagsByReleaseName
-* Create errorHTML for every errors
-* Add ebook verification url to the desc
-* Implement verification url prop to every possibilities
-* Fix ebook category InforbarImage
-
-**1.6.7 Hotfix / 1.6.6**
-
-* Check redicteredURL is valid
-* Fixed faulty negation
-
-**1.6.5**
-
-* Fix saveAllButton state
-* Implement CheckOtherMovieDatabaseURL (priorize port.hu or mafab from NFO)
-* Update game category where localfile was used
-* Optimize some ImageOperations & Log to XXX
-* Fixed Movie category - tmdb search
-* Remove XXX required thumbnails
-* Able to change Thumbnail positions
-* Add new regex what match with XXX-IMAGESET
-
-**1.6.4**
-
-* Check resolutionMatch is valid int
-* Check XXX thumbnails before save
-* Fix predbCategory is null
-* Fix predbCalls
-
-**1.6.3**
-
-* Added predb.de for backup site
-* Update resolutionRegex
-* Fix yearRegex and MovieTitle
-* Using await instead of .Result
-* DownloadStringWithPolly - async
-* AutoSize RemoveExistTorrent form
-* Implement RemoveTorrentAfterUploadFailed method
-* Add MessageBox Icon to uninstaller
-
-**1.6.2**
-
-* Fix when predb.ovh is down
-
-**1.6.1**
-
-* Fixed foundGame's name
-* Improve dateRegexInSeries
-* Add GetVerificationlinkFromNFO to XXX category
-* Implement Torrents.IsImageFromTorrent instead of Files
-* Handle if game categorized as movie
-* Implement CheckUploadProgress method
-* Fix same torrents with different names
-* Fix error if Directory isnt exist
-* Check movieYear property is valid
-* Improve nCore API Search query string
-* Music Cover primary is the FileSource
-* Improve predb API Search query string
-* Fix Lock() method null exception
-
-**1.6**
-
-* Fixed dateRegexInSeries
-* Add GetVerificationlinkFromNFO to XXX category
-* Using torrent's stored files instead of local files
-* Handle if game categorized as movie
-* Fixed same torrents with different names
-* Fix error if Directory does not exist
-* Store ExistCheck and AnonymousUpload states in settings
-* Check movieYear property is valid
-
-**1.5**
-
-* Fixed predb.ovh API 429 error
-* Fix thumbnail arrow buttons after reset
-* Fix Steam/GoG ID when its 0
-* Fix GetVerificationlinkFromNFO - NullReferenceException
-* Fix OtherMovieDatabaseURL
-* Add Movie&Series category null checks
-* Check if file locked by another process
-* Implement better webClient tries
-* Implement tinyurl reverse engineering
-* Fix StripNameString method if object is null
-* Fixed some typo
-
-**1.4**
-
-* Fixed GOG API data pulls
-* Implement Custom Image upload (right click)
-* Implement create torrent before read
-* Improved request search
-* Implement RequestMovieTitle method if movie title would be empty
-* Implement new Feature: AlwaysAddReleaseNameToDescription (settings)
-* Added TimeOut in qBittorrentClient
-* Lot of other fixes...
-
-**1.3**
-
-* Fixed Tools' directory
-* Stored log messages to separeted class
-* Added tests for TMDB API Key
-
-**1.2**
-
-* Some bug fixes
-* Code clean up
-* Changed Bencode.NET to MonoTorrent
-
-**1.1**
-
-* Many bug fixes
-
-**1.0**
-
-* Initial release
+<summary>🗂️ <strong>Korábbi verziók</strong> – 4.1.1 … 1.0</summary>
+
+### [4.1.1]
+
+#### Added
+
+- AutoUpload can retry the torrents it skipped for a missing category (the PreDB may learn the release minutes after the pre) - with the new Retry skipped (no category) button on the main window, or periodically with a delay and a maximum number of tries set in the Auto upload settings
+
+#### Changed
+
+- The main window shows how many torrents were skipped for other reasons
+
+### [4.1]
+
+#### Added
+
+- Optional API keys in the category settings - imgbb as a fallback image host when kek.sh does not answer, and a Google Books key for ebooks; an invalid key is reported once and the app continues without it
+- Music without an embedded cover gets its album cover from MusicBrainz and the Cover Art Archive
+- Every external request works behind a system or corporate proxy (Windows sign-in for NTLM/Negotiate proxies), including the Epic store and NFO downloads; local network addresses bypass the proxy
+- More categories are recognized from the release name and the torrent's files, and non-original releases are categorized by the nCore naming rules
+- The nCore exist check runs before the PreDB lookup, so a torrent already on nCore is skipped without PreDB requests
+- Without a TMDB API key the app asks whether movie and series uploads should continue without TMDB; AutoUpload continues without TMDB when the key is invalid
+- Tab / Shift+Tab steps through the dialog fields in on-screen order
+- The qBittorrent Done and Working categories are chosen from a drop-down list of the client's categories
+- Progress bars show that work is ongoing (a shimmer, and a moving bar when the size is unknown)
+- A fresh install starts with the Simple interface when the Modern window does not fit the screen
+
+#### Changed
+
+- The installer is about 17 MB instead of 67 MB: MultiUploader runs on the .NET 10 Desktop Runtime installed on the computer; if it is missing, the installer downloads and installs it from Microsoft once, and Windows Update keeps it up to date
+- Ebooks fall back to Open Library when Google Books has no data
+- Update, FFmpeg, MediaInfo and kek.sh transfers retry on temporary server errors; FFmpeg is downloaded from gyan.dev when GitHub does not serve the package
+- A source that keeps failing is written to ERROR.log once; a single failure is not
+- Framed NFO links broken across lines are joined
+- The Light/Dark row is hidden when the Simple interface is chosen
+- Bump Microsoft.Web.WebView2 to 1.0.4258.31
+
+#### Fixed
+
+- Epic Games Store: the name search works again, and newer Epic products get their description, images and system requirements; when a game store fails, the other stores are tried in the search order
+- A DLC release always gets the data of its base game; a collector's edition marker no longer stops the game search
+- Mafab series without a year are found, and the port.hu year check works again
+- The log stays scrollable during a delayed exit; the description no longer comes up fully selected
+- The Corrupt-Net nuke check found nothing
+- The qBittorrent automatic setup kept asking for qBittorrent.ini when qBittorrent runs with an empty --profile=
+- A non-disc release in the DVDR PreDB section (e.g. a magazine DVD) was taken for a movie
+- Drop-down lists flashed when their items changed; open windows did not fully follow a live light/dark switch
+- The MultiUploader comment was missing from a torrent when another program briefly held the .torrent file
+
+#### Security
+
+- The browser nCore login no longer sends the visited addresses to SmartScreen; the saved upload error page also hides the nCore API token
+
+### [4.0]
+
+#### Added
+
+- Modern interface - themed controls, a card layout, Settings with a side menu, designed dialogs and a dark mode that switches without a restart; the Simple interface can still be chosen with the Interface switch in Settings
+- The interface language is chosen in Settings from `language_<code>.json` files
+- qBittorrent WebUI is set up automatically from Settings; the WebUI and the watch folder mode can be switched without Clear Settings
+- Update installers are verified with a publisher signature before they start, on both interfaces (AutoUpdater.NET removed)
+- A manually given IMDb ID can be saved to the static IMDb IDs
+- Answered prompts are remembered across re-reads and ID or category changes, including the Movie/Series question
+- Manual category selection asks for every release
+- Removing a torrent from the list asks for confirmation; Tab / Shift+Tab steps through the active list in a circle; saving keeps the reading order
+- Ebook sample images are taken from the text pages
+- The IMDb plot is the last fallback for the description
+
+#### Changed
+
+- Runs on .NET 10; the installer brings its own runtime, so no separate .NET install is needed
+- HEVC thumbnails are decoded on the GPU; HDR and Dolby Vision thumbnails are tone-mapped
+- Faster torrent hashing with one sequential reader and parallel hashers; the Corrupt-Net lookup and the upload image preparation run during waits
+- GOG system requirements without empty blocks, addon releases uploaded as updates; symbol-bulleted store paragraphs become a BBCode list
+- The sample size limit is set in MB instead of GB
+- The log window shows only the time and a dot separator before each line
+- The rule-required parts of an upload without NFO stay on regardless of the switches
+- An exhausted Google Books daily quota is no longer retried for a minute per ebook; the host is skipped until the quota resets
+- An unreachable nCore in the settings check is no longer written to ERROR.log
+
+#### Fixed
+
+- Windows are scaled correctly across monitors with different DPI
+- Includes the 3.6.1 fixes: the main window stays responsive while FFmpeg is installed and while images are processed
+- The exist check again removes the same-name torrent from any category
+- Every Hungarian letter of the nCore rank is read correctly
+- Overlapping and squeezed dialog layouts
+- The findings of two full code reviews (data safety, lifecycle, security and correctness)
+
+### 3.6.1
+
+#### Changed
+
+- The last version for .NET Framework 4.8; the next version runs on .NET 10
+- The previous nCore browser login profile is deleted in the background when the login window opens
+
+#### Fixed
+
+- The main window stays responsive while FFmpeg or the MediaInfo CLI is being installed
+- Screenshots, thumbnails and cover images are processed off the UI thread, so the main window no longer freezes during reading and uploading
+
+### [3.6]
+
+#### Added
+
+- itch.io and Big Fish Games support - a game is imported from its store link (never by a name search); a Big Fish link for the other platform is swapped to the release's Windows or Mac version
+- itch.io and Big Fish search links in the game URL dialog
+- Epic release group list in the game search settings; the message that blocks the save names every group listed for two stores
+- "Search only on Epic" and store-order search types (Steam → GoG → Epic, GoG → Steam → Epic, Epic → Steam → GoG); every store is searched at most once per release
+- The category group is decided from the release name and the torrent's files before the predb chain (music videos, MDVDR/MViD, XXX releases with a full date, retro console tokens, packed eBook releases)
+- Every categorized torrent is checked for a nuke on Corrupt-Net, and its section is the last category source when every predb site fails
+- A non-scene upload of an IMDb sports broadcast unknown to TVmaze (e.g. UFC) is uploaded as a sports event
+- The app reconnects by itself when the network comes back; AutoUpload retries the connection and switches itself off after the Max reconnect attempts setting
+- The video snapshots are taken concurrently; Parallel ffmpeg snapshots setting (1-8, default 3) on the Thumbnail picture settings
+
+#### Changed
+
+- Faster connections on every network: IPv4 is used where it is reachable instead of waiting 21 seconds on a broken IPv6 path, unresponsive server addresses are skipped, up to 8 connections per host, TLS 1.3 where Windows supports it, and a fast connection failure of a GET request is retried once
+- Infobar English title: the TVmaze/TMDB English name comes before the IMDb primary title (Broken Lives instead of Kirik Hayatlar); a foreign release without a Hungarian title keeps its original title in the Eredeti/magyar field
+- Fewer requests: the Hungarian and English TMDb data are requested together, the decoded torrent and NFO are reused, downloaded images are cached, and the nCore request page is searched once per release name
+- An unknown predb section is a normal miss instead of a red log line; a gyan.dev checksum outage is no longer written to ERROR.log
+- The rate-limit line of the log file names the release that triggered it; stack traces no longer contain build machine paths
+
+#### Fixed
+
+- A torrent whose comment already carries the MultiUploader signature is no longer rewritten on every read
+- With the exact-only request setting a Linux or Mac release could match the Windows request
+- An unnuked release was offered for removal as nuked (Corrupt-Net, predb.club)
+- The game thumbnail arrows were enabled when the store had no other picture to step to
+
+### [3.5]
+
+#### Added
+
+- Epic Games Store support - a game is imported from its store link or slug with full metadata, and a store search runs when there is no link
+- Epic search link in the game URL dialog, next to the Steam and GOG ones
+- The infobar titles (English, Hungarian, original) and the IMDb title search come from the IMDb GraphQL API; the nCore imdb_movie helper is only a fallback
+- An IMDb id that comes from another database is verified against IMDb itself; an id from the NFO or typed by hand stays final
+- API responses are cached for the session, so the same data is not queried twice during a run
+- Long category reads report their progress periodically
+- The Settings form shows a loading indicator during the exist check that runs before a read
+
+#### Changed
+
+- Oversized kek.sh screenshots are uploaded as high-quality JPEG instead of being dropped
+- Images above the pixel limit are resized instead of rejected
+- NFO database links are the primary source, dropped only when their title is foreign to the release
+- Game search: punctuation-free similarity, never a demo, the patch notes link of the loaded game, Steam apps only
+- The HTTP retry policy was rewritten on Polly v8 and honours Retry-After
+- A TMDb HTTP error counts as a miss instead of an ERROR.log entry
+- The "Still working on" log line pauses while a modal form waits for an answer; the game ID request labels are left-aligned
+- Interlaced video is read from the ffprobe field_order (FFMpegCore 5.5.0)
+- Bump FFMpegCore to 5.5.0, Polly.Core to 8.8.0 (instead of the Polly shim package) and xunit.v3 to 4.0.1
+
+#### Fixed
+
+- The infobar English title no longer carries the network name of a show (Dateline NBC to Dateline), and the same title no longer fills two infobar fields
+- Right-click on an already selected torrent no longer reloads its images
+- An unknown ffprobe video size classified the release as SD
+- The qBittorrent test overwrote the result icon of the authentication test
+- Left-over Hungarian and incorrect English UI and log strings
+- Fixed six findings of a full code audit: the log link cache grew without a bound, an unreadable torrent threw instead of skipping the sample, a single-file torrent's stored path was resolved wrongly, the error log did not redact api_key=, a corrupt secret swallowed every exception, and an abandoned single-instance mutex crashed the start
+
+### [3.4]
+
+#### Added
+
+- Browser login in Settings - the nCore cookie, passkey and API token are filled in automatically (the WebView2 runtime is installed on demand)
+- Hungarian plot from mafab.hu and JustWatch; JustWatch moved to its GraphQL API (the old lookups no longer found anything)
+- Sports events are recognised (TVmaze Sports shows, PreDB section) and uploaded to series categories, with the infobar filled in per the nCore wiki
+- Non-scene (NFO-less) uploads are looked up on TVmaze, IMDb and TMDB too; a release identified as a movie by a database id becomes a series when TVmaze knows the show
+- The disc image category (HD/DVD/DVD9) and the music category (MP3/lossless) are decided from the files; a lossless release without real lossless files is skipped
+- Delayed Exit option on the exit confirmation - the app closes by itself once the running read, upload or torrent creation finishes
+- Add/Change genre in the right-click menu for ebook and music torrents
+- AutoUpload checks for updates periodically during long runs (Check for updates every N hours, default 24)
+- Every text the app displays is translatable through translation.json; lines left in English also receive later English corrections
+- Automatic piece length goes up to 16 MiB, 32/64/128 MiB can be chosen manually (with a caution note)
+- Added Microsoft.Web.WebView2 1.0.4191.47
+
+#### Changed
+
+- The Would upload as preview shows the resolved category (e.g. Movies HD)
+- Samples are recognised by their Sample/Minta folder; a single-file release is moved into a folder named after the file
+- Game search finds names that write + as Plus and shortens update/trainer names; a store title with a different sequel number is refused
+- Movie/series matching leaves a release unmatched rather than accepting a doubtful candidate
+- The torrent creation progress dialog is modal and can be minimized
+- The connection test validates the passkey from the profile page instead of downloading a torrent
+- Settings are validated live (nCore domain, qBittorrent WebUI address, folders); a secret that cannot be decrypted is kept instead of being overwritten, and settings.json is written atomically
+- An infobar picture or screenshot that cannot be downloaded is left out with a warning instead of failing the whole upload
+- Clearer nCore error messages (expired cookie/token, rate limit, server error with its code)
+- Installer: correct version number, asks to close the running app, always removes previous versions (including the old MSI installs)
+- Performance: each torrent is decoded once per release, fewer folder walks, one AutoUpload timer across reconnects
+- Replaced F23.StringSimilarity, LazZiya.ImageResize, Syroot.Windows.IO.KnownFolders and TvMaze.Api.Client with built-in code
+- Newtonsoft.Json.Schema replaced by NJsonSchema 11.6.1 (MIT license)
+- Bump SharpCompress from the unlisted 1.0.0 build to 0.50.4
+
+#### Fixed
+
+- Dialogs: long release names wrap instead of being cut off or pushing the window off the screen, controls are centered, texts are no longer clipped
+- Tab no longer moves the focus between controls, and forms open without a fully selected text box
+- Fixed AutoUpload hanging on a message box, not stopping after deciding to skip a release, and releasing the locks of saved items too early
+- Fixed single-file torrents being deleted during the NFO search and a wrong upload success detection
+- Fixed many category, genre, infobar title, TMDB/TVmaze and game lookup issues found by a full code audit
+- Reliability: every external tool call has a timeout; settings, NFO, torrent and tool files are written through temp files; a stale temp.lock left by a crash is removed; the log no longer corrupts non-ASCII text and the newest log archives are kept
+
+#### Security
+
+- NFO links and every redirect are validated (no private/loopback addresses), download and archive sizes are capped, API keys and the passkey are redacted from the error log, the downloaded MediaInfo CLI and WebView2 installer are verified before running
+
+### [3.3]
+
+#### Added
+
+- Automatic sample thumbnails for ebooks (PDF, EPUB, CBZ, CBR, FB2, MOBI, AZW, AZW3, PRC, DOCX, XPS, OXPS, TXT, HTM, HTML)
+- MOBI/AZW/AZW3/PRC ebooks also set the infobar image from the file's embedded cover
+- Nuked torrents now show a dedicated nuke icon
+- Interlaced video is now detected and marked (1080i) in the upload title
+- Added 11 additional language name mappings
+- Added passkey validation to the connection test
+- Added a warning log when an animated image is selected as the infobar picture
+
+#### Changed
+
+- AutoUpload settings now validate skip-option values, pruning invalid ones
+- Blockquotes are now stripped from Markdown descriptions too
+- The "Too many requests" retry log line now names which site is rate-limiting
+- Centralized UI text into one place; small explorer.exe/URL/Auth fixes
+- Cleaned up redundant audio/subtitle stream labels
+- Re-enabled the torrent creation progress bar, now with real cancellation support
+- Rewrote the FFmpeg auto-downloader to use the GitHub Releases API with dual hash verification
+- Switched translation to GTranslate with automatic fallback and caching
+- All auth errors are now logged during Test Connection too
+- Better handling of a mistyped nCore username or invalid domain
+- qBittorrent WebUI: torrents are now sent as a file instead of by URL
+
+#### Fixed
+
+- Fixed the found-request name link in the log unreliably jumping to/selecting the matching item, including a case where it could leave both lists selected at once
+- Fixed NFO URL extraction truncating URLs that contain accented/non-ASCII characters or other valid URL symbols (parentheses, brackets, etc.)
+- Selecting an already-selected item in the list no longer redundantly re-fetches/re-renders its data
+- Fixed a NullReferenceException in Logger.LogToForm when the form isn't available yet
+- Fixed the thumbnail percentage display for movie/serie thumbnails
+- Read/upload controls now stay disabled for the entire duration of a read
+- Fixed the IMDb ID cache never actually persisting; added 429 backoff and a rate-limit cooldown for hosts that keep throttling
+- Fixed an NFO line-ending bug that truncated wrapped URLs
+- Settings dialog now only asks once whether to keep changes when closing
+- Fixed a NullReferenceException when testing the connection with an invalid cookie pass
+- Fixed dynamic content being lost due to the localization system
+- Fixed localization overwriting runtime values set by Load handlers
+- Fixed AutoUpload using the description template even for empty uploads
+- Fixed 401/403 authentication errors being silently swallowed
+
+### [3.2]
+
+#### Added
+
+- New feature: release-group-specific install info overrides
+- New setting: disable IMDb/TVmaze/TMDB search entirely, and always ask for Movie/Series category
+- AutoUpload: new option to upload a game empty when no game link is found
+- UI text is now community-translatable
+- Installer is now available in multiple languages
+
+#### Changed
+
+- Recognize language packs more reliably in search value/update matching
+- Force TLS 1.2 on outgoing requests; fixed a null-reference in GOG changelog parsing
+- MediaInfo.exe is now launched directly instead of via PowerShell hosting
+- Audio/subtitle track titles now have accents stripped for normalization
+- Rewrote media analysis on top of FFMpegCore instead of Xabe.FFmpeg/NReco.VideoConverter
+- Fetch TMDB data with append_to_response instead of separate endpoint calls (fewer requests per torrent)
+- qBittorrent client now reuses its session instead of logging in on every call
+- Now reusing a single shared HttpClient instead of creating a new one per request
+- Music torrents are now decoded once per release instead of repeatedly
+- Video file search now does 1 directory walk instead of 4
+- Increased the regex cache size (94 patterns vs. the built-in 15-slot cache)
+- Log file's daily header check and old-log archiving now run once a day instead of on every line
+- Bump HtmlAgilityPack from 1.11.72 to 1.13.0
+- Bump Polly from 8.5.1 to 8.7.0
+- Bump MonoTorrent from 2.0.7 to 3.0.2
+- Bump ReverseMarkdown from 4.6.0 to 6.2.1
+- Bump F23.StringSimilarity from 5.1.0 to 7.0.1
+- Bump UTF.Unknown from 2.5.1 to 2.7.0
+- Bump Xabe.FFmpeg.Downloader from 5.2.6 to 6.0.2
+- Bump TMDbLib from 2.2.0 to 2.3.0
+
+#### Fixed
+
+- Fixed XXX cover picture upload
+- Fixed saved torrents' request ID
+- Fixed newlines in Movie/Serie description
+- Fixed several Movie/Series lookup bugs: wrong endpoint used for alternate titles on some branches, year filter throwing on dateless matches, last TMDB match always picked when no IMDb ID was found, missing flag when the IMDb ID came from TMDB, language code compared against country code
+- 429 Too Many Requests responses were never actually retried (and got logged as real errors)
+- A single shared 30s timeout could cut off an entire retry chain
+- nCore cover image could get overwritten by a smaller TVmaze/TMDB image
+- Fixed a memory leak in the log window (torrent name/ID links no longer pile up as controls)
+- Fixed AutoUpload getting stuck after an exception instead of resuming on the next cycle
+- Fixed 3 range/index calculation bugs (e.g. episode range/gap detection)
+- Fixed several swallowed NullReferenceExceptions caused by missing null checks
+- Fixed 4 cases of swapped/mistyped variable references
+- Fixed a Bitmap handle leak, a stack-trace-losing rethrow, and a file write that didn't truncate old content
+- TMDbClient instances were never disposed, accumulating over time
+- Fixed screenshot large-file counting and a missed folder scan
+- Fixed a bias in random picture index selection
+- Fixed 2 bugs in the non-TMDB search branches (an nCore 404 wrongly logged as an error; a swallowed NullReferenceException in the JustWatch lookup)
+- Fixed several Installer.iss bugs; the installer is now built (and translated) in CI too
+- Fixed a PowerShell injection risk and broken TMDB genre building
+- Fixed FFprobe output being read with the wrong codepage for accented filenames
+
+#### Security
+
+- Sensitive settings (API keys, passwords) are now encrypted with Windows DPAPI instead of stored in plain text
+
+### [3.1]
+
+#### Added
+
+- Implement a MediaInfoHelper to get up-to-date MediaInfo version
+- New feature: generate infobar pic from XXX movie
+
+#### Changed
+
+- Update builtin MediaInfo to v24.12
+- Update Logger method to maximize the entries (50 in form)
+- Bump Polly from 8.5.0 to 8.5.1
+- Filter setup files when AutoUpload is running
+- Validate year variables in Movie/Serie category
+- Improve otherSubtitleInfos
+- Improve Steam & GoG game search APIs
+- Exclude Polly's TimeoutRejectedException
+- Processing of all links in NFO, in the game category
+- Use HttpClient instead of WebClient
+- Now Auth test also test the nCore API token
+
+#### Fixed
+
+- Fixed port.hu url duplicate at infobar
+- Fixed filtering non-latin characters
+- Fixed log dates & log to file
+- Fixed empty Audio/Subtitle streams at description
+- Fixed Controls' state when AutoUpload mode enabled
+
+### [3.0.2]
+
+#### Added
+
+- Implemented AutoUploadSkipList at settings
+
+### [3.0.1]
+
+#### Fixed
+
+- Hotfix serie category
+
+### [3.0]
+
+#### Added
+
+- New feature: AutoUpload! **(Since it cyclically polls the contents of the folder, it is possible that the antivirus will give you a false alarm!)**
+
+#### Changed
+
+- Optimize CreateTorrent method
+- Check if an NFO file exists in the torrent file. If it doesn't, recreate it
+- Rewrite the ExistChecker method
+- Exclude bad torrent file, and remove it
+- Bump HtmlAgilityPack from 1.11.64 to 1.11.72
+- Bump Polly from 8.4.1 to 8.5.0
+- Bump QBittorrent.Client from 1.9.23349.1 to 1.9.24285.1
+
+#### Fixed
+
+- Fixed music description if performers more than one
+- Fixed a mistake in the request search
+- Fixed form start positions
+- Fixed the UpdateTorrentInfo() method
+
+### [2.9]
+
+#### Added
+
+- Implemented a new method that checks for empty (zero-byte) files in torrents
+- Implemented a new method that checks if a series is incomplete, then pops up a warning
+
+#### Changed
+
+- Improved GogGame data model handling
+- Rewrite the ExistChecker method
+- Error logging for 502 Bad Gateway errors has been turned off
+- Updated MediaInfo CLI to 24.06
+
+#### Fixed
+
+- Fixed a mistake in the request search
+- Fixed the bookware category in predb
+- Fixed the UpdateTorrentInfo() method
+
+### [2.8.3]
+
+#### Added
+
+- Implement new feature what search local file in NFO
+
+#### Changed
+
+- Set application icon
+- Show exist form instead of warning message when app is already running
+- Get url from NFO in game category when upload as empty
+- Requests: check Linux or Mac in request titles - match with game type
+- Remove music description if cannot get any data from files
+- Improve post to kek.sh
+- Get the best quality picture from GOG api
+- Ignore country code in stream (Audio/Subtitle) title
+- Updated dependencies - [ReverseMarkdown from 4.3.0 to 4.4.0], [Newtonsoft.Json.Schema from 3.0.15 to 3.0.16], [Polly from 8.3.0 to 8.4.0], [Autoupdater.NET.Official from 1.8.5 to 1.8.6], [HtmlAgilityPack from 1.11.59 to 1.11.61], [TMDbLib from 2.1.0 to 2.2.0]
+
+#### Fixed
+
+- Fix torrent create form
+- Fixed torrents with multiple NFOs
+
+### [2.8.2]
+
+#### Fixed
+
+- Fixed the error when there are several soundtracks, but one of them is Hungarian
+
+### [2.8.1]
+
+#### Added
+
+- Add open TechInfo file button (same as Open NFO) it uses windows default notepad.exe if notepad++ is missing
+- Add RetryPolicy to GetImdbInfoAsync
+
+#### Changed
+
+- Updated MediaInfo CLI to v24.01.1
+- Check for nukes and exits before reading
+
+#### Fixed
+
+- Fixed Flurl.Http.FlurlHttpException in TVmaze API
+- Fixed url in GoG changelog
+- Fixed non-release infobar
+- Fixed music performer value in description
+
+### [2.8]
+
+#### Changed
+
+- Exclude translatedOtherStreamInfo if it same as AudioInfo or SubtitleInfo
+
+#### Fixed
+
+- Fixed settings changed checker
+- Fixed html headings
+
+### [2.7.5]
+
+#### Added
+
+- Option to turn off upload with mediainfo
+- Added new feature what allow to upload music/clip with mediaInfo
+
+#### Changed
+
+- Find and replace three or more newlines with a maximum of two
+- Check movieTitle and torrent's name missmatch
+
+#### Removed
+
+- Removed useless translate requests
+
+#### Fixed
+
+- Fixed sample create method
+- Fixed MainForm torrentInfo's after upload terminated
+
+### [2.7.4]
+
+#### Fixed
+
+- Fixed duplicated "forced" string in subtitle info
+- Fixed subtitle's title has bad character set
+- Fixed CreateTorrents form
+
+### [2.7.3]
+
+#### Added
+
+- Add files to torrentCreate form
+- Implement DataModel's Identification (for better search)
+
+#### Changed
+
+- Improve IsEbookFromTorrentAsync method
+- Improve IsTorrentContainsOnlyMediaFile method
+- Check if UserProvidedUploadTitle is contains MovieTitle
+- Check fileStream is exist before ask a question to download
+- Check NFO's & Torrent's size at read
+- RequestGameURL resize form by torrentDirectoryPath.Length
+- Exclude Menu info from series
+- Exclude HttpStatusCode.Forbidden from error log
+
+#### Fixed
+
+- Fixed AddCommentToTheTorrentAsync method
+- Fixed RequestExtraInfo when user wanna delete something
+
+### [2.7.2]
+
+#### Added
+
+- Add a request form if language is missing
+
+#### Changed
+
+- Dont get steaminfos again after isImdbIDChanged
+
+#### Fixed
+
+- Fixed UserProvidedUploadTitle when hun title found
+- Fixed RemoveItemAfterItFound method
+- Fixed duplicate requestMovieInfos form when imdbIDChanged
+- Fixed some null exceptions
+
+### [2.7.1]
+
+#### Added
+
+- Add new method what count mediafiles without sample
+- The user can specify the category in RequestMovieInfos form
+
+#### Changed
+
+- Accept imdbID in RequestMovieInfos form
+- Check if userProvidedURL is valid url at RequestMovieInfos form
+- Improve IsTorrentContainsOnlyMediaFile method (it will check the local files exist)
+
+#### Removed
+
+- Removed MediaInfo.Wrapper, use Xabe.FFmpeg instead
+
+### [2.7]
+
+#### Added
+
+- Add AppBundle to InstallInfo method (MacOS)
+- Add "BOOKWARE" to program instead of ebook
+- !!!ready to upload movie/serie with mediainfo!!!
+- New settings options in Movie/Serie Uploader
+
+#### Changed
+
+- Update isFixOrUnlockerRegex with 'lang pack'
+- Read .torrent & NFO files directly to the memory instead of a local reference
+- Ask subtitle language if it included in the torrent
+
+#### Fixed
+
+- Fixed Auth test with comas
+- Fixed Unleashed's setup file
+
+### [2.6.4]
+
+#### Fixed
+
+- Whoops fixed regex in gameCategory
+
+### [2.6.3]
+
+#### Changed
+
+- Improve TranslateString with auto lang detection
+- Translate genre only where needed
+- Adjust RequestMediaInfoLanguage form again (meh...)
+- Changed ExactRequestSearch to NotJustAnExactSearch (it update the settings.json so you should update your settings)
+
+#### Fixed
+
+- Fixed XrelAPI's "rating" variable (int to double)
+- Fixed IsRequestValid method
+
+### [2.6.2]
+
+#### Added
+
+- Implement new Feature: TranslateLanguageWithGoogle, default: false
+
+#### Changed
+
+- Improve RequestMediaInfoLanguage methods
+- Little code refactoring
+
+#### Fixed
+
+- Fix RequestMediaInfoLanguage form layout
+
+### [2.6.1]
+
+#### Changed
+
+- Bump QBittorrent.Client from 1.9.23340.1 to 1.9.23349.1
+
+#### Fixed
+
+- Whoops fixed log textbox colors
+
+### [2.6]
+
+#### Added
+
+- Add "TRAiNER" string to filters
+- Implement xREL API (category and imdbID searches)
+
+#### Changed
+
+- Read stored files from Torrent file
+- Improve setupFileSearch method if only one executable file found
+- Update FoundMoreSetupFileChooser form
+- Remove the exist desktopShortcut before install
+- Update MediaInfo.dll to 23.11
+- Updated dependencies to the latest versions
+
+#### Fixed
+
+- Fix if nothing selected for torrentCreate
+
+### [2.5]
+
+#### Added
+
+- Add UploadTimeout (60s)
+- Add new feature: able to select multiple value for undo/saves
+- Add BallonNotification when program is minimized
+- Add request search for ebook's title
+
+#### Changed
+
+- Remove any space from Releasename at exist check
+- Get changelog from gogAPI if changelog.txt missing
+- Validate Image what user selected
+- Remove whitespace in game descriptions
+
+#### Fixed
+
+- Fixed gameapibroken log message
+- Fixed NotificationFlash when foundTorrentsListBox is empty
+- Fixed RemoveFirstAndLastComa method
+- Fixed inappropriate game ID
+
+### [2.4.1]
+
+#### Added
+
+- Added new MobileURLRegex
+
+#### Fixed
+
+- Fixed if any game api broken
+
+### [2.4]
+
+#### Added
+
+- Add BOOKWARE to predbEbookCategory
+- Add ClickAble link when rls already exist
+
+#### Changed
+
+- Update MediaInfo.dll to 23.09
+
+#### Removed
+
+- Removed Timeout error logging
+
+#### Fixed
+
+- Fix SetupFileSearch
+- Fix if ImdbID missing but NFO has hun url
+
+### [2.3.7]
+
+#### Fixed
+
+- Fixed game description after GameID removed
+- Fix MusicClip release's category
+
+### [2.3.6]
+
+#### Added
+
+- Implement new Feature: get NFO from srrdb
+- Add NotificationFlash when form not active
+- Add ToolTip for selectedFolders
+
+#### Changed
+
+- Improve category definition
+- Improve Imageset CoverPicture getting
+
+#### Fixed
+
+- Fix blank header picture in Clip category
+- Fix read buttons state
+
+### [2.3.5]
+
+#### Changed
+
+- predb.de changed to predb.net
+
+#### Fixed
+
+- Fixed some tipos
+- Fixed some cases when game category changed to console
+
+### [2.3.4]
+
+#### Added
+
+- Add flashing when got some error in upload
+- Add error message in TorrentCreate progress
+
+#### Fixed
+
+- Fixed TooLongPath exceptions
+- Updater fixed - The previous version (2.3.3) throws an error when searching for a new version.
+
+### [2.3.3]
+
+#### Added
+
+- Add existCheckBeforeReadIsFinished to Form's exit check
+- Add flashing when app is minimized
+
+#### Changed
+
+- Check if program already running
+- Improve waitInSecondsBetweenUpload methods
+- Change retryPolicy -&gt; except InternalServerError (it fixes predb.de errors)
+
+#### Fixed
+
+- Fixed deadlock when files to be deleted are in use
+
+### [2.3.2]
+
+#### Added
+
+- Add error string when found movie, but TMDB Api key is invalid
+- Add checks for video files if category is movie
+- Add checking to readProgress when form closing
+- Implement new searchType - Search by release groups
+- Get imdbID and hungarian plot from port.hu
+
+#### Fixed
+
+- Fix upload button state when torrent already exist
+- Fix Thumbnail 3 image open
+- Fix updateChecking radio button state
+- Fix CheckRequestIsValid method
+
+### [2.3.1]
+
+#### Added
+
+- Added predb.club as a new pre site
+- Added check to qBittorrentWebUIAnswer's is valid
+- Added lossless file check in Music category
+- Added new feature: able to open every Thumbnails
+- Implement Exist check options (Right click)
+
+#### Fixed
+
+- Fixed predb search query with a backup query
+- Fixed headerPictureBox ContextMenu
+
+### [2.3]
+
+#### Added
+
+- Implement an Update checker
+
+#### Changed
+
+- Get genre and music infos with MediaInfo is success
+- Get ImdbLength from MediaInfo
+- Trim last '/' char from OtherMovieDatabaseURL
+
+#### Fixed
+
+- Fixed music description
+
+### 2.2.2
+
+#### Added
+
+- Add nCoreDomain to settings form
+- Added music description
+- Implement new settings form for Apps, Ebooks, Musics etc
+
+#### Changed
+
+- Improve request search with category match (exclude completed requests)
+- Correct otherDatabase url where hun title came from
+- Update MediaInfo DLL to v23.03
+
+#### Fixed
+
+- Fixed createTorrents button state
+- Fixed null or empty genre in music
+- Fixed error exclamation mark when reconnect
+- Fixed IsSteamGame or IsGogGame states
+- Fixed Hungarian category when MediaInfo lang is null
+- Fixed NumericUpDown text changed by user not triggered
+- Fixed PictureBoxContextMenu items at popup
+
+### 2.2.1
+
+#### Added
+
+- Implement GenerateScreenshotsToDescription method
+- Implement Undo function
+- Function: able to set maxTries in bad pic detection
+
+#### Fixed
+
+- Fixed qBittorrentState method
+
+### 2.2
+
+#### Added
+
+- GetAudioStreamAndSubtitles from videoStream
+- Add wmv file extension
+- Add new settings option - Audio/Subtitle
+- Implement multi season request search
+- Add FFMpegConverter convertSettings to fix some rare error
+- Implement TorrentCreate form
+
+#### Changed
+
+- Update GetInfoFromTvmaze method
+- Prevent pure black thumbnails
+- Validate settings with jsonSchema
+
+#### Fixed
+
+- Fix game pictures if screenshots is null
+- Fix MusicOrEbookGenre starts with dot
+- Fix JustWatchAPI multiple imdbID-s
+
+### 2.1.4
+
+#### Added
+
+- Add ExitConfirmation to settings
+
+#### Changed
+
+- Trim movie/serie Descriptions
+
+#### Fixed
+
+- Fix too long path
+
+### 2.1.3
+
+#### Changed
+
+- Check WebContent if exists before upload
+
+#### Fixed
+
+- Fix tvmaze hun title
+
+### 2.1.2
+
+#### Fixed
+
+- Fixed imdbID when already found in NFO
+
+### 2.1.1
+
+#### Changed
+
+- Replace first dot char in MusicOrEbook genre string
+- Search tvmaze url in nfo to get hun title
+- Search movie database urls only once per movie
+
+#### Fixed
+
+- Fix tmdb api check in settingsvalider
+
+### 2.1
+
+#### Added
+
+- Check ImdbID is exist
+- Add Warning message if foundTorrents listbox has value
+- Implement hungarian title from tvmaze's akas
+- Add able to skip/ignore tmdb error without reconnecting
+- Implement JustWatchAPI to search imdbID
+
+#### Changed
+
+- Improve ImdbSuggestionAPI search
+- Search tmdb url in NFO
+- Improve errorLogger with version number
+- Refactor webclients
+- Check WatchFolder permissions and add log messages
+- Rewrite MovieAndSeries category's logic
+
+#### Removed
+
+- Remove useless errorloggers
+
+#### Fixed
+
+- Fix button states
+- Fix NullReferenceException in Attributes["data-ds-appid"] (Game category)
+- Fix GetSearchValue trim last whitespace char
+- Fix Bluray disk's category
+- Fix rightClick menu when check in progress
+- Fix tvmaze GetShowAkasAsync method
+- Fix tmdbSearch with imdbID
+- Fix if tmdb is ignored
+
+### 2.0.1
+
+#### Changed
+
+- Updated TMDbLib to 2.0
+
+#### Fixed
+
+- Fix RenameTorrentFiles
+
+### 2.0
+
+#### Added
+
+- Implement SrrdbAPI
+- Able to choose another thumbnails in movie/serie category
+- Add thumbnail chooser for XXX Videos
+- Implement able to add custom requestID
+- Add XXX coverimage with CustomInfoBarImage
+- Implement Movies & Series & Games changeID
+- Implement XXX Imageset search for cover pic
+- Add random XXX coverpicture if nothing found with keywords
+- Implement ThumbnailStep in movie settings
+
+#### Changed
+
+- Improve searchTypeAutodeterminate
+- Search year at port.hu and use it as criteria
+- Improve AddOrChangeImdbID - checks for valid imdbID
+
+#### Fixed
+
+- Fix RequestSearchString
+- Fix SetButtons method, change selectedIndex to selectedItem
+- Fix steamGame verificationText
+- Fix game search if game object is null
+- Fix tmdbAPI error message
+- Fix getSearchValueRegex
+- Fix IsNFOContainsGameURL to determinate category
+- Fix NullReferenceException at SearchGameWithNameOnSteam
+- Fix: movieCategory - handle WebException NotFound & BadRequest
+
+### 1.7
+
+#### Added
+
+- Add search for port.hu url as other database
+- Add more predbcategories (ask me if more needed)
+- Implement GetEbookTagsByReleaseName
+- Create errorHTML for every errors
+- Add ebook verification url to the desc
+- Implement verification url prop to every possibilities
+
+#### Changed
+
+- Try to optimize large imageFiles again
+- Improve Checks for port.hu url
+- Change error color to red and regular to green
+
+#### Fixed
+
+- Fix XXX category log messages
+- Fix Thumbnail settings
+- Fix multiSeriesPack's nfo
+- Fix ebook category InforbarImage
+
+### 1.6.7 / 1.6.6
+
+#### Changed
+
+- Check redicteredURL is valid
+
+#### Fixed
+
+- Fixed faulty negation
+
+### 1.6.5
+
+#### Added
+
+- Implement CheckOtherMovieDatabaseURL (priorize port.hu or mafab from NFO)
+- Able to change Thumbnail positions
+- Add new regex what match with XXX-IMAGESET
+
+#### Changed
+
+- Update game category where localfile was used
+- Optimize some ImageOperations & Log to XXX
+
+#### Removed
+
+- Remove XXX required thumbnails
+
+#### Fixed
+
+- Fix saveAllButton state
+- Fixed Movie category - tmdb search
+
+### 1.6.4
+
+#### Changed
+
+- Check resolutionMatch is valid int
+- Check XXX thumbnails before save
+
+#### Fixed
+
+- Fix predbCategory is null
+- Fix predbCalls
+
+### 1.6.3
+
+#### Added
+
+- Added predb.de for backup site
+- Implement RemoveTorrentAfterUploadFailed method
+- Add MessageBox Icon to uninstaller
+
+#### Changed
+
+- Update resolutionRegex
+- Using await instead of .Result
+- DownloadStringWithPolly - async
+- AutoSize RemoveExistTorrent form
+
+#### Fixed
+
+- Fix yearRegex and MovieTitle
+
+### 1.6.2
+
+#### Fixed
+
+- Fix when predb.ovh is down
+
+### 1.6.1
+
+#### Added
+
+- Add GetVerificationlinkFromNFO to XXX category
+- Implement Torrents.IsImageFromTorrent instead of Files
+- Implement CheckUploadProgress method
+
+#### Changed
+
+- Improve dateRegexInSeries
+- Handle if game categorized as movie
+- Check movieYear property is valid
+- Improve nCore API Search query string
+- Music Cover primary is the FileSource
+- Improve predb API Search query string
+
+#### Fixed
+
+- Fixed foundGame's name
+- Fix same torrents with different names
+- Fix error if Directory isnt exist
+- Fix Lock() method null exception
+
+### 1.6
+
+#### Added
+
+- Add GetVerificationlinkFromNFO to XXX category
+- Store ExistCheck and AnonymousUpload states in settings
+
+#### Changed
+
+- Using torrent's stored files instead of local files
+- Handle if game categorized as movie
+- Check movieYear property is valid
+
+#### Fixed
+
+- Fixed dateRegexInSeries
+- Fixed same torrents with different names
+- Fix error if Directory does not exist
+
+### 1.5
+
+#### Added
+
+- Add Movie&Series category null checks
+- Implement better webClient tries
+- Implement tinyurl reverse engineering
+
+#### Changed
+
+- Check if file locked by another process
+
+#### Fixed
+
+- Fixed predb.ovh API 429 error
+- Fix thumbnail arrow buttons after reset
+- Fix Steam/GoG ID when its 0
+- Fix GetVerificationlinkFromNFO - NullReferenceException
+- Fix OtherMovieDatabaseURL
+- Fix StripNameString method if object is null
+- Fixed some typo
+
+### 1.4
+
+#### Added
+
+- Implement Custom Image upload (right click)
+- Implement create torrent before read
+- Implement RequestMovieTitle method if movie title would be empty
+- Implement new Feature: AlwaysAddReleaseNameToDescription (settings)
+- Added TimeOut in qBittorrentClient
+
+#### Changed
+
+- Improved request search
+
+#### Fixed
+
+- Fixed GOG API data pulls
+- Lot of other fixes...
+
+### 1.3
+
+#### Added
+
+- Added tests for TMDB API Key
+
+#### Changed
+
+- Stored log messages to separeted class
+
+#### Fixed
+
+- Fixed Tools' directory
+
+### 1.2
+
+#### Changed
+
+- Code clean up
+- Changed Bencode.NET to MonoTorrent
+
+#### Fixed
+
+- Some bug fixes
+
+### 1.1
+
+#### Fixed
+
+- Many bug fixes
+
+### 1.0
+
+#### Added
+
+- Initial release
 
 </details>
+
+[4.2]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/4.2
+[4.1.1]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/4.1.1
+[4.1]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/4.1
+[4.0]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/4.0
+[3.6]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/3.6
+[3.5]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/3.5
+[3.4]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/3.4
+[3.3]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/3.3
+[3.2]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/3.2
+[3.1]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/3.1
+[3.0.2]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/3.0.2
+[3.0.1]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/3.0.1
+[3.0]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/3.0
+[2.9]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/2.9
+[2.8.3]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/2.8.3
+[2.8.2]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/2.8.2
+[2.8.1]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/2.8.1
+[2.8]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/2.8
+[2.7.5]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/2.7.5
+[2.7.4]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/2.7.4
+[2.7.3]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/2.7.3
+[2.7.2]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/2.7.2
+[2.7.1]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/2.7.1
+[2.7]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/2.7
+[2.6.4]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/2.6.4
+[2.6.3]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/2.6.3
+[2.6.2]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/2.6.2
+[2.6.1]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/2.6.1
+[2.6]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/2.6
+[2.5]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/2.5
+[2.4.1]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/2.4.1
+[2.4]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/2.4
+[2.3.7]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/2.3.7
+[2.3.6]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/2.3.6
+[2.3.5]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/2.3.5
+[2.3.4]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/2.3.4
+[2.3.3]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/2.3.3
+[2.3.2]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/2.3.2
+[2.3.1]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/2.3.1
+[2.3]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/2.3
 
 <br>
 
