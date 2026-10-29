@@ -97,7 +97,7 @@ Ha feltöltesz nCore-ra, ismered a menetet: megnyitod a feltöltő oldalt, kiker
 | ⚙️ | **.NET 10 Desktop Runtime** | A program ezzel fut | Ha hiányzik, a telepítő letölti és telepíti |
 | 👤 | **nCore fiók** | Erre a fiókra fog feltölteni | – |
 | 🎬 | **TMDB API kulcs** *(csak filmhez/sorozathoz)* | Innen jönnek a filmadatok, ingyenes, 3 perc regisztráció | [themoviedb.org](https://www.themoviedb.org/settings/api/request) – lásd a [3. lépést](#3-tmdb-kulcs--csak-filmhez-és-sorozathoz) |
-| 🧲 | **qBittorrent** *(nem kötelező)* | Ha használod, a program feltöltés után automatikusan hozzáadja a torrentet és indul a seed | [qbittorrent.org](https://www.qbittorrent.org/) |
+| 🧲 | **qBittorrent 4.1 vagy újabb** *(nem kötelező)* | Ha használod, a program feltöltés után automatikusan hozzáadja a torrentet és indul a seed | [qbittorrent.org](https://www.qbittorrent.org/) |
 
 > [!NOTE]
 > Minden mást a program **maga intéz**: a beépített böngészőhöz szükséges WebView2 futtatókörnyezetet és a mintaképekhez szükséges FFmpeg-et első használatkor letölti és telepíti.
@@ -175,13 +175,36 @@ A Beállítások **Folders & logging** oldalán (Simple felületen az *Other set
 | 📁 **Torrents folder** | A mappa, ahol a feltöltendő `.torrent` fájlok vannak | `E:\Feltöltendő` |
 | 📂 **Torrent data folder** | A mappa, ahol a letöltött release-ek **mappái** vannak (a program ezekben keresi az NFO-t és a videót/könyvet a mintaképekhez) | `E:\Torrentek` |
 
+**💽 Több meghajtó – több mappa:** mindkettőből több mappát is megadhatsz, pl. `E:\Torrentek` és `F:\Torrentek`. Modern felületen a mező egy lista: az **`Add`** gombbal tallózva veszel fel újat, a **`Remove`** kiveszi a kijelöltet, dupla kattintással lecserélheted a sort. Simple felületen a mező egy sorban, `; `-vel elválasztva mutatja a mappákat (ha nem fér ki, fölé víve látszik a teljes lista), rákattintva pedig egy kis ablak nyílik **`Add…`**, **`Change…`** és **`Remove`** gombbal. Ugyanaz a mappa kétszer nem vehető fel (a kis- és nagybetű, illetve a záró `\` nem számít).
+
+* A program minden *Torrents folder* `.torrent` fájljait beolvassa, és release-enként megkeresi, melyik *Torrent data folder*-ben van a release mappája (egyfájlos release-nél a fájlja). Utána minden lépés – mintakép, MediaInfo, NFO, a kliensnek átadás, a törlés – a release saját mappáját használja.
+* A *Torrents folder*-ek sorrendje csak azt dönti el, hová kerül a programban készített `.torrent` (**`Read & Create torrent(s)`**): az első elérhető mappába. A data folderek sorrendje nem számít.
+* Egymásba ágyazott data folderek (pl. `E:\Torrentek` és `E:\Torrentek\Sorozatok`) megadhatók, de a Beállítások figyelmeztet rájuk.
+
+**🔀 Ha ugyanaz a release több helyen is megvan** (ugyanaz a `.torrent` több *Torrents folder*-ben, vagy ugyanaz a release több data folderben), a beolvasás végén egy ablak (*Releases found in several places*) kérdez rá. Release-enként felsorolja a helyeket mérettel és módosítási dátummal, a data helyeknél azt is, hogy a tartalom egyezik-e a `.torrent` fájllistájával (*✓ matches the torrent* / *✕ … files differ from the torrent* – név és méret alapján). Jelöld ki a helyet, majd **`Use selected`**; a *Skip this release* csak azt a release-t, a **`Skip all`** (vagy az ablak bezárása) mindet kihagyja.
+
+* A választást a program megjegyzi (`%AppData%\MultiUploader\folder-choices.json`), és csak akkor kérdez újra, ha megváltozik, hol van meg a release. A kihagyást csak a program bezárásáig jegyzi meg.
+* Ha rosszul választottál: jobb klikk a több helyen talált release-en a *Torrents* listában → **Choose location again**, és a következő beolvasáskor újra megkérdezi.
+* Ha a `Remove torrent file after uploaded?` be van kapcsolva, feltöltés után a nem választott `.torrent` példányok is törlődnek. A release adatát a program a másik helyről nem törli.
+
+**🔌 Lecsatolt meghajtó:** ha egy megadott mappa meghajtója épp nincs meg (pl. kihúzott külső lemez), a program a többi mappával dolgozik tovább.
+
+* A Beállításokban az ilyen mappa mellett figyelmeztetés látszik, de a beállítás menthető.
+* A naplóban piros sor jelzi (ha a főablak nincs előtérben, tálcaértesítés is), és amikor a meghajtó visszajön, egy újabb sor.
+* Ha egy release-nél korábban erre a meghajtóra esett a választásod, a program nem veszi helyette a másik példányt: a release vár.
+* Ugyanígy vár – kézi és auto upload módban is, kérdés nélkül – az a release, amelynek az adata egyik elérhető data folderben sincs meg, miközben egy data folder nem elérhető. Nem kerül a kihagyottak közé, és a `.torrent` fájlja megmarad.
+* A beolvasás összesítője megmutatja, hány release vár, és a meghajtó visszadugása után a következő beolvasás feldolgozza őket.
+* Ha csak egy data foldered van, és épp annak a meghajtója nincs meg, kézi beolvasásnál a megszokott kérdés jön (*Do you want to remove the single torrent file?*), kiegészítve azzal, hogy a data folder nem elérhető – ilyenkor válaszd a **No**-t.
+* Ha viszont a meghajtó megvan, csak a mappa nincs (elgépelted vagy törölted), az hiba: a Beállítások így nem engedi menteni, futás közben pedig piros sor és a szokásos kihagyás jön.
+* Indításkor a program csak akkor áll le, ha egy fajtából egyik mappa sincs meg.
+
 ### 5️⃣ Torrent kliens – nem kötelező
 
 Feltöltés után a program letölti az nCore-ról a kész torrentet, és kétféleképpen adhatja át a kliensnek: a qBittorrent **WebUI**-ján keresztül, vagy egy **figyelt mappába** (*Watch folder*) mentve. A Beállítások ablak első megnyitásakor megkérdezi, melyiket választod (*Do you want to use qBittorrent WebUI…?*): **Yes** → a `qBittorrent settings` doboz él, **No** → az `Optional settings without qBittorrent`; a másik doboz *Disabled by User!* jelzést kap (Modernben összecsukódik, csak a fejléce látszik, Simple felületen kiszürkül). Később a letiltott doboz **`Use this`** gombjával válthatsz át rá, majd **`Save settings`** – a program ilyenkor újracsatlakozik.
 
 **🧲 qBittorrent – mindkét módhoz** (*Eszközök → Beállítások… → Letöltések*):
 
-* **Alapértelmezett mentési útvonal** = a MultiUploader **Torrent data folder**-e. A program nem ad meg mentési helyet, a qBittorrent ide teszi a torrentet, és itt kell megtalálnia a release mappáját.
+* **Alapértelmezett mentési útvonal** = a MultiUploader **Torrent data folder**-e. A program nem ad meg mentési helyet, a qBittorrent ide teszi a torrentet, és itt kell megtalálnia a release mappáját. Több data foldernél ez nem számít: WebUI-val a program minden torrentnél megadja a release saját data folderét, figyelt mappával pedig a figyelt mappák saját mentési helye dönt (lásd lent).
 * **Torrent tartalom elrendezése:** *Eredeti* – a másik két beállítás más mappaszerkezetet vár, mint ami a lemezen van.
 * **Ne induljon el automatikusan a letöltés** legyen kikapcsolva, különben a torrent megállítva kerül be, és nem indul a seed.
 
@@ -200,9 +223,12 @@ Feltöltés után a program letölti az nCore-ról a kész torrentet, és kétf�
 1. qBittorrentben: *Eszközök → Beállítások… → Web UI*, pipáld be a **Webes felhasználói felület (Távoli vezérlés)** opciót.
 2. Jegyezd meg a **Port**ot, a *Hitelesítés* részben adj meg **Felhasználónevet** és **Jelszót**, majd **OK**. Ha a qBittorrent ugyanezen a gépen fut, elég bepipálni a **Hitelesítés mellőzése a helyi gépen lévő klienseknél** opciót – ilyenkor felhasználónév és jelszó nem kell.
 3. A MultiUploaderben írd be a **WebUI URL** (`http://localhost:<port>`, ha a qBittorrent másik gépen fut, annak IP-címével), **Username** és **Password** mezőket (a hitelesítés mellőzésénél ez a kettő üresen maradhat). A **Done category** és **Working category** mezőt hagyd üresen – ezek nem szükségesek, lásd [Haladó beállítások](#-haladó-beállítások).
-4. Kattints a **`qBittorrent Test`** gombra – zöld OK (Simple felületen zöld pipa) = jó. Ha a qBittorrent alapértelmezett mentési útvonala eltér a *Torrent data folder*-től, a program felajánlja, hogy átírja – válaszd a **Yes**-t.
+4. Kattints a **`qBittorrent Test`** gombra – zöld OK (Simple felületen zöld pipa) = jó. Ha a qBittorrent alapértelmezett mentési útvonala eltér a *Torrent data folder*-től, a program felajánlja, hogy átírja – válaszd a **Yes**-t. (Ezt csak egy data foldernél kérdezi.)
 
 A program hash-ellenőrzés nélkül adja hozzá a torrentet (a fájlok már a helyükön vannak), így **azonnal indul a seed**.
+
+> [!IMPORTANT]
+> Több data foldernél a program minden torrentnél a release saját data folderét adja át a qBittorrentnek mentési helyként. Ez csak akkor működik, ha a qBittorrent **ugyanazokon az útvonalakon** látja a fájlokat, mint a MultiUploader – ha másik gépen vagy Dockerben fut, és ott más az útvonal (pl. `E:\Torrentek` helyett `/downloads`), a qBittorrent nem találja meg a fájlokat.
 
 <details>
 <summary>📷 <i>Képernyőkép: qBittorrent – Web UI</i></summary>
@@ -216,6 +242,8 @@ A program hash-ellenőrzés nélkül adja hozzá a torrentet (a fájlok már a h
 2. qBittorrentben: *Eszközök → Beállítások… → Letöltések*, lent a **Torrentek automatikus hozzáadása innen** résznél **Hozzáadás…**, válaszd ki ugyanezt a mappát, majd **OK**.
 
 A program feltöltés után `<torrent azonosító>.torrent` néven ide menti a kész torrentet, a qBittorrent felveszi, ellenőrzi a meglévő fájlokat, és indul a seed. Más kliens (uTorrent, Deluge…) is így használható: a saját figyelt mappáját add meg.
+
+**Több data foldernél** minden data folderhez saját watch folder tartozik, és a program a feltöltött torrentet a release data folderéhez tartozóba menti. Modern felületen a dobozban data folderenként egy sor van (*Torrent data folder* → *Watch folder*), a watch folder mezőre kattintva tallózhatsz. Simple felületen a *Watch folders* mező egy sorban mutatja a párokat (pl. `E:\Torrentek\watch; F:\Torrentek → (not set)`), rákattintva egy kis ablakban adhatod meg őket. Minden data folderhez kötelező watch foldert választani, különben a beállítás nem menthető. A qBittorrentben mindegyik watch foldert külön vedd fel a **Torrentek automatikus hozzáadása innen** résznél, és mindegyiknél a hozzá tartozó data folder legyen a mentési hely. Más klienssel ez csak akkor működik, ha az is több figyelt mappát kezel, mindegyiket saját mentési hellyel.
 
 <details>
 <summary>📷 <i>Képernyőkép: qBittorrent – figyelt mappa</i></summary>
@@ -253,8 +281,8 @@ A számok a főablak képén lévő jelölőkre utalnak – nyisd le:
 </details>
 
 1. ⚙️ **Beállítások** (fogaskerék) – ezt már megcsináltad fent.
-2. 🔍 **`Read`** – a program beolvassa a *Torrents folder* összes `.torrent` fájlját, kikeresi hozzájuk az adatokat a netről, és megnézi, nincs-e már fent az oldalon. Ha egy release-hez nincs NFO, megkérdezi, letöltse-e a pre-adatbázisból vagy az [srrDB](https://www.srrdb.com/)-ről; ha nem biztos a kategóriában, egy kis ablakban rákérdez.
-3. 📋 **A beolvasott release-ek listája** – kattints egyre, és a jobb oldalon megjelenik minden, amit a program összegyűjtött róla. A **Tab** / **Shift+Tab** a következő / előző release-re lép, a lista végéről körbe az elejére; csak az éppen használt listán belül mozog (a *Torrents* és a *Ready* lista között – Simple felületen a két lista között – nem ugrik át). Ha egy release-t ki akarsz venni, jobb klikk → **Remove from the list** – a program előtte megerősítést kér, a **No** mindent úgy hagy. Ugyanebben a jobb klikkes menüben adhatod meg vagy cserélheted az IMDb-azonosítót (*Add / Change IMDb ID*), a játék azonosítóját (*Add / Change GameID*), zenénél és könyvnél a műfajt (*Add / Change genre*), állíthatod vissza az előző azonosítót (*Reset to previous ID*), és szerkesztheted az infobar címeit (*Edit infobar titles*).
+2. 🔍 **`Read`** – a program beolvassa a *Torrents folder*ek összes `.torrent` fájlját, kikeresi hozzájuk az adatokat a netről, és megnézi, nincs-e már fent az oldalon. Ha egy release-hez nincs NFO, megkérdezi, letöltse-e a pre-adatbázisból vagy az [srrDB](https://www.srrdb.com/)-ről; ha nem biztos a kategóriában, egy kis ablakban rákérdez. Ha egy release több helyen is megvan, egy ablakban megkérdezi, melyiket használja (lásd [A két mappa](#4-a-két-mappa)).
+3. 📋 **A beolvasott release-ek listája** – kattints egyre, és a jobb oldalon megjelenik minden, amit a program összegyűjtött róla. A **Tab** / **Shift+Tab** a következő / előző release-re lép, a lista végéről körbe az elejére; csak az éppen használt listán belül mozog (a *Torrents* és a *Ready* lista között – Simple felületen a két lista között – nem ugrik át). Ha egy release-t ki akarsz venni, jobb klikk → **Remove from the list** – a program előtte megerősítést kér, a **No** mindent úgy hagy. Ugyanebben a jobb klikkes menüben adhatod meg vagy cserélheted az IMDb-azonosítót (*Add / Change IMDb ID*), a játék azonosítóját (*Add / Change GameID*), zenénél és könyvnél a műfajt (*Add / Change genre*), állíthatod vissza az előző azonosítót (*Reset to previous ID*), és szerkesztheted az infobar címeit (*Edit infobar titles*). A több helyen talált release-nél itt vonhatod vissza a helyválasztást is (*Choose location again*).
 4. 👀 **Nézd át, javítsd ha kell** – a három mintakép és az infobar kép (jobb klikk → saját kép), a leírás (szabadon szerkeszthető), a kategória legördülő.
 5. 💾 **`Save selected`** (vagy `Save All`, ha mind jó) – a release átkerül a feltöltendők közé: a lista alján a **Ready** fülre (Simple felületen a bal alsó listába). A release-ek a beolvasás sorrendjében kerülnek át, és a program ebben a sorrendben is tölti fel őket. Az **`Undo selected`** a kijelölt mentett release-t visszateszi a beolvasottak közé.
 6. 🚀 **`Upload torrent(s)`** – a program egyesével feltölti őket (köztük legalább 5 mp szünettel), majd a kész torrentet átadja a kliensnek vagy a figyelt mappába teszi.
@@ -293,7 +321,7 @@ Ha rosszul sorolná be, beolvasás után szabadon átváltható. Minden besorolt
 <summary>🎬 <strong>Film és Sorozat</strong></summary>
 <br>
 
-* **Kategória automatikusan:** film vagy sorozat (csak évszám → film; évad/epizód/dátum → sorozat), SD vagy HD.
+* **Kategória automatikusan:** film vagy sorozat (csak évszám → film; évad/epizód/dátum → sorozat), SD vagy HD. A sportesemény csak évszámmal is sorozat: ha a TVmaze *Sports* műsornak ismeri, vagy az IMDb-n sportközvetítés (lásd lent, *Nem scene release*). A dátumos sportközvetítés (pl. `NBA.2026.10.23...`) is így ismeri fel, ezért sport-infobart kap. Az IMDb-je ilyenkor a release-hez kötött (srrDB / xREL) azonosító, ha van; különben az esemény saját adatlapja (csak a release évéből, pl. a 2023-as US Open-hez nem az 1982-es) vagy a verseny sorozata, amely az esemény idején futott – azonos című sorozatok közül a legkorábban indult (pl. a Formula 1 bajnoksága, nem egy csatorna F1-műsora). A predb SPORTS szekciójába sorolt release is sorozat, kivéve, ha filmre utaló bizonyíték van: az xREL filmnek mondja, vagy az IMDb-n azonos címmel és a release évével film van (pl. a *World Cup Heist* dokumentumfilm). Ha az adatbázis-keresés ki van kapcsolva, a szekció csak évszám nélküli névnél dönt.
 * **IMDb keresés sorrendje:** NFO-ban lévő link vagy rögzített azonosító (lásd lent) → [srrDB](https://www.srrdb.com/) → [xREL](https://www.xrel.to) → [JustWatch](https://www.justwatch.com/) → cím alapján az IMDb-n. A JustWatch és a cím alapú keresés a beállított *Minimum similarity percent in search* egyezéssel dolgozik (alapértelmezés 90%); ha az NFO-ban TVmaze- vagy TheTVDB-link van, a JustWatch kimarad.
 * A *Movie/Serie settings*-ben kikapcsolható az automatikus keresés (*Disable automatic IMDb/TVmaze/TMDB search?*), és kérheted, hogy beolvasáskor minden scene release-nél rákérdezzen a film/sorozat kategóriára (*Always ask for Movie/Series category before upload?*; auto upload módban nem kérdez).
 * Az NFO-ban lévő IMDb-link és a kézzel megadott vagy statikus IMDb-azonosító mindenhol az alap. A többi forrásból (TVmaze/TMDB/TheTVDB link, srrDB, xREL) kapott azonosítót az IMDb-ről azonosító alapján kéri le, és a címét (AKA-listával együtt) a release nevéhez méri: ha egyik cím sem egyezik **és** a cím alapú keresés másik azonosítót talál, azt veszi; ha a keresés nem talál mást, a linkelt azonosító marad.
@@ -313,12 +341,12 @@ Ha rosszul sorolná be, beolvasás után szabadon átváltható. Minden besorolt
 
   Ha az IMDb-n nincs értékelés, az értékelés `0` lesz (ahogy az nCore-on is), a TVmaze pontszáma nem kerül a helyére. Az nCore IMDb-segédje (`imdb_movie` ajax) csak akkor fut, ha az IMDb nem válaszol, vagy ha egy műfajnak nincs magyar neve – ilyenkor csak a műfajokat kéri onnan. A műfajok nCore-os magyar neveit a program tanulja is: 30 naponta egyszer (és minden ilyen segéd-lekérésnél) összeveti az IMDb műfajait az nCore szavaival, az eltérést eltárolja (`%AppData%\MultiUploader\imdb-genres.json`) és a naplóban jelzi – a beépített szótárt nem kell kézzel frissíteni.
 * Az NFO-ban talált egyéb linkeket (TVmaze, TheTVDB, Rotten Tomatoes, mafab, port.hu, MyAnimeList, Netflix) is beteszi a feltöltésbe.
-* Ha az IMDb magyar címe egyezik a release nevével, az infobarba az angol cím kerül eredeti/magyar címként. Idegen nyelvű release-nél magyar cím nélkül az eredeti/magyar címhez az eredeti cím kerül (*Kodenavn Hunter*).
+* Ha az IMDb magyar címe egyezik a release nevével, az infobarba az angol cím kerül eredeti/magyar címként. Az eredeti (nem angol) címmel ellátott release-nél magyar cím nélkül az eredeti/magyar címhez is az angol cím kerül, ahogy az nCore szabályzatának példája mutatja (*Burlacii: Foc în paradis*: – / Bachelors: Fire in Paradise / Bachelors: Fire in Paradise). Ehhez a TMDB-nek ismernie kell a mű nem angol eredeti nyelvét; enélkül az eredeti cím marad a mezőben.
 * **3 mintakép** a film elejéről (alapból a hossz 5, 7 és 9%-ánál; évadpack esetén az első epizódból). A *Thumbnail picture's settings*-ben állítható a helyük, a fekete/fehér kockák kiszűrése, hogy kerüljön-e **6 véletlen kép** a leírásba, és hogy egyszerre hány ffmpeg mintakép készülhessen (*Parallel ffmpeg snapshots*, alapértelmezés 3, 1 és 8 között) – ez utóbbi a film és a lemez terhelését osztja be, nem a képek számát. HEVC videónál a kockát a videókártya dekódolja. Az *FFmpeg for the thumbnails* beállításban választható, melyik FFmpeg töltődjön le: a **Full** (~60 MB, alapértelmezés) a HDR10, HLG és Dolby Vision filmek mintaképét a videókártyán SDR-re képezi le (libplacebo, Vulkan), így az eredetihez hű színeket ad; az **Essentials** (~35 MB, kisebb letöltés) ezt nem tudja, ezért azokon a filmeken a mintakép fakó, a Dolby Vision Profile 5-ösöknél lila-zöld. Normál (SDR) videónál a kettő ugyanazt a képet adja.
 * A leírásba kerülő képek a kek.sh-ra töltődnek. Ha a kek.sh nem válaszol, és a *Thumbnail picture's settings* jobb oldali oszlopában (Modern felületen az **API keys (optional)** kártyán) meg van adva egy ingyenes **imgbb API Key**, a képek az imgbb-re kerülnek. A kulcs nem kötelező; nélküle minden a régi módon megy.
 * Ha egy megadott opcionális API-kulcsot (Google Books, imgbb) a szolgáltatás elutasít, a program abban a munkamenetben nélküle megy tovább, és egyszer szól: kézi módban megkérdezi, törölje-e a kulcsot a beállításokból; AutoUpload alatt egy OK-gombos ablak jelzi, ami nem állítja meg a feltöltést.
 * **Technikai infó** opcionálisan a leírásba: hangsávok, feliratok nyelve – magyarra fordítva vagy bekérve.
-* **Nem scene release** (saját rip, NFO nélkül): bekapcsolható (*Movie/Serie settings* → *Turn on uploads without NFO?*), csak kézi beolvasással – auto upload módban nem –, és csak akkor, ha a torrentben kizárólag `.mkv`, `.avi`, `.mp4` vagy `.wmv` videó és felirat van; lemezkép (pl. DVD ISO) vagy DVD-mappa nem lehet benne. Ha nincs NFO, a program megkérdezi, hogy keressen-e hozzá, vagy a saját MediaInfójával töltse fel; ez utóbbinál maga generálja a MediaInfót, bekéri a címet és a torrent nevét, filmnél **sample fájlt** is készít – a scene szokását követve külön `sample` mappába (a *Sample create options* szerint, a megadott méret fölötti fájloknál). HD filmnél 2 GB fölött az nCore szabálya kötelezővé teszi: ha a sample nem sikerül, a program megkérdezi, próbálja-e újra, töltse-e fel nélküle, vagy törölje a `.torrent` fájlt. Megadhatsz IMDb- vagy TVmaze-linket: ilyenkor pontos találattal egészíti ki az adatokat, és ha sportesemény, magától sorozat kategóriába kerül, generált epizódszám nélkül, sport-infobarral. Sporteseménynek a TVmaze *Sports* műsorait veszi, és ha a TVmaze nem ismeri (pl. UFC), akkor az olyan IMDb-tételt, amely tévéműsor/-epizód/-különkiadás és az egyetlen műfaja a *Sport* – a sportfilmek és -dokumentumfilmek más műfajt is hordoznak, azok filmek maradnak. Link nélkül a beírt cím alapján keres az IMDb-n, a TVmaze-en és a TMDB-n (a release-névre épülő srrDB / xREL / JustWatch itt értelemszerűen kimarad).
+* **Nem scene release** (saját rip, NFO nélkül): bekapcsolható (*Movie/Serie settings* → *Turn on uploads without NFO?*), csak kézi beolvasással – auto upload módban nem –, és csak akkor, ha a torrentben kizárólag `.mkv`, `.avi`, `.mp4` vagy `.wmv` videó és felirat van; lemezkép (pl. DVD ISO) vagy DVD-mappa nem lehet benne. Ha nincs NFO, a program megkérdezi, hogy keressen-e hozzá, vagy a saját MediaInfójával töltse fel; ez utóbbinál maga generálja a MediaInfót, bekéri a címet és a torrent nevét, filmnél **sample fájlt** is készít – a scene szokását követve külön `sample` mappába (a *Sample create options* szerint, a megadott méret fölötti fájloknál). HD filmnél 2 GB fölött az nCore szabálya kötelezővé teszi: ha a sample nem sikerül, a program megkérdezi, próbálja-e újra, töltse-e fel nélküle, vagy törölje a `.torrent` fájlt. Megadhatsz IMDb- vagy TVmaze-linket: ilyenkor pontos találattal egészíti ki az adatokat, és ha sportesemény, magától sorozat kategóriába kerül, generált epizódszám nélkül, sport-infobarral. Sporteseménynek a TVmaze *Sports* műsorait veszi, és ha a TVmaze nem ismeri (pl. UFC), akkor az olyan IMDb-tételt, amely tévéműsor/-epizód/-különkiadás/-film, a műfajai között ott a *Sport*, és mellette legfeljebb *Action* szerepel (a pankrációs gálák ilyenek) – a sportfilmek, -vígjátékok és -dokumentumfilmek más műfajt is hordoznak, azok filmek maradnak. Ha IMDb-link nélkül az infobar adatait (címek, év, ország, rendező, szereplők) magad írod be, azok maradnak: az adatbázisok csak az üresen hagyott mezőket töltik ki, és ha mást találnak, a naplóban narancs sor jelzi. Ha a magyar cím megegyezik az angollal, az nCore szabálya szerint csak az *Angol cím* marad kitöltve. Link nélkül a beírt cím alapján keres az IMDb-n, a TVmaze-en és a TMDB-n (a release-névre épülő srrDB / xREL / JustWatch itt értelemszerűen kimarad).
 
 <details>
 <summary><i>Rossz IMDb-t talál egy sorozathoz?</i></summary>
@@ -427,7 +455,7 @@ Két lépcsőben keres: először a pontos release-névre, majd – ha be van ka
 <summary>🤖 <strong>Auto upload mód</strong></summary>
 <br>
 
-Az *Auto upload settings*-ben bekapcsolható **felügyelet nélküli** mód: a program adott időközönként figyeli a *Torrents foldert*, és minden új `.torrent`-et automatikusan beolvas és feltölt – kérdések nélkül.
+Az *Auto upload settings*-ben bekapcsolható **felügyelet nélküli** mód: a program adott időközönként figyeli a *Torrents folder*eket, és minden új `.torrent`-et automatikusan beolvas és feltölt – kérdések nélkül.
 
 * **Skip torrent if…** – mikor hagyja ki a release-t (hiányzik az NFO, hiányzik a release mappája, hiányzó epizód, hibás torrent-újragenerálás, hiányzó zene/könyv műfaj…).
 * **If torrent exist/nuked** – mi legyen, ha már fent van vagy nuked.
@@ -436,6 +464,8 @@ Az *Auto upload settings*-ben bekapcsolható **felügyelet nélküli** mód: a p
 * **Check for updates every** – ebben a módban ennyi óránként nézi meg, van-e programfrissítés.
 * **Max reconnect attempts** – ha megszakad az nCore-kapcsolat, a program a *Torrent's folder checking interval* ütemében magától újracsatlakozik; ennyi egymást követő sikertelen próbálkozás után kikapcsolja az auto upload módot (a beállításban is), és a naplóban jelzi, hogy kézzel kell újracsatlakozni.
 * **If category is missing** – ha a PreDB még nem ismeri a release-t, a program kategória nélkül kihagyja. A *Retry only with the button* esetén csak a főablak **Retry skipped (no category)** gombja engedi vissza ezeket azonnal; a *Retry periodically* esetén a program a *Retry skipped torrents every* percenként, legfeljebb *Max retries per torrent* alkalommal magától is újra megpróbálja őket. A gomb ablakot nyit: ott a kategória nélkül kihagyott torrentek közül többet is kijelölhetsz, és egyszerre ugyanabba a kategóriába tölthetsz fel (a megadott kategória csak az adott feltöltésre érvényes), vagy a *Retry all* gombbal újra lekérdezheted a kategóriájukat. A gomb a próbák elfogyása után is működik.
+
+Ha egy release több helyen is megvan, ebben a módban nincs kérdés: a program a kézi módban mentett helyválasztást használja (lásd [A két mappa](#4-a-két-mappa)); ha nincs ilyen, kihagyja (*Found in several locations*). Ha később kézi módban választasz helyet, a következő beolvasás már nem hagyja ki. A lecsatolt meghajtón lévő release-ek itt is várnak, nem kerülnek a kihagyottak közé.
 
 Ebben a módban a *Read* és a listák le vannak tiltva, a főablakon piros felirat jelzi, hogy aktív.
 </details>
@@ -532,7 +562,7 @@ Hibás szerkesztésnél a beépített alapértelmezésre esik vissza, a fájlt s
 <summary>⚽ <strong>Sportesemények infobarja</strong> – ismert hiba</summary>
 <br>
 
-* Sporteseményeknél (pl. UFC, foci, F1) az infobar adatai nem mindig az nCore szabályai szerint töltődnek ki – ismert hiba. **Mentés előtt** a beolvasott release-ek listájában jobb klikk → *Edit infobar titles*; feltöltés után már csak nCore-on javítható. (A már mentett tételnél a menüpont csak megmutatja az adatokat.)
+* Sporteseményeknél a *Magyar cím* az nCore szabálya szerint a sportág neve: a magyar gyűjtőnév (pl. *Futball*, *Tenisz*, *Jégkorong*, *Ökölvívás*, *Cselgáncs*, *Strandröplabda*, *Alpesi sí*), az amerikai ligák (*NFL*, *NCAA*, *CFL*, *NBA*, *NHL*, *MLB*, *MLS*), az *AFL*, a pankráció (*WWE*, *AEW*, *TNA*, *NJPW*), az MMA (*UFC* – a Bellator és a PFL is –, *ONE Championship*) és a motorsport (*Formula 1*, *MotoGP* – a Moto2 és a Moto3 is –, *IndyCar*, *NASCAR*, *WEC*, *MXGP*…) a saját nevén. A program a release nevéből csak a verseny nevét nézi (az évszám, dátum vagy gálaszám előtti részt, a csapat- és versenyzőneveket nem), és a műsor címét. Ha ezek kiírják a sportágat, az nyer egy másik sportág ligájával szemben (pl. *Premier League Darts* → Darts). A kézzel beírt infobar-adatok (*Magyar*, *Angol*, *Eredeti/magyar cím*, év) mindig megmaradnak, a sportszabály csak az üresen hagyott mezőket tölti ki. Ha a sportág nem ismert vagy kétértelmű (pl. *World Cup*, *US Open*), a műsor/esemény neve marad, és az infobar egyéb adatai sem mindig az nCore szabályai szerint töltődnek ki – ismert hiba. **Mentés előtt** a beolvasott release-ek listájában jobb klikk → *Edit infobar titles*; feltöltés után már csak nCore-on javítható. (A már mentett tételnél a menüpont csak megmutatja az adatokat.)
 
 </details>
 
@@ -541,7 +571,46 @@ Hibás szerkesztésnél a beépített alapértelmezésre esik vissza, a fájlt s
 ## 📝 Változásnapló
 
 <details>
-<summary>🆕 <strong>4.2</strong> – a legutóbbi kiadás változásai</summary>
+<summary>🆕 <strong>4.3</strong> – a legutóbbi kiadás változásai</summary>
+
+### [4.3]
+
+#### Added
+
+- Several Torrents folders and several Torrent data folders can be set in the Settings (more drives): every torrent keeps its own .torrent and data location, a release found in more places can be chosen, and a disconnected drive does not stop the run
+- IMDb: search by name when the database page linked in the NFO has no IMDb ID; the original title can also match the release name
+- Game ID window: the NFO name is a link that opens the NFO
+- Game right-click menu: Change GameID for every store when the torrent has an ID
+
+#### Changed
+
+- Sport releases: the Hungarian title is the sport name required by nCore's rules; a PreDB SPORTS release is a series unless something points to a movie, a dated sports broadcast is a sport event, and the IMDb linked to the release decides (no general title search for sport events)
+- Values typed by hand in the infobar are not overwritten by the databases or the automatic rules
+- Infobar: an original-language release without a Hungarian title gets the English title in the Original/Hungarian field; an English title completed with its own year is not a separate original/Hungarian title
+- Infobar cover: a portrait image is preferred, a landscape IMDb image is only a fallback
+- Title matching ignores spaces, punctuation, curly apostrophes, backticks and a leading English article
+- Duration: the length of the local video file takes precedence; for a season pack or a CD1/CD2 movie the parts are added up
+- Modern main window: in a bigger window every area grows proportionally and the images follow the new size
+- External sources: the documented rate limits are kept (xREL, TVmaze, MusicBrainz, Open Library), timeouts, retries and jitter follow the Microsoft standard, a host that keeps failing is paused for a while, and a server error is retried 2 times instead of 5
+- Release name recognition accepts +, _, & and a tracker tag, so such names also go into the description of an upload without NFO
+- qBittorrent 4.1.0-4.1.3: the connection test passes without the category list
+- Thumbnail caption: no video percentage or picture set number for a single image
+- Bump SharpCompress to 0.50.7, UTF.Unknown to 2.8.0, Polly.Core to 8.8.1 and WebView2 to 1.0.4314.35
+
+#### Fixed
+
+- qBittorrent: the uploaded torrent is added with the save path of the original torrent, so it seeds even when the release was not downloaded to qBittorrent's default folder
+- qBittorrent: a wrong WebUI username or password is reported as such, not as a timeout
+- qBittorrent 5.3.0: the uploaded torrent is added without hash checking again
+- The technical info (MediaInfo) of an upload without NFO no longer contains the full local path of the file
+- The file paths in a torrent's file list and the fallback torrent name are checked to stay inside the release folder
+- After saving, clicking another torrent showed the category, description and images of the saved one
+- Modern interface: a window shown again after missing or wrong data (game ID, IMDb ID, movie and music info) collapsed to a few pixels
+
+</details>
+
+<details>
+<summary>🗂️ <strong>Korábbi verziók</strong> – 4.2 … 1.0</summary>
 
 ### [4.2]
 
@@ -566,11 +635,6 @@ Hibás szerkesztésnél a beépített alapértelmezésre esik vissza, a fájlt s
 - An audio or subtitle track without a language code is named through the language table by its title, and Hungarian accents in track titles are kept
 - The end of a longer number (e.g. 61850.7.3.) was taken for a series air date
 - A minimized or very narrow window could fail to create the thumbnail, and an image above the pixel limit was decoded at full size
-
-</details>
-
-<details>
-<summary>🗂️ <strong>Korábbi verziók</strong> – 4.1.1 … 1.0</summary>
 
 ### [4.1.1]
 
@@ -1755,6 +1819,7 @@ Hibás szerkesztésnél a beépített alapértelmezésre esik vissza, a fájlt s
 
 </details>
 
+[4.3]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/4.3
 [4.2]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/4.2
 [4.1.1]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/4.1.1
 [4.1]: https://github.com/MultiUploader/MultiUploader.github.io/releases/tag/4.1
